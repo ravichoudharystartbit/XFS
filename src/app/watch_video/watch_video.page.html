@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button><img src="assets/xfs_image/12/side_bar.svg"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Videos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class='mainPage videosPage' (click)='hideShowSort()'>
+  
+  <ion-grid class='searchSection'>
+    <ion-row class='searchInput'>
+      <ion-col size="9" class='searchbox'>
+        <ion-input type="text" [(ngModel)]='searchInput' placeholder="Search" clearInput autocapitalize="off" inputmode="text"></ion-input>
+        <img src="assets/xfs_image/13/search.svg" (click)='search()'>
+      </ion-col>
+      <ion-col size="3" class='sortbox' (click)='toggleShowSort()'>
+      
+          <img src="assets/xfs_image/13/sort.svg">
+          <ion-row *ngIf='showSort'>
+            <ul>
+              <li>Newest</li>
+              <li>Most Reviewed</li>
+              <li>Alphabetical</li>
+            </ul>
+          </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+          <div>
+            <!-- <ul class="tab">
+              <li id='tab1' class="width40 tablinks active" (click)="openContent('first' , 'tab1')">Sport Performance</li>
+              <li id='tab2' class="width20 tablinks" (click)="openContent( 'second', 'tab2')">Fitness</li>
+              <li id='tab3' class="width40 tablinks" (click)="openContent( 'third', 'tab3')">Sport Performance</li>
+             
+            </ul> -->
+
+            <ion-row class='imageSlider123'> 
+              <ion-slides pager="true" [options]="slideOpts123" #mySlider>   
+                <ion-slide *ngFor='let slide of Categories; let i = index;'>
+                  <ion-row class='sliderRow {{i == 0 ? "active" : ""}} slideContent' id='tab{{i}}'  (click)="openSlideContent(slide.slug , i)">  
+                    <ion-col size="12" class='sliderItem'>
+                       
+                       {{slide.name}}
+                    </ion-col> 
+                    <!-- <ion-col  size="12">
+                      <h4></h4>
+                    </ion-col>    -->            
+                  </ion-row>
+                  
+                </ion-slide>  
+              
+                      
+              </ion-slides>
+          </ion-row>
+
+            <ion-row class="tabcontent">
+               <ion-col size="12" *ngFor='let video of filterCatData'>
+                <!-- <video controls="true" width='100%' height='100%' src='assets/small.mp4' playsinline></video> -->
+                <iframe name="iframe1" id="iframe1"  [src]="cleanURL(video.VideoId)" width="100%" height="200px" frameborder="0" allowfullscreen='1' title='Watch Video' allow="autoplay; encrypted-media" class="videoFrame"></iframe>
+                <span>{{video.Title}}</span>
+              </ion-col>
+               <!-- <ion-col size="12">
+                 <iframe src="https://player.vimeo.com/video/76979871" width="100%" height="200px" frameborder="0" allowfullscreen='1' title='Watch Video' allow="autoplay; encrypted-media" class="videoFrame"></iframe>
+                 <span>Video Title</span>
+              </ion-col> -->
+            </ion-row>
+          </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

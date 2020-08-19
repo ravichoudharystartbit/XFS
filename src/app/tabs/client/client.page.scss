@@ -1,0 +1,41 @@
+ion-header {
+    ion-toolbar{
+        --background : #000;
+        --color: #fff;
+        font-weight : 600;
+    }
+    ion-back-button {
+        margin-top: 0px;
+        content: url('assets/back-arrow.png');
+        width: 20px;
+        margin-left: 5px;
+    }
+
+    .sc-ion-back-button-ios-h{
+        display:block;
+    }
+}
+
+ion-content{
+    --background: transparent; 
+    z-index : 100000;
+    background: #000;
+
+    .coachSection{
+        color:white;
+        padding: 0 3%;
+
+        h5 , p{
+            margin-top:5px;
+            margin-bottom:5px;
+        }
+
+        ion-row{
+            background: #2d2d2d;
+            padding: 10px;
+            border-radius: 20px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+    }
+}

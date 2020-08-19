@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button><img src="assets/xfs_image/12/side_bar.svg"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      STORE
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class='mainPage'>
+  
+  <ion-grid class='searchSection'>
+    <ion-row class='searchInput'>
+      <ion-col size="9" class='searchbox'>
+        <ion-input type="email" placeholder="Search" clearInput autocapitalize="off" inputmode="email"></ion-input>
+        <img src="assets/xfs_image/13/search.svg">
+      </ion-col>
+      <ion-col size="3" class='sortbox' (click)='toggleShowSort()'>
+      
+          <img src="assets/xfs_image/13/sort.svg">
+          <ion-row *ngIf='showSort'>
+            <ul>
+              <li>Newest</li>
+              <li>Most Reviewed</li>
+              <li>Alphabetical</li>
+            </ul>
+          </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+         
+          <div class='storePage'>
+            
+            <ion-row class='imageSlider123'> 
+              <ion-slides pager="true" [options]="slideOpts123" #mySlider>   
+                <ion-slide *ngFor='let slide of Categories; let i = index;'>
+                  <ion-row class='sliderRow {{i == 0 ? "active" : ""}} slideContent' id='tab{{i}}'  (click)="openSlideContent(slide.slug , i)">  
+                    <ion-col size="12" class='sliderItem'>
+                       
+                       {{slide.name}}
+                    </ion-col> 
+                    <!-- <ion-col  size="12">
+                      <h4></h4>
+                    </ion-col>    -->            
+                  </ion-row>
+                  
+                </ion-slide>  
+              
+                      
+              </ion-slides>
+            </ion-row>
+            <ion-row id="first" class="tabcontent">
+              <ion-row class='newsSection'>
+                <ion-col size="12" class='news' *ngFor='let pd of filterCatData'>
+                  <ion-row>
+                     <ion-col  size="4" class='productImage' (click)='detail()'>
+                    <!-- <img src="assets/xfs_image/19/Asset 5.png" width="100%"> -->
+                    <img src="{{pd.image}}" width="100%">
+                  </ion-col>
+                  <ion-col  size="8">
+                    <h6>{{pd.name}}</h6>
+                     <p>Price : <b>{{pd.price | currency : pd.currency}}</b></p>
+                     <p class="buyButton">Buy</p>
+                  </ion-col>
+                   </ion-row>     
+                            <div class='nextButton' (click)='goTo()'>
+                      <img src="assets/xfs_image/19/heart-1.svg">
+                  </div>
+                </ion-col>
+                
+              </ion-row>
+            </ion-row>
+          </div>     
+          
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

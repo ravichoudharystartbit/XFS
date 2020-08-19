@@ -1,0 +1,28 @@
+ion-toolbar {
+    --border-width: 0px!important;
+    --background: #000 !important;
+    background: #000;
+    color: #fff;
+   /* border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    --border-bottom-left-radius: 18px;
+    --border-bottom-right-radius: 18px; */
+
+    ion-menu-button {
+        color: #fff;
+    }    
+    .sc-ion-back-button-ios-h{
+        color : #fff;
+    }
+    .toolbar-container{
+     --background: #000 !important;
+      background: #000 !important;
+    }
+    .ion-color-primary{
+    	background: #000
+    }
+    ion-item{
+        --background-activated : #000;
+        --background-focused : #000;
+    }
+}

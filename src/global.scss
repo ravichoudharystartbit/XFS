@@ -1,0 +1,179 @@
+// http://ionicframework.com/docs/theming/
+@import "~@ionic/angular/css/core.css";
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+.instructions{
+    .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {
+            width: 100%;
+            position: fixed;
+            /* padding-top: 20px; */
+            bottom: 4vh;
+            margin: 0 auto;
+            left: 0;
+        }
+}
+
+
+
+.graphSlider  .swiper-container-horizontal>.swiper-pagination-bullets{
+    display : none;
+}
+
+.videosPage  .swiper-container-horizontal>.swiper-pagination-bullets{
+    display : none;
+}
+.storePage  .swiper-container-horizontal>.swiper-pagination-bullets{
+    display : none;
+}
+
+.tradingStar{
+    .swiper-container-horizontal>.swiper-pagination-bullets{
+        bottom : 0px;
+        display : block;
+    }
+}
+
+.swiper-slide img {
+    margin: 8vh auto 6vh;
+}
+.swiper-pagination-bullet-active {
+    background: white;
+}
+.tradingStar .swiper-slide img , .singleProductDetails  .swiper-slide img {
+    margin: 0vh auto 0vh;
+}
+
+ion-menu{
+   ion-content{
+       --background: black;  
+    }
+    ion-item{
+        --background: black;
+        color: white;        
+        --background-activated : #000;
+        --background-focused : #000;
+        --inner-border-width : 0;
+    } 
+}
+
+.newsPageSection , .mainPage {
+  .graphSlider {
+    .swiper-slide img {
+        width: 100%;
+    }
+    ion-slides{
+
+        margin-right: 10p
+    }
+    .swiper-wrapper{
+        width: 90%;
+        padding-left: 3%;
+    }
+    
+}  
+}
+
+.singleProductDetails{
+  .graphSlider {
+    .swiper-slide img {
+        width: 100%;
+    }
+    ion-slides{
+
+        margin-right: 10p
+    }
+    .swiper-wrapper{
+        width: 88%;
+        padding-left: 3%;
+    }
+    
+}  
+}
+
+.productDetails{
+    .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {
+            bottom: 40px;
+        }
+}
+
+
+
+ @media screen and (max-width: 420px){
+   div.wrapper{
+        margin:25px auto !important;
+
+        input.otp-input{
+            width: 21% !important;
+            font-size: 24px;
+            height:50px !important;
+            font-weight: 800;
+            color : #4c8cd8;
+        }
+    } 
+  }
+
+ 
+
+ @media screen and (max-width: 320px){
+    .swiper-slide img {
+        margin: 4vh auto;
+    }
+  }
+
+
+  ion-back-button {
+        margin-top: 5px;
+        content: url('assets/back-arrow.png') !important;
+        width: 20px;
+        margin-left: 5px;
+    }
+
+  ion-menu-button {
+    width: 30px;
+    img{
+        width: 100%;
+    }       
+        
+}
+
+ion-back-button {
+  display: block;
+}
+.can-go-back header-component ion-back-button {
+  display: block;
+}
+
+.videoFrame{
+    #sun{
+        h1{
+            font-size:10px !important;
+            margin-bottom:0 !important;
+        }
+        p{
+            font-size:8px !important;
+            margin-bottom:0 !important;
+        }
+    }
+    
+}
+
+@media (max-width: 300px){
+  iframe{
+    #sun{
+      h1 {
+        font-size: 10px !important;
+      }
+      p {
+        font-size: 8px !important;
+      }
+    }
+  }  
+}

@@ -1,0 +1,40 @@
+<ion-content>
+    <ion-grid class="login form_fields ion-padding" >
+        <ion-row>
+            <ion-col size="12" class="ion-text-center" >
+                <img src="/assets/logo.png" class="logoImage" />
+            </ion-col>
+        </ion-row>
+        <form class="signup-form auth-form" [formGroup]="forgotForm" (ngSubmit)="doForgotPassword(forgotForm.value)">
+            <ion-label class="first">Email</ion-label>
+            <ion-row class="field last">
+                <ion-col size="2" class="ion-text-center">
+                  <img src="assets/email.png" />     
+                </ion-col> 
+                <ion-col size="10" class="ion-no-padding">
+                    <ion-input type="text" formControlName="userEmail" (ionInput)='emailValidate($event)' placeholder="Email Address"></ion-input>
+                    <!-- <ng-container *ngFor="let validation of validation_messages.userEmail">
+                        <p class="errp" *ngIf="forgotForm.get('userEmail').hasError(validation.type) && (forgotForm.get('userEmail').dirty || forgotForm.get('userEmail').touched)">
+                            <ion-icon class="erricon" name="information-circle-outline"></ion-icon>{{ validation.message }}
+                        </p>
+                    </ng-container> -->
+                </ion-col>
+                <span *ngIf='EmailError' class='errorMsg'>{{EmailErrorMsg}}</span>
+            </ion-row>
+            <ion-row>
+                <ion-col size="12">
+                    <div class="shadow">
+                        <ion-button type="submit" [disabled]="EmailError">Reset Password</ion-button>
+                    </div>
+                </ion-col>
+            </ion-row>
+    </form>
+    </ion-grid>
+    <ion-grid class="footer_block">
+        <ion-row>
+            <ion-col size="12" class="ion-text-center">
+                <p routerLink="/login">Existing User? <span>Sign In</span></p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

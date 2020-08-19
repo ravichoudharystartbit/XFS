@@ -1,0 +1,28 @@
+<ion-header >
+  
+  <ion-toolbar>
+   <ion-buttons slot="start">
+      <!-- <ion-back-button text=''></ion-back-button> -->
+      <ion-button routerLink="/tabs/home" routerDirection="back"><img src="assets/back-arrow.png" width="20px"></ion-button>
+    </ion-buttons>
+    <ion-title>
+     Client Directory
+    </ion-title>    
+  </ion-toolbar> 
+</ion-header>
+<ion-content>
+	<ion-row>
+		<ion-col size='12' class='coachSection' *ngFor='let coach of Coaches'>
+			<ion-row>
+				<ion-col size='4'>
+					<img src="{{client.image}}">
+				</ion-col>
+				<ion-col size='8'>
+					<h5>{{coach.name}}</h5>
+					<p><img src="assets/xfs_image/23/star.svg" width="15px"> {{coach.star}}</p>
+					<p><img src="{{coach.image}}" width="12px"> {{coach.address}}</p>
+				</ion-col>
+			</ion-row>
+		</ion-col>
+	</ion-row>
+</ion-content>

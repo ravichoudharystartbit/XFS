@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button><img src="assets/xfs_image/12/side_bar.svg"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      News
+    </ion-title>
+    <img class="search" src='assets/xfs_image/12/search.svg' (click)="search()">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class='mainPage'>
+  
+
+  <ion-grid>
+    <ion-row class='graphSlider'> 
+        <ion-slides pager="true" [options]="slideOpts1">   
+          <ion-slide>
+            <ion-row class='sliderRow'>  
+              <ion-col size="12" class='sliderItem'>   
+              <img src="assets/xfs_image/17/image_1.png" width="100%">   
+                <div class='sliderTimeShowSection'>
+                  30 mins ago
+                  <!-- {{today | timeAgo}} -->
+                </div>
+                <div class='headingShowSection'>
+                  <!-- 30 mins ago -->
+                  Welcome to EFS
+                </div>           
+                
+              </ion-col>                             
+            </ion-row>            
+          </ion-slide>          
+          <ion-slide>
+            <ion-row class='sliderRow'>  
+              <ion-col size="12" class='sliderItem'>                 
+                <img src="assets/xfs_image/17/image_1.png" width="100%">
+                <div class='sliderTimeShowSection'>
+                  45 mins ago
+                </div>
+              </ion-col>                            
+            </ion-row>            
+          </ion-slide>    
+          <ion-slide>
+            <ion-row class='sliderRow'>  
+              <ion-col size="12" class='sliderItem'>                 
+                <img src="assets/xfs_image/17/image_1.png" width="100%">
+                <div class='sliderTimeShowSection'>
+                  45 mins ago
+                </div>
+                
+              </ion-col>                            
+            </ion-row>            
+          </ion-slide>       
+        </ion-slides>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row class='newsSection'>
+      <h6>Description</h6>
+      <!-- Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. <br><br>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. -->
+      {{singleNews ? singleNews.description : ''}}
+    </ion-row>
+  </ion-grid>
+</ion-content>

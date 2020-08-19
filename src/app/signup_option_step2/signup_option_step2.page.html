@@ -1,0 +1,67 @@
+<ion-content>
+    <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
+    <ion-grid class="login form_fields ion-padding">
+        <ion-row>
+            <ion-col size="12" class="ion-text-center">
+                <img src="assets/logo.png" class="logoImage" />
+                <p>SIGN UP</p>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="field">
+            <ion-col size="2" class="ion-text-center">
+                <img src="assets/xfs_image/2/user.png" />    
+            </ion-col>
+            <ion-col size="10" class="ion-no-padding">
+                <ion-input type="email" placeholder="Email" formControlName="email" clearInput autocapitalize="off" inputmode="email"></ion-input>
+                <div class="error-container">
+                  <ng-container *ngFor="let validation of validation_messages.email">
+                    <div class="error-message" *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon>
+                      <span>{{ validation.message }}</span>
+                    </div>
+                  </ng-container>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row class="field last">
+            <ion-col size="2" class="ion-text-center">
+                <img src="assets/xfs_image/2/password.png" />     
+            </ion-col>
+            <ion-col size="10" class="ion-no-padding">
+                <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>      
+                <div class="error-container">
+                  <ng-container *ngFor="let validation of validation_messages.password">
+                    <div class="error-message" *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon>
+                      <span>{{ validation.message }}</span>
+                    </div>
+                  </ng-container>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12" class="ion-text-center">
+                <div class="shadow">
+                <button type="submit" [disabled]="!loginForm.valid" class='submitButton' >Verify Email</button>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+  </form> 
+
+<ion-grid class="footer_block">
+    <ion-row>
+        <ion-col size="12">
+            <p routerLink="/login">Already have an account? <span>SIGN IN</span></p>
+        </ion-col>        
+    </ion-row>
+</ion-grid>
+
+</ion-content>
+
+<ion-footer>
+<ion-row>
+            <p >Terms & Conditions?</p>
+        </ion-row>
+</ion-footer>

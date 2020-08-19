@@ -1,0 +1,42 @@
+<ion-tabs  *ngIf='ShowPage'>
+
+  <ion-tab-bar slot="bottom">
+
+    <ion-tab-button tab="home">
+      <!-- <img src="assets/m1.png" class="desktop"/> -->
+      <img src="assets/home.png" class="home" />
+
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)='goToProfile()'>
+      <!-- <img src="assets/m2.png" class="desktop"/> -->
+      <img src="assets/profile.svg"/>
+      <ion-label>Profile</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="appointment">
+      <!-- <img src="assets/m3.png" class="desktop"/> -->
+      <img src="assets/appointment.svg"/>
+
+      <ion-label>Appointment</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="message">
+      <!-- <img src="assets/m4.png" class="desktop"/> -->
+      <img src="assets/message.svg"/>
+
+      <ion-label>Message</ion-label>
+    </ion-tab-button>
+
+
+    <ion-tab-button tab="more">
+      <!-- <img src="assets/m4.png" class="desktop"/> -->
+      <img src="assets/more.svg"/>
+
+      <ion-label>More</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+
+</ion-tabs>

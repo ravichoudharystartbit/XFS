@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" icon='dfsdfd' text="" ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class='instructions'>
+    <ion-row class='imageSlider'> 
+        <ion-slides pager="true" [options]="slideOpts" #mySlider>   
+          <ion-slide>
+            <ion-row class='sliderRow'>  
+                <ion-col class='sliderItem'>
+                  <img src="assets/slider-1.png"/>  
+                  <h2>Intruction 1</h2>  
+                  <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              </ion-col>  
+              <ion-button fill="clear" class="insButton" (click)="swipeNext()">Next</ion-button> 
+            </ion-row>
+          </ion-slide>  
+        
+          <ion-slide>
+          <ion-row class='sliderRow'>  
+            <ion-col class='sliderItem'>
+              <img src="assets/slider-2.png"/>  
+              <h2>Intruction 2</h2>  
+              <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>  
+              </ion-col>
+              <ion-button fill="clear" class="insButton" (click)="swipeNext()">Next </ion-button> 
+            </ion-row>
+          </ion-slide>  
+    
+         <ion-slide>
+          <ion-row class='sliderRow'> 
+              <ion-col class='sliderItem'> 
+                  <img src="assets/slider-3.png"/>  
+                  <h2>Intruction 3</h2>  
+                  <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>  
+              </ion-col>
+            <ion-button fill="clear" class="insButton"  (click)="goToNext()">Get Started </ion-button>  
+            </ion-row>
+          </ion-slide>          
+        </ion-slides>
+    </ion-row> 
+</ion-content>
+

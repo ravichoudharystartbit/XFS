@@ -1,0 +1,102 @@
+<ion-content>
+    <form [formGroup]="PersonalForm" (ngSubmit)="submit()">
+    <ion-grid class="login form_fields ion-padding">
+        <ion-row>
+            <ion-col size="12" class="ion-text-center">
+                <img src="assets/logo.png" class="logoImage" />
+                <p class='signup'>PERSONAL INFORMATION</p>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="field">
+            <ion-col size="2" class="ion-text-center">
+                <img src="assets/xfs_image/2/user.png" />     
+            </ion-col>
+            <ion-col size="10" class="ion-no-padding">
+                <ion-input type="text" placeholder="Enter Name" formControlName="name" clearInput autocapitalize="off" inputmode="text"></ion-input>
+                <div class="error-container">
+                  <ng-container *ngFor="let validation of validation_messages.name">
+                    <div class="error-message" *ngIf="PersonalForm.get('name').hasError(validation.type) && (PersonalForm.get('name').dirty || PersonalForm.get('name').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon>
+                      <span>{{ validation.message }}</span>
+                    </div>
+                  </ng-container>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row class="field">
+            <ion-col size="2" class="ion-text-center">
+                <img src="assets/xfs_image/6/Asset 3.png" />     
+            </ion-col>
+            <ion-col size="10" class="ion-no-padding">
+                <ion-datetime displayFormat="MM/DD/YYYY" placeholder="MM/DD/YYYY" formControlName="DOB" clearInput autocapitalize="off"></ion-datetime>
+                <div class="error-container">
+                  <ng-container *ngFor="let validation of validation_messages.DOB">
+                    <div class="error-message" *ngIf="PersonalForm.get('DOB').hasError(validation.type) && (PersonalForm.get('DOB').dirty || PersonalForm.get('DOB').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon>
+                      <span>{{ validation.message }}</span>
+                    </div>
+                  </ng-container>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row class="field">
+            <ion-col size="2" class="ion-text-center">
+                <img src="assets/xfs_image/6/Asset 4.png" />     
+            </ion-col>
+            <ion-col size="10" class="ion-no-padding">
+                <ion-input type="tel" maxlength="10" placeholder="1234567890" formControlName="phone" clearInput autocapitalize="off" inputmode="number"></ion-input>
+                <div class="error-container">
+                  <ng-container *ngFor="let validation of validation_messages.phone">
+                    <div class="error-message" *ngIf="PersonalForm.get('phone').hasError(validation.type) && (PersonalForm.get('phone').dirty || PersonalForm.get('phone').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon>
+                      <span>{{ validation.message }}</span>
+                    </div>
+                  </ng-container>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row class="field">
+            <ion-col size="2" class="ion-text-center">
+                <img src="assets/xfs_image/6/Asset 5.png" />     
+            </ion-col>
+            <ion-col size="10" class="ion-no-padding">
+                <ion-input type="text" placeholder="Primary sport" formControlName="sports" clearInput autocapitalize="off" inputmode="text"></ion-input>
+                <div class="error-container">
+                  <ng-container *ngFor="let validation of validation_messages.sports">
+                    <div class="error-message" *ngIf="PersonalForm.get('sports').hasError(validation.type) && (PersonalForm.get('sports').dirty || PersonalForm.get('sports').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon>
+                      <span>{{ validation.message }}</span>
+                    </div>
+                  </ng-container>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row class="field">
+            <ion-col size="2" class="ion-text-center">
+                <img src="assets/xfs_image/6/Asset 6.png" />     
+            </ion-col>
+            <ion-col size="10" class="ion-no-padding">
+                <ion-input type="text" placeholder="Area of Emphasis" formControlName="choice" clearInput autocapitalize="off" inputmode="text"></ion-input>
+                <div class="error-container">
+                  <ng-container *ngFor="let validation of validation_messages.choice">
+                    <div class="error-message" *ngIf="PersonalForm.get('choice').hasError(validation.type) && (PersonalForm.get('choice').dirty || PersonalForm.get('choice').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon>
+                      <span>{{ validation.message }}</span>
+                    </div>
+                  </ng-container>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12" class="ion-text-center">
+                <div class="shadow">
+                <button type='submit' class='submitButton'>Submt</button>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+  </form> 
+
+
+</ion-content>

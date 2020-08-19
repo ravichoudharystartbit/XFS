@@ -1,0 +1,124 @@
+ion-toolbar {
+    --border-width: 0px!important;
+    --background: #000;
+    color: #fff;
+   /* border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    --border-bottom-left-radius: 18px;
+    --border-bottom-right-radius: 18px; */
+
+    ion-menu-button {
+        color: #fff;
+    }    
+    .sc-ion-back-button-ios-h{
+        color: #fff;
+        background: url(/assets/back-arrow.png);
+        width: 28px;
+        background-size: 100% 100%;
+        padding: 0 5px;
+        height: 21px;
+        margin-left: 8px;
+    }
+}
+
+
+ion-tab-bar {
+    min-height: 69px;
+    --border: transparent;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.17);
+
+    ion-tab-button{
+        padding-top: 4px;
+    }
+
+    ion-label {
+        color: #000;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    ion-tab-button[aria-selected="true"]{
+        color: #012069;
+
+        ion-label {
+            color: #012069;
+            font-size: 12px;
+        }
+    }
+    img {
+        max-width: 25px;
+        max-height: 25px;
+        min-height: 25px;
+        object-fit: contain;
+        margin-bottom: 5px;
+    }
+    ion-back-button{
+        color: white;
+        --color: white;
+        content: url('/assests/back-arrow.png');
+        width: 35px;
+    }
+}
+
+ion-content{
+   
+    z-index : 1;
+    --background: #000;
+
+    h2{
+        color: #4c8cd8;
+        width: 100%;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    p{
+        text-align: center;
+        color: #b7b8b8;
+        font-size: 14px;
+    }
+
+   .insButton{
+        width: 100%;
+        background: #4c8cd8;
+        color: white;
+        border-radius: 50px;
+   }
+
+   .imageSlider  {
+        padding-left: 25px;
+        padding-right: 25px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        position: relative;
+
+        .sliderRow{
+            background: #2b2c2d;
+            padding: 25px 25px 0;
+            border-radius: 40px;
+            min-height: 75vh;
+            max-width: 80vh;
+            width: 100% !important
+        }
+
+       ion-slide{
+            width : 100% !important;
+       }  
+
+       .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {
+            width: 100%;
+            position: fixed;
+            /* padding-top: 20px; */
+            bottom: 4vh;
+            margin: 0 auto;
+            left: 0;
+        }
+        .sliderItem{
+            padding: 0 12px;
+        }
+    }
+
+}
+

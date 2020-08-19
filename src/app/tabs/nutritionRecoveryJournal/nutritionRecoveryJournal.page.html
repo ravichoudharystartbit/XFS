@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)='back()'><img src="assets/back-arrow.png" width="20px"></ion-button>
+    </ion-buttons>
+    <ion-title>
+      Nutrition & Recovery Journal
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class='nutritionRecoveryJournal'>
+  <ion-back-button></ion-back-button>
+  <ion-grid>
+     <ion-row class='nutritionButton'>
+        <ion-col size="12"  class='nrjButton'>
+           <button type="button" style="width:100%">+ New Journal Entry</button>
+        </ion-col>
+     </ion-row>
+     <ion-row class='imageSlider'> 
+        <ion-slides pager="true" [options]="slideOpts" #mySlider>   
+          <ion-slide>
+            <ion-row class='sliderRow'>  
+              <ion-col size="12" class='sliderItem'>
+                 
+                 <video controls="true" width='100%' height='100%' src='assets/small.mp4' playsinline></video>
+              </ion-col> 
+              <ion-col  size="12">
+                <h4></h4>
+              </ion-col>               
+            </ion-row>
+            
+          </ion-slide>  
+        
+          <ion-slide>
+           <ion-row class='sliderRow'>  
+              <ion-col size="12" class='sliderItem'>
+                 
+                 <video controls="true" width='100%' height='100%' src='assets/small.mp4' playsinline></video>
+              </ion-col> 
+              <ion-col  size="12">
+                <h4></h4>
+              </ion-col>               
+            </ion-row>
+          </ion-slide> 
+    
+          <ion-slide>
+            <ion-row class='sliderRow'>  
+              <ion-col size="12" class='sliderItem'>
+                 
+                 <video controls="true" width='100%' height='100%' src='assets/small.mp4' playsinline></video>
+
+              </ion-col> 
+              <ion-col  size="12">
+                <h4></h4>
+              </ion-col>               
+            </ion-row>  
+            </ion-slide>       
+        </ion-slides>
+    </ion-row>
+    <ion-row class='nutritionSection'>
+      <h6>Instructions</h6>
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. <br><br>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    </ion-row>
+    <ion-row class='nutritionSection nutritionPadding'>
+      <ion-col size="12"  class='nutritionSechedule' *ngFor='let nut of nutritions'>
+        <p class="date">{{nut.date | date : 'dd MMM yyyy'}}</p>
+        <p class="date">{{nut.date | date : 'shortTime'}} </p>
+        <p class="sleep"><br>Sleep : <b>{{nut.sleep}} hours</b></p>
+        <ion-progress-bar color="success" value="{{nut.sleep/24}}"></ion-progress-bar>
+        <p class="calories"><br>Calories : <b>{{nut.calories}}Kcal</b></p>
+        <ion-progress-bar color="primary" value="{{nut.calories/1200}}"></ion-progress-bar>
+      </ion-col>
+      <!-- <ion-col size="12"  class='nutritionSechedule'>
+        <p>{{today | date : 'dd MMM yyyy'}}</p>
+        </p>{{today | date : 'shortTime'}} </p>
+        </p><br>Sleep : 6 hours</p>
+        <ion-progress-bar color="success" value="0.5"></ion-progress-bar>
+        </p>Calories : 450Kcal</p>
+        <ion-progress-bar color="primary" value="0.5"></ion-progress-bar>
+      </ion-col>
+      <ion-col size="12"  class='nutritionSechedule'>
+        <p>{{today | date : 'dd MMM yyyy'}}</p>
+        </p>{{today | date : 'shortTime'}} </p>
+        </p><br>Sleep : 6 hours</p>
+        <ion-progress-bar color="success" value="0.5"></ion-progress-bar>
+        </p>Calories : 450Kcal</p>
+        <ion-progress-bar color="primary" value="0.5"></ion-progress-bar>
+      </ion-col>
+      <ion-col size="12"  class='nutritionSechedule'>
+        <p>{{today | date : 'dd MMM yyyy'}}</p>
+        </p>{{today | date : 'shortTime'}} </p>
+        </p><br>Sleep : 6 hours</p>
+        <ion-progress-bar color="success" value="0.5"></ion-progress-bar>
+        </p>Calories : 450Kcal</p>
+        <ion-progress-bar color="primary" value="0.5"></ion-progress-bar>
+      </ion-col> -->
+    </ion-row>
+  </ion-grid>
+</ion-content>

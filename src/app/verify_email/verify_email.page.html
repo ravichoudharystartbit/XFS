@@ -1,0 +1,29 @@
+<ion-content>
+    <form>
+    <ion-grid class="login form_fields ion-padding">
+        <ion-row>
+            <ion-col size="12" class="ion-text-center">
+                <img src="assets/logo.png" class="logoImage" />
+                <p class='signup'>SIGN UP</p>
+                <p class='message'>We have send an OTP an your email<br>{{Email}}</p>
+            </ion-col>
+        </ion-row>
+
+        <ion-row text-center>
+          <ion-col>
+           <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:4,allowNumbersOnly:true}"></ng-otp-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12" class="ion-text-center">
+                <div class="shadow">
+                <button class='submitButton' (click)='formSubmit()'>Submt</button>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+  </form> 
+
+
+</ion-content>
+

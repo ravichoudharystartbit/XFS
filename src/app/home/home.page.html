@@ -1,0 +1,176 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="assets/xfs_image/12/side_bar.svg">
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Menu
+    </ion-title>
+    <img class="search" src='assets/xfs_image/12/search.svg' (click)="search()">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class='mainPage'>
+  <ion-row class='heading'><h5>LIVE SOCCER VIDEO</h5></ion-row>
+    <ion-row class='imageSlider'> 
+        <ion-slides pager="true" [options]="slideOpts" #mySlider>   
+          <ion-slide>
+            <ion-row class='sliderRow'>  
+              <ion-col size="12" class='sliderItem'>
+                 
+                 <video controls="true" width='100%' height='100%' src='assets/small.mp4' playsinline></video>
+              </ion-col> 
+              <ion-col  size="12">
+                <h4></h4>
+              </ion-col>               
+            </ion-row>
+            
+          </ion-slide>  
+        
+          <ion-slide>
+           <ion-row class='sliderRow'>  
+              <ion-col size="12" class='sliderItem'>
+                 
+                 <video controls="true" width='100%' height='100%' src='assets/small.mp4' playsinline></video>
+              </ion-col> 
+              <ion-col  size="12">
+                <h4></h4>
+              </ion-col>               
+            </ion-row>
+          </ion-slide> 
+    
+          <ion-slide>
+            <ion-row class='sliderRow'>  
+              <ion-col size="12" class='sliderItem'>
+                 
+                 <video controls="true" width='100%' height='100%' src='assets/small.mp4' playsinline></video>
+
+              </ion-col> 
+              <ion-col  size="12">
+                <h4></h4>
+              </ion-col>               
+            </ion-row>  
+            </ion-slide>       
+        </ion-slides>
+    </ion-row>
+    <ion-row class='heading'><h5>Stat</h5></ion-row>
+    <ion-row class='graphSlider'> 
+        <ion-slides pager="true" [options]="slideOpts1">   
+          <ion-slide>
+            <ion-row class='sliderRow'>  
+              <ion-col size="12" class='sliderItem'>   
+              <!-- <img src="assets/xfs_image/12/graph.svg" width="100%">               -->
+                <ejs-sparkline id='container' [dataSource]="data" xName="xval" yName="yval"  width='200px' height='100px'>
+                </ejs-sparkline>
+                <h6>Status 1 <br><span>Processing</span></h6>
+              </ion-col>                             
+            </ion-row>            
+          </ion-slide>          
+          <ion-slide>
+            <ion-row class='sliderRow'>  
+              <ion-col size="12" class='sliderItem'>                 
+                <!-- <img src="assets/xfs_image/12/graph.svg" width="100%"> -->
+                <ejs-sparkline id='container1' fill='#99b041' [dataSource]="data1" xName="xval" yName="yval"  width='200px' height='100px' >
+                </ejs-sparkline>
+                <h6 class='secondGraph'>Status 2<br> <span>Processing</span></h6>
+              </ion-col>                            
+            </ion-row>            
+          </ion-slide>    
+          <ion-slide>
+            <ion-row class='sliderRow'>  
+              <ion-col size="12" class='sliderItem'>                 
+                <!-- <img src="assets/xfs_image/12/graph.svg" width="100%"> -->
+                <ejs-sparkline id='container2'  fill='yellow' [dataSource]="data2" xName="xval" yName="yval"  width='200px' height='100px' >
+                </ejs-sparkline>
+                <h6 class='thirdGraph'>Status 3<br> <span>Processing</span></h6>
+              </ion-col>                            
+            </ion-row>            
+          </ion-slide>       
+        </ion-slides>
+    </ion-row>
+
+    <ion-row class='heading'>
+      
+      <ion-col size="12">
+          <h5>Sessions</h5> 
+      </ion-col>   
+    </ion-row>
+    <ion-row class='sessions'>
+      <ion-col size="9">
+        <h6 class='remaining'>Session Remaining</h6>
+
+        <h6 class='purchase'>Purchase</h6>
+      </ion-col>  
+      <ion-col size="3" class='purchaseDigit'>
+        <h6 >10</h6>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class='heading  menu'>
+      <h5 >Menus</h5>      
+    </ion-row>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+          <div class="serv">
+            <span routerLink='/tabs/watch_videos'>
+               <img src="assets/xfs_image/12/watch_videos.svg" />
+               <p>Watch Videos</p>
+            </span>
+
+            <span routerLink='/store'>
+              <img src="assets/xfs_image/12/store.svg" />
+              <p>Stores</p>
+           </span>
+
+            <span routerLink='/tabs/nutritionRecoveryJournal'>
+               <img src="assets/xfs_image/12/nutrition.svg" />
+               <p >Nutrition & <br>Recovery Journal</p>
+            </span>
+
+            <span routerLink='/tabs/nutrition'>
+               <img src="assets/xfs_image/12/account.svg" />
+               <p>Account</p>
+            </span>
+            <span routerLink='/video-call'>
+               <img src="assets/xfs_image/12/library.svg" />
+               <p>Library</p>
+            </span>
+            
+            <span>
+              <img src="assets/xfs_image/12/schedule.svg" />
+              <p>Schedule A <br>Sessions</p>
+           </span>
+            
+            <span routerLink='/tabs/news'>
+              <img src="assets/xfs_image/12/news.svg" />
+              <p>News</p>
+           </span>
+            
+            <span routerLink='/contact'>
+              <img src="assets/xfs_image/12/contact.svg" />
+              <p>Contact</p>
+           </span>          
+          </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <div class="serv lastMenu">
+            <span routerLink='/tabs/trading_star'>
+              <img src="assets/xfs_image/12/training_stars.svg" />              
+               <p>Traning Star</p>
+           </span>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row id='handstick'>
+      </ion-row>
+      
+    </ion-grid>
+</ion-content>
+

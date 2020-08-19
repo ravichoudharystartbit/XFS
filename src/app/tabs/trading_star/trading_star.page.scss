@@ -1,0 +1,181 @@
+ion-toolbar {
+    --border-width: 0px!important;
+    --background: #000 !important;
+    background: #000;
+    color: #fff;
+
+
+    ion-menu-button {
+        color: #fff;
+    }    
+    .sc-ion-back-button-ios-h{
+        color : #fff;
+    }
+    .toolbar-container{
+     --background: #000 !important;
+      background: #000 !important;
+    }
+    .ion-color-primary{
+        background: #000
+    }
+
+    ion-toolbar ion-menu-button {
+        color: #fff;
+        content: url(assets/xfs_image/12/side_bar.svg);
+        width: 18px;
+        margin-left: 10px;
+    }
+    .search{
+        cursor: pointer;
+        position: absolute;
+        top: 12px;
+        right: 20px;
+        width: 18px;
+    } 
+    
+    ion-buttons{
+        padding-left: 2%;
+    }
+}
+
+ion-content{
+   
+    z-index : 1;
+    --background: #000;
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+
+    h2{
+        color: #4c8cd8;
+        width: 100%;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    p{
+        text-align: center;
+        color: #9e9e9e;
+        font-size: 14px;
+    }
+
+    .insButton{
+        width: 100%;
+        background: #4c8cd8;
+        color: white;
+        border-radius: 50px;
+    }
+
+    .imageSlider  {
+        padding: 0 3.5%;
+        margin: 0 auto;    
+        height: auto;
+        position: relative;
+
+        .sliderRow{            
+            padding:0;
+            border-radius: 40px;
+            min-height: 15vh;
+            max-width: 94vw;
+            width: 100% !important;
+            margin-top:15px;
+
+            .sliderItem{
+                padding:20px;
+                border-radius: 20px;
+                border: 1px solid #2d2d2d;
+
+                img{
+                    width: 50%;
+                }
+            }
+        }
+
+        ion-slide{
+            width : 100% !important;
+        } 
+    }
+  
+    #container , #container1, #container2{
+        text-align: left;
+        padding: 30px 25px 12px;
+        background: #2d2d2d;
+        border-radius: 24px;
+        position:relative;
+    }
+
+    .menu{
+        padding-top: 25px;
+    }
+
+    .tradingstarSection{
+        padding : 0 3%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+
+
+
+        .tradingstar{
+            position: relative;
+            
+            ion-row{
+                background: #2d2d2d;
+                padding: 2px 10px;
+                border-radius: 24px;
+
+                h6{
+                    margin: 5px 0;
+                    color: white;
+                }
+                p{
+                    text-align : left;
+                    margin: 0;
+                    padding-right: 15px;
+                    line-height: 1.3;    
+                }
+                .sport{
+                    color: #00bcd4;
+                }
+            }
+
+            img{
+                border-radius: 22px;
+                margin: 0 !important;
+                height: 80px;
+            }
+
+            .nextButton{
+                background : url('assets/xfs_image/17/shape.svg');
+                background-size: 100% 100%;
+                position: absolute;
+                top: 2px;
+                width: 35px;
+                height: 35px;
+                right: 5px;
+                padding: 8px;
+                text-align: center;
+
+                img{
+                    width: 70%;
+                    height: 18px;
+                }
+
+            }
+            .timeShowSection{
+                position: absolute;
+                bottom: 15px;
+                width: 100px;
+                right: 20px;
+                font-size: 12px;
+                color: #9e9e9e;
+                text-align : right;
+            }
+        }
+    }
+
+    .showImageBanner{
+        padding: 0 3%;
+        margin: 4% 0;
+    }
+
+}

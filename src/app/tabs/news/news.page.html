@@ -1,0 +1,77 @@
+XFS<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button><img src="assets/xfs_image/12/side_bar.svg"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      News
+    </ion-title>
+    <img class="search" src='assets/xfs_image/12/search.svg' (click)="search()">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class='mainPage'>
+  
+
+  <ion-grid class='newsPageSection'>
+    <ion-row class='graphSlider'> 
+        <ion-slides pager="true" [options]="slideOpts1">   
+          <ion-slide>
+            <ion-row class='sliderRow'>  
+              <ion-col size="12" class='sliderItem'>   
+              <img src="assets/xfs_image/17/image_1.png" width="100%">   
+                <div class='sliderTimeShowSection'>
+                  <!-- 30 mins ago -->
+                  {{today | timeAgo}}
+                </div>           
+                
+              </ion-col>                             
+            </ion-row>            
+          </ion-slide>          
+          <ion-slide>
+            <ion-row class='sliderRow'>  
+              <ion-col size="12" class='sliderItem'>                 
+                <img src="assets/xfs_image/17/image_1.png" width="100%">
+                <div class='sliderTimeShowSection'>
+                  30 mins ago
+                </div>
+              </ion-col>                            
+            </ion-row>            
+          </ion-slide>    
+          <ion-slide>
+            <ion-row class='sliderRow'>  
+              <ion-col size="12" class='sliderItem'>                 
+                <img src="assets/xfs_image/17/image_1.png" width="100%">
+                <div class='sliderTimeShowSection'>
+                  30 mins ago
+                </div>
+                
+              </ion-col>                            
+            </ion-row>            
+          </ion-slide>       
+        </ion-slides>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row class='newsSection'>
+      <ion-col size="12" class='news' *ngFor='let new of News'>
+        <ion-row>
+           <ion-col  size="3">
+          <!-- <img src="assets/xfs_image/17/image_2.png" width="100%"> -->
+          <img src="{{new.image}}" width="100%">
+        </ion-col>
+        <ion-col  size="9">
+          <h6>{{new.title}}</h6>
+          <p>{{(new.description.length>50)? (new.description | slice:0:50)+'...':(new.description)}}</p>
+        </ion-col>
+        </ion-row>     
+        <div class='nextButton' (click)='goTo(new.ID)'>
+          <img src="assets/xfs_image/17/arrow.svg">
+        </div>
+        <div class='timeShowSection'>
+           {{new.date | timeAgo}}
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

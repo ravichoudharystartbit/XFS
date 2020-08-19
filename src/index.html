@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>XFS Progressive Web App</title>
+
+  <base href="/" />
+
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <link rel="icon" type="image/png" href="assets/icon/favicon.png">
+
+  <!-- add to homescreen for ios -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <!-- icons for ios pwa -->
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1976d2">
+</head>
+<body>
+  <app-root></app-root>
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
+  <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.3/custom-elements-es5-adapter.js"></script>
+  <script type="text/javascript" src="https://cloud.apizee.com/apiRTC/apiRTC-latest.min.js"></script>
+  <script src="https://static.opentok.com/v2/js/opentok.min.js"></script>
+  <script>
+    var connectedSession;
+
+    // Create a new UserAgent instance with your api key
+    var ua = new apiRTC.UserAgent({
+        uri: 'apzkey:b79952dd2cec7653209614f0c35aa462'
+    });
+
+    // Register UserAgent to create an apiRTC session
+    ua.register({
+        id : 1 // OPTIONAL // This is used for setting userId
+    }).then(function (session) {
+        console.log("Registration OK");
+        console.log(session);
+        connectedSession = session;
+    }).catch(function (error) {
+        console.log("Registration error", error);
+    });
+</script>
+<script>
+  function hasGetUserMedia() {
+    return !!(navigator.mediaDevices &&
+      navigator.mediaDevices.getUserMedia);
+  }
+  if (hasGetUserMedia()) {
+   
+  } else {
+    alert('getUserMedia() is not supported by your browser,so you can not work');
+  }   
+</script>
+</body>
+</html>
