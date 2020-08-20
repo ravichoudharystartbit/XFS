@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>incoming-call</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div id="remote" style="width:100%;"></div>
+
+  <div id="mini"></div>
+  
+  <ion-row *ngIf="!callanswered">
+      <ion-col col-6 class="center">
+        <ion-button expand="block" color="secondary" type="button" (click)='AnswerCall(incomingCallId)'>Accept Call</ion-button>
+      </ion-col>
+      <ion-col col-6 class="center">
+        <ion-button expand="block" color="danger" type="button" (click)='HangUp()'>Reject Call</ion-button>
+      </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="callanswered">
+    <ion-col col-12 class="center">
+      <ion-button expand="block" color="danger" type="button" (click)='HangUp()'>End Call</ion-button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>
+
+
+

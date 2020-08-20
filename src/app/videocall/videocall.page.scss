@@ -1,0 +1,126 @@
+.header_bg{
+    // background: url(../assets/imgs/header_bg.png) no-repeat;
+    background-position: center center;
+    background-size: cover;
+    padding:0px;
+    min-height: 70px !important;
+}
+.toolbar-background {
+    border-color: 0px !important;
+    background: transparent !important;
+    box-shadow: 0px 0px 0px !important;
+}
+.toolbar-title {
+    text-align: center;
+    // font-size: 14px;
+    height: 100%;
+}
+.toolbar {
+
+}
+img.small_logo {
+    max-width: 37px;
+    width: 100%;
+    object-fit: cover;
+}
+.toolbar-title p {
+    // margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 4px;
+}
+.header .toolbar:last-child .toolbar-background {
+    border-width: 0 0 0.55px;
+    border: 0px !important;
+}
+.scroll-content {
+    background: #f2f2f2;
+    -webkit-overflow-scrolling: initial !important;
+    will-change: initial !important;
+}
+
+.user_sec img {
+    max-width: 40px;
+    border-radius: 100%;
+    min-height: 40px;
+    max-height: 40px;
+    object-fit: cover;
+}
+.user_sec [col-2] {
+    margin: auto;
+}
+ p.name {
+    padding-bottom: 0px !important;
+    color: #000;
+    font-family: 'roboto';
+    font-weight: 500 !important;
+}
+p.address {
+    padding-top: 0px !important;
+    color: #797979;
+    font-family: 'Poppins-Regular' !important;
+    font-size: 10px;
+    text-align: justify;
+}
+p.content{
+    padding-top: 0px !important;
+    color: #797979;
+    font-family: 'roboto';
+    font-size: 11px;
+}
+.user_sec [col-10] {
+    margin: auto;
+    padding-bottom: 0px;
+}
+.box_shadow [col-12] {
+    padding: 0px 12px;
+}
+.del_eye_img span img {
+    max-width: 22px;
+    max-height: 22px;
+    min-height: 22px;
+    width: 100%;
+    display: inline-block;
+    border-radius: 24px;
+}
+.del_eye_img [col-12] {
+    margin-bottom: 5px;
+}
+.bar-button-default img {
+    max-width: 23px;
+    width: 100%;
+}
+.call_id {
+    background-color: #fff;
+    p {
+        margin-top: 5px;
+        font-weight: 700;
+        font-size: 14px;
+    }
+    ion-icon {
+        font-size: 24px;
+        color: #488afe;
+        display: inline-block;
+        margin-right: 5px;
+        position: relative;
+        top: 4px;
+    }
+}
+#remote {
+    border: 2px solid #e6e6e6;
+    padding: 6px;
+    padding-bottom: 0px;
+    min-height: 424px;
+    
+    video {
+        object-fit: cover;
+        min-width: 100%;
+        min-height: 407px;
+    }
+}
+div#mini {
+    position: absolute;
+    bottom: 18px;
+    left: 29px;
+}

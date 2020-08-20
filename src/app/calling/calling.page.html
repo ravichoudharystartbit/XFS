@@ -1,0 +1,93 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Video Call -{{status}}</ion-title>
+    <ion-icon class="close-icon" name="close-circle" slot="end" (click)="dismiss();"></ion-icon>
+  </ion-toolbar>  
+</ion-header> -->
+
+<ion-content>
+  <!-- <ion-card class="card_view"> -->
+  <!-- <div id="subscriber"></div>
+      <div id="publisher"></div> -->
+
+ <ion-grid>
+   <ion-row>
+     <ion-col size="12">
+      <div id="subscriber_data" class="clearfix">
+      </div>
+     </ion-col>
+     <ion-col size="12">
+      <div id="publisher"></div>
+    </ion-col>
+   </ion-row>
+ </ion-grid>
+ 
+  <ion-grid class="main-grid custom">
+    <ion-row class="view_data" *ngIf="status==-1 || status==0">
+      <ion-col size="12">
+        <img class="user-img" src="assets/people.png" *ngIf="calling_going" />
+        <img class="moving" *ngIf="status==0 && calling_going"  src="assets/imgs/colorloader.gif" />
+        <!-- <img class="moving" src="assets/imgs/colorloader.gif" /> -->
+      </ion-col>
+      <ion-col size="12">
+        <h3 class="user-name ">{{opposite_name}}</h3>
+
+        <h4 class="call-text" *ngIf="!isIncoming && status==0">Calling...</h4>
+        <h4 class="call-text" *ngIf="isIncoming && status==0">Call Incoming...</h4>
+
+      </ion-col>
+    </ion-row>
+    <ion-row class="view_data" style="position: absolute; bottom: 70px; z-index: 1000; width: 100%;">
+      <ion-col size="12">
+
+        <ng-container *ngIf="!isIncoming">
+
+          <ion-col>
+            <ion-button block (click)="startCall()" *ngIf="status==-1">Make Call</ion-button>
+          </ion-col>
+
+          <ion-col>
+            <ion-button block (click)="endCall(1)" *ngIf="status>=0">End Call</ion-button>
+          </ion-col>
+
+          <ion-col>
+            <ion-button block (click)="dismiss()" *ngIf="status==-1">Cancel</ion-button>
+          </ion-col>
+
+          <!-- <ion-col *ngIf="status==2"> -->
+            <ion-col *ngIf="status==2">
+            <ion-button block (click)="OpendocModal()">Add</ion-button>
+          </ion-col>
+
+          <ng-container *ngIf="role=='doctor' && recordingStatus>0">
+            <ion-col *ngIf="recordingStatus==1">
+              <ion-button block (click)="RequeststartArc()">Start Recording</ion-button>
+            </ion-col>
+            <ion-col *ngIf="recordingStatus==2">
+              <ion-button block (click)="endArc()">End Recording</ion-button>
+            </ion-col>
+          </ng-container>
+
+
+        </ng-container>
+
+        <ng-container *ngIf="isIncoming">
+
+
+          <ion-col>
+            <ion-button block (click)="joinCall()" *ngIf="status==0">Accept Call</ion-button>
+          </ion-col>
+
+          <ion-col>
+            <ion-button block (click)="rejectCall()" *ngIf="status==0">Reject Call</ion-button>
+          </ion-col>
+
+          <!-- <ion-col>
+            <ion-button block (click)="endCallCallie()" *ngIf="status>1">End Call</ion-button>
+          </ion-col> -->
+        </ng-container>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

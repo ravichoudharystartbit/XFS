@@ -27,6 +27,11 @@ import { PublisherComponent } from './publisher/publisher.component';
 import { SubscriberComponent } from './subscriber/subscriber.component';
 import { OpentokService } from './opentok.service';
 
+import { Network } from '@ionic-native/network/ngx';
+import { TokboxService } from './services/tokbox.service';
+
+import { CallingPageModule } from './calling/calling.module';
+
 
 
 @NgModule({
@@ -45,7 +50,8 @@ import { OpentokService } from './opentok.service';
     IonicStorageModule.forRoot(),
     AngularFireMessagingModule,
     ServiceWorkerModule.register('combined-sw.js', { enabled: environment.production }),
-    SparklineModule,
+    SparklineModule,    
+    CallingPageModule,
    // VideocallPageModule,
    // IncomingcallPageModule
     // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
@@ -57,7 +63,9 @@ import { OpentokService } from './opentok.service';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     NativeAudio,
     ServiceForAllService,
-    OpentokService
+    OpentokService,
+    Network,
+    TokboxService
   //  UserProvider
     
   ],

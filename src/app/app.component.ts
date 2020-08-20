@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 
 import { OpentokService } from './opentok.service';
 import * as OT from '@opentok/client';
+import * as firebase from 'firebase';
 
 
 @Component({
@@ -76,6 +77,20 @@ session: OT.Session;
           }
       // this.appPages.push(value);
     });
+
+
+    let config = {
+      apiKey: "AIzaSyB2OPW8IAcSl8xDEPPF7gDcLrXFL9atKSs",
+      authDomain: "xefs-fitness.firebaseapp.com",
+      databaseURL: "https://xefs-fitness.firebaseio.com",
+      projectId: "xefs-fitness",
+      storageBucket: "xefs-fitness.appspot.com",
+      messagingSenderId: "113816097680",
+      appId: "1:113816097680:web:f7be6dfa84cc0755099915",
+      measurementId: "G-4398GF8YCW"
+    };
+    firebase.initializeApp(config);
+
     this.initializeApp();
   }
 

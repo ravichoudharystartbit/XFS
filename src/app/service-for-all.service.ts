@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse, } from '@angular/common/http';
 import { catchError, tap, map, retry } from 'rxjs/operators';
+import { Network } from '@ionic-native/network/ngx';
 let wpUrl = 'https://xfs.betaplanets.com/';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,7 +17,10 @@ export class ServiceForAllService {
   totalPosts = null;
   pages: any;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private network: Network
+  ) {
   }
 
 
@@ -55,14 +59,6 @@ export class ServiceForAllService {
         )
   }
   getUser(){
-    return this.http.get('https://xfs.betaplanets.com/wc-api/v3/products?consumer_key="ck_025c7377b0a7a9cff3723bfda95f6c8004d25301"&consumer_secret="cs_455cf6a85f9dcccdf2f31c0fdbcd822f65c5bac4"').pipe(
-          retry(2),
-          map(content => {
-            return content;
-          })
-        )
-  }
-  updateUserSession(userId , apiCCId){
     return this.http.get('https://xfs.betaplanets.com/wc-api/v3/products?consumer_key="ck_025c7377b0a7a9cff3723bfda95f6c8004d25301"&consumer_secret="cs_455cf6a85f9dcccdf2f31c0fdbcd822f65c5bac4"').pipe(
           retry(2),
           map(content => {
@@ -268,7 +264,9 @@ export class ServiceForAllService {
      })
    
     }
-  
+  checkNetworkConnection() {
+    return this.network.type;
+   }
   
 
   getpagebyslug(token,slug){
@@ -282,12 +280,7 @@ export class ServiceForAllService {
           })
         )
   }
-
-    
-
  
-  
-    
 
   createPDF(token){
     return this.http.post(wpUrl + 'wp-json/mobileapi/v1/createPDF',{
@@ -322,6 +315,59 @@ export class ServiceForAllService {
         return user;
       })
     )
+  }
+
+  updateUserSession(user_id, deviceData, myCallId) {
+    console.log("SERVICES === ", user_id);
+    return this.http.post(wpUrl + 'wp-json/mobileapi/v1/update_session_id', {
+      user_id:user_id,
+      deviceData: deviceData,
+      myCallId: myCallId
+    })
+  }
+
+  getUserCurrentSession(user_id){
+    return this.http.post(wpUrl + "wp-json/mobileapi/v1/getUserCurrentSession",{
+      user_id: user_id
+    })
+  }
+
+  getCallerInfo(session_id) {
+    return this.http.post(wpUrl + 'wp-json/mobileapi/v1/getCallerInfo', {
+      session_id:session_id
+    })
+  }
+  sendMissedVideoNotification(caller_id,callie_id) {
+    return this.http.post(wpUrl + 'wp-json/mobileapi/v1/sendMissedVideoNotification', {
+      caller_id: caller_id,
+      callie_id: callie_id
+    })
+  }
+
+  createSession(){
+    return this.http.post(wpUrl + "wp-json/mobileapi/v1/create_session",{
+    })
+  }
+
+  endSession(session_id){
+    return this.http.post(wpUrl + "wp-json/mobileapi/v1/end_session",{
+      session_id: session_id
+    })
+  }
+
+  startArc(session_id, appointment_id,user_id,to_user_id){
+    return this.http.post(wpUrl + "wp-json/mobileapi/v1/start_arc",{
+      session_id: session_id,
+      appointment_id: appointment_id,
+      doctor_id: user_id,
+      patient_id: to_user_id,
+    })
+  }
+
+  endArc(archive_id){
+    return this.http.post(wpUrl + "wp-json/mobileapi/v1/end_arc",{
+      archive_id: archive_id
+    })
   }
 
   

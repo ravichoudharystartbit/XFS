@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { Storage } from "@ionic/storage";
 import { ServiceForAllService } from '../service-for-all.service';
 
-      import Player from '@vimeo/player';
-
+import Player from '@vimeo/player';
+import { MenuController, LoadingController,AlertController, NavController, ModalController, ToastController, ActionSheetController } from '@ionic/angular';
+import { CallingPage } from '../calling/calling.page';
 
 @Component({
   selector: 'app-home',
@@ -80,6 +81,7 @@ public data: object[] = [
     private router: Router,
     public storage: Storage,
     public webService: ServiceForAllService,
+    public modalController: ModalController,
   ) {
 
      this.storage.get("user").then((val) => {
@@ -117,6 +119,28 @@ public data: object[] = [
   }
   search(){
     console.log('search');
+    this.makeVCall(18, 'a');
+  }
+
+  async makeVCall(user_id, a) {
+    console.log("a: ", a);
+    const modal = await this.modalController.create({
+      component: CallingPage,
+      cssClass: 'full-modal',
+      componentProps: {
+        "user_id": user_id,
+        "appointment": a
+      }
+    });
+  
+    modal.onDidDismiss().then((dataReturned) => { 
+      if (dataReturned !== null) {
+        // this.dataReturned = dataReturned.data;
+        // //alert('Modal Sent Data :'+ dataReturned);
+      }
+    });
+  
+    return await modal.present();
   }
 
 

@@ -1,0 +1,116 @@
+
+.noti {
+    float: right;
+    ion-icon {
+        font-size: 25px;
+        color: #fff;
+    }    
+}
+
+ion-grid{
+    padding: 0px;
+
+    ion-col{
+        padding: 0px;
+    }
+}
+
+.custom{
+    margin-top: 72px;
+    .user-name {
+        margin-top: -60px;
+    }
+    img{
+        display: none;
+    }
+}
+
+.view_data{
+    img{
+        border-radius: 0px;
+    }
+}
+
+.close-icon{
+    z-index: 99;
+    font-size: 35px;
+    color: #fff !important;
+    margin-right: 8px;
+    margin-bottom: 2px;
+}
+ion-header {
+    ion-toolbar {
+        padding-top: 30px !important;
+        ion-title {
+            color: #fff !important;
+            }
+        }
+}
+p{
+    white-space: normal;
+}
+
+
+// E-Des
+
+.main-grid{
+    text-align: center;
+    margin-top: 100px;
+}
+
+ion-content{
+    --background: #262625!important;
+    --color: #fff!important;
+}
+.user-img{
+    height: 165px;
+    width: 165px;
+    border-radius: 50% !important;
+    box-shadow: 0px 0px 10px #878787;
+    margin: auto;
+    /* margin-top: 13%; */
+    /* margin-bottom: 25px; */
+    z-index: 99;
+    position: relative;
+    /* bottom: 7px; */
+}
+
+.user-name {
+    font-size: 32px !important;
+    font-weight: 600;
+    color: #fff;
+    margin-top: 52px;
+}
+
+
+#subscriber_data div{
+    float: left;
+} 
+
+
+
+
+.moving{
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+.call-text{
+    font-size: 24px !important;
+    color: #fff;
+    margin-top: 36px;
+}
+ion-button {
+    position: relative;
+    top: 39px;
+}
+ion-button {
+    --background: #226eff;
+    --background-activated: #226eff;
+    --background-focused: #226eff;
+    --background-hover: #226eff;
+}

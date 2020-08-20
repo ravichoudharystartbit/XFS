@@ -1,0 +1,32 @@
+.toolbar-background {
+    border-color: 0px !important;
+    background: transparent !important;
+    box-shadow: 0px 0px 0px !important;
+}
+.toolbar-title {
+    text-align: center;
+    // font-size: 14px;
+    height: 100%;
+}
+.toolbar {
+    min-height: 70px !important;
+}
+img.small_logo {
+    max-width: 37px;
+    width: 100%;
+    object-fit: cover;
+}
+.toolbar-title p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 0px;
+}
+.bar-button-default img {
+    max-width: 23px;
+    width: 100%;
+}
+.content{
+    text-align:justify!important;
+}
