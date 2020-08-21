@@ -129,7 +129,10 @@ public data: object[] = [
       cssClass: 'full-modal',
       componentProps: {
         "user_id": user_id,
-        "appointment": a
+        "appointment": {
+          'id' : 'a',
+          'name' : 'Support'
+        }
       }
     });
   

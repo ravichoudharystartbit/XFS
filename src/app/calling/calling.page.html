@@ -25,8 +25,8 @@
   <ion-grid class="main-grid custom">
     <ion-row class="view_data" *ngIf="status==-1 || status==0">
       <ion-col size="12">
-        <img class="user-img" src="assets/people.png" *ngIf="calling_going" />
-        <img class="moving" *ngIf="status==0 && calling_going"  src="assets/imgs/colorloader.gif" />
+        <!-- <img class="user-img" src="assets/proPic.jpg" *ngIf="calling_going" /> -->
+        <img class="moving" *ngIf="status==0 && calling_going"  src="assets/colorloader.gif" />
         <!-- <img class="moving" src="assets/imgs/colorloader.gif" /> -->
       </ion-col>
       <ion-col size="12">
@@ -55,18 +55,18 @@
           </ion-col>
 
           <!-- <ion-col *ngIf="status==2"> -->
-            <ion-col *ngIf="status==2">
+            <!-- <ion-col *ngIf="status==2">
             <ion-button block (click)="OpendocModal()">Add</ion-button>
-          </ion-col>
-
-          <ng-container *ngIf="role=='doctor' && recordingStatus>0">
+          </ion-col> -->
+<!-- 
+          <ng-container *ngIf="recordingStatus>0">
             <ion-col *ngIf="recordingStatus==1">
               <ion-button block (click)="RequeststartArc()">Start Recording</ion-button>
             </ion-col>
             <ion-col *ngIf="recordingStatus==2">
               <ion-button block (click)="endArc()">End Recording</ion-button>
             </ion-col>
-          </ng-container>
+          </ng-container> -->
 
 
         </ng-container>
@@ -82,9 +82,9 @@
             <ion-button block (click)="rejectCall()" *ngIf="status==0">Reject Call</ion-button>
           </ion-col>
 
-          <!-- <ion-col>
+          <ion-col>
             <ion-button block (click)="endCallCallie()" *ngIf="status>1">End Call</ion-button>
-          </ion-col> -->
+          </ion-col>
         </ng-container>
 
       </ion-col>

@@ -84,8 +84,8 @@ export class CallingPage implements OnInit {
     this.recordingStatus = 0;
 
     this.plt.ready().then(() => {
-
-       this.storage.get('user').then(val => {
+        // console.log('Navparams');
+      this.storage.get('user').then(val => {
         if (val != null) {
 
           this.role = val.role;
@@ -94,7 +94,9 @@ export class CallingPage implements OnInit {
 
           this.ref = firebase.database().ref('call/' + val.user_id);
           if (this.ref) {
+            // console.log('user: ',this.ref);
             this.ref.limitToLast(1).on('value', data1 => {
+              // console.log('value:-', data1);
               if (!this.loding_first_2) {
                 if (data1.val() == null) {
                   this.stopTune()
@@ -109,8 +111,10 @@ export class CallingPage implements OnInit {
           firebase.database().ref('call/' + this.opposite_user_id).remove();
           this.ref = firebase.database().ref('call/' + this.opposite_user_id);
           if (this.ref) {
+           // console.log('user2 : ',this.ref);
             this.ref.limitToLast(1).on('value', data1 => {
               if (!this.loding_first) {
+               // console.log('value 2:-', data1);
                 if (data1.val() == null) {
                   this.stopTune()
                   this.dismiss();
@@ -124,9 +128,9 @@ export class CallingPage implements OnInit {
 
 
      /* this.nativeAudio.preloadComplex('uniqueI1', 'assets/callertune.mp3', 1, 1, 0).then((succ) => {
-        console.log("suu", succ)
+        // console.log("suu", succ)
       }, (err) => {
-        console.log("err", err)
+        // console.log("err", err)
       });*/
     });
 
@@ -147,11 +151,11 @@ export class CallingPage implements OnInit {
     }
 
     if (navParams.get('appointment') && navParams.get('appointment') != undefined) {
-      console.log('Appp: ', navParams.get('appointment'));
+      // console.log('Appp: ', navParams.get('appointment'));
       this.appointment = navParams.get('appointment');
 
       this.opposite_pic = this.appointment.opposite_pic;
-      this.opposite_name = this.appointment.opposite_name;
+      this.opposite_name = this.appointment.name;
 
       this.isIncoming = false;
     }
@@ -168,11 +172,11 @@ export class CallingPage implements OnInit {
           if (this.ref) {
             this.ref.limitToLast(1).on('value', data1 => {
               let callData = {};
-              console.log('data 1 : ', data1);
+              // console.log('data 1 : ', data1);
               data1.forEach(data => {
                 if (data.val()) {
                   this.recive_key = data.key;
-                  console.log('Recording 3 : ', data.val().recording);
+                  // console.log('Recording 3 : ', data.val());
                    
                   this.opposite_pic = data.val().caller_img;
                   this.opposite_name = data.val().caller_name;
@@ -206,7 +210,7 @@ export class CallingPage implements OnInit {
                   }
                 
                   this.status = parseInt(data.val().status);
-                  console.log("this.status: ", this.status);
+                  // console.log("this.status: ", this.status);
                 }
               });
             });
@@ -249,17 +253,17 @@ export class CallingPage implements OnInit {
               if (data.val().recording == 1) {
                  this.AddRecordingStatus(this.opposite_user_id,true)
                  .then((data) => {
-                   console.log(data);
+                   // console.log(data);
                    if(data.added==true){
                     this.CheckAutRecording(); 
                    }
                  }, err => {
-                   console.log(err);
+                   // console.log(err);
                  });
 
               }
               this.status = parseInt(data.val().status);
-              console.log("Call Accepted By : ", this.status);
+              // console.log("Call Accepted By : ", this.status);
             }
           });
         });
@@ -279,13 +283,13 @@ export class CallingPage implements OnInit {
           cssClass: 'secondary',
           handler: (blah) => {
             this.is_recording=false;
-            console.log('Confirm Cancel: blah');
+            // console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'Yes',
           handler: () => {
             this.is_recording=false;
-            console.log('Confirm Okay');
+            // console.log('Confirm Okay');
           }
         }
       ]
@@ -305,15 +309,15 @@ export class CallingPage implements OnInit {
   startTune() {
     this.plt.ready().then(() => {
      /* this.nativeAudio.loop('uniqueI1').then((succ) => {
-        console.log("succ", succ)
+        // console.log("succ", succ)
       }, (err) => {
-        console.log("err", err)
+        // console.log("err", err)
       }); */
     });
   }
 
   stopTune() {
-    console.log("I am here----------------");
+    // console.log("I am here----------------");
     /*this.nativeAudio.stop('uniqueI1').then(() => { }, () => { });*/
   }
 
@@ -339,9 +343,9 @@ export class CallingPage implements OnInit {
           this.storage.get('user').then((val) => {
             if (val != null) {
               this.allServices.sendMissedVideoNotification(val.user_id, this.opposite_user_id).subscribe((result) => {
-                console.log(result);
+                // console.log(result);
               }, (err) => {
-                console.log("error...", err);
+                // console.log("error...", err);
               });
 
             }
@@ -353,7 +357,7 @@ export class CallingPage implements OnInit {
   }
 
   async dismiss() {
-  console.log('call cancel')
+  // console.log('call cancel')
     // this.stopTune();
     if (this.ref) {
       this.ref.off;
@@ -369,7 +373,7 @@ export class CallingPage implements OnInit {
 
   //Start Call
   startCall() {
-  console.log('call to users')
+  // console.log('call to users')
     this.JoinUsers=[];
     this.AcceptedUsers=[];
     let cc = this.allServices.checkNetworkConnection();
@@ -393,13 +397,13 @@ export class CallingPage implements OnInit {
                 // this.dismissLoading();
                 let res2: any = [];
                 res2 = res;
-                console.log(res2);
-                console.log(res2.session_id);
+                // console.log(res2);
+                // console.log(res2.session_id);
 
                 this.sessionId = res2.session_id;
                 this.token = res2.token;
 
-                console.log(this.token);
+                // console.log(this.token);
 
                 // "archive_id": e88d27b3-0c1f-4dc5-96d4-bf165bebad7a
 
@@ -419,7 +423,7 @@ export class CallingPage implements OnInit {
 
                 this.session.on({
                   streamCreated: (event: any) => {
-                    console.log(event.streams.length);
+                    // console.log(event.streams.length);
                    let len = document.getElementById("stream_other_calling")
                     if (len) {
                         document.getElementById("stream_other_calling").remove();
@@ -427,7 +431,7 @@ export class CallingPage implements OnInit {
                     //this.session.subscribe(event.stream, 'subscriber', options);
                     for (let i = 0; i < event.streams.length; i++) {
                       //  Make sure we don’t subscribe to ourself
-                      console.log(event.streams[i]);
+                      // console.log(event.streams[i]);
                       if (event.streams[i].connection.connectionId == this.session.connection.connectionId) {
                         return;
                       }
@@ -453,19 +457,19 @@ export class CallingPage implements OnInit {
                   },
 
                   streamDestroyed: (event: any) => {
-                    console.log("streamDestroyed");
-                    console.log(`Stream ${event.stream.name} ended because ${event.reason}`);
+                    // console.log("streamDestroyed");
+                    // console.log(`Stream ${event.stream.name} ended because ${event.reason}`);
                     //OT.updateViews();
                   },
                   sessionConnected: (event: any) => {
-                    console.log("sessionConnected");
+                    // console.log("sessionConnected");
                   }
                 });
 
                 this.session.connect(this.token, (error: any) => {
-                  console.log("session.connect");
+                  // console.log("session.connect");
                   if (error) {
-                    console.log(`There was an error connecting to the session ${error}`);
+                    // console.log(`There was an error connecting to the session ${error}`);
                     this.presentAlert("Sorry, you can not make a call right now try again later.")
                     this.dismiss();
                   } else {
@@ -478,10 +482,10 @@ export class CallingPage implements OnInit {
                         this.session.publish(this.publisher);
                         this.ref.push({
                           caller_id: val.user_id,
-                          caller_name: val.first_name + ' ' + val.last_name,
+                          caller_name: val.user_display_name,
                           caller_img: val.user_avatar,
                           caller_role: val.role,
-                          appointment_id: this.appointment.appointment_id,
+                          appointment_id: 'a',
                           session_id: this.sessionId,
                           token: this.token,
                           status: 0
@@ -534,14 +538,14 @@ export class CallingPage implements OnInit {
         then((stream) => {
           this.session.on({
             streamCreated: (event: any) => {
-              console.log("streamCreated");
-              console.log(event.streams);
+              // console.log("streamCreated");
+              // console.log(event.streams);
               //this.session.subscribe(event.stream, 'subscriber', options);
               //OT.updateViews();
 
               for (let i = 0; i < event.streams.length; i++) {
                 //  Make sure we don’t subscribe to ourself
-                console.log(event.streams[i]);
+                // console.log(event.streams[i]);
                 if (event.streams[i].connection.connectionId == this.session.connection.connectionId) {
                   return;
                 }
@@ -555,21 +559,21 @@ export class CallingPage implements OnInit {
 
             },
             streamDestroyed: (event: any) => {
-              console.log("streamDestroyed");
-              console.log(`Stream ${event.stream.name} ended because ${event.reason}`);
+              // console.log("streamDestroyed");
+              // console.log(`Stream ${event.stream.name} ended because ${event.reason}`);
               //OT.updateViews();
             },
             sessionConnected: (event: any) => {
-              console.log("sessionConnected");
+              // console.log("sessionConnected");
               this.session.publish(this.publisher);
-              console.log(event.streams);
+              // console.log(event.streams);
             }
           });
 
           this.session.connect(this.token, (error: any) => {
-            console.log("session.connect");
+            // console.log("session.connect");
             if (error) {
-              console.log(`There was an error connecting to the session ${error}`);
+              // console.log(`There was an error connecting to the session ${error}`);
             } else {
               this.stopTune();
 
@@ -596,7 +600,7 @@ export class CallingPage implements OnInit {
         this.ref.limitToLast(1).once('value', data1 => {
           data1.forEach(data => {
             if (data.val()) {
-              console.log('data rej 11: ', data.val());
+              // console.log('data rej 11: ', data.val());
               firebase.database().ref('call/' + val.user_id + '/' + data.key).update({ status: 3 });
             }
           });
@@ -630,7 +634,7 @@ export class CallingPage implements OnInit {
         firebase.database().ref('call/' + this.opposite_user_id).limitToLast(1).once('value', data1 => {
           data1.forEach(data => {
             if (data.val()) {
-              console.log('data rej 2222: ', data.val());
+              // console.log('data rej 2222: ', data.val());
               firebase.database().ref('call/' + this.opposite_user_id + '/' + data.key).update({ status: st });
               firebase.database().ref('call/' + data.val().other_call).remove();
             }
@@ -645,7 +649,7 @@ export class CallingPage implements OnInit {
     });
 
     setTimeout(() => {
-      this.dismissLoading();
+     // this.dismissLoading();
       this.ref.remove();
       this.dismiss();
     }, 3000);
@@ -658,7 +662,7 @@ export class CallingPage implements OnInit {
         this.ref.limitToLast(1).once('value', data1 => {
           data1.forEach(data => {
             if (data.val()) {
-              console.log('data rej 2222: ', data.val());
+              // console.log('data rej 2222: ', data.val());
               firebase.database().ref('call/' + val.user_id + '/' + data.key).update({ status: 3 });
               firebase.database().ref('call/' + data.val().other_call).remove();
             }
@@ -677,7 +681,7 @@ export class CallingPage implements OnInit {
   }
 
   startArc() {
-    // console.log('start::::');
+    // // console.log('start::::');
 
     // this.showLoader('Start arch...');
     this.allServices.startArc(this.sessionId, this.appointment.appointment_id,this.user_data.user_id,this.opposite_user_id)
@@ -685,7 +689,7 @@ export class CallingPage implements OnInit {
         // this.dismissLoading();
         let res2: any = [];
         res2 = res;
-        console.log(res2);
+        // console.log(res2);
         this.archive_id = res2.archive_id;
 
         this.recordingStatus = 2;
@@ -696,7 +700,7 @@ export class CallingPage implements OnInit {
   }
 
   endArc() {
-    console.log('end::::');
+    // console.log('end::::');
 
     // this.showLoader('End arch...');
     this.allServices.endArc(this.archive_id)
@@ -704,7 +708,7 @@ export class CallingPage implements OnInit {
         // this.dismissLoading();
         let res2: any = [];
         res2 = res;
-        console.log(res2);
+        // console.log(res2);
 
         this.recordingStatus = 0;
 
@@ -728,7 +732,7 @@ export class CallingPage implements OnInit {
     this.loading.present();
   }
   async dismissLoading() {
-    console.log(this.loading);
+    // console.log(this.loading);
     await this.loading.dismiss();
   }
 
@@ -752,7 +756,7 @@ export class CallingPage implements OnInit {
     });
 
     modal.onDidDismiss().then((res) => {
-      console.log(res);
+      // // console.log(res);
       this.makeOthercall(res.data.user_id,res.data)
     });
     return await modal.present();
@@ -786,12 +790,12 @@ export class CallingPage implements OnInit {
           if (data.val().recording == 1) {
               this.AddRecordingStatus(doc_id,true)
               .then((data) => {
-                console.log(data);
+                // // console.log(data);
                 if(data.added==true){
                  this.CheckAutRecording(); 
                 }
               }, err => {
-                console.log(err);
+                // // console.log(err);
               });
            }
           }    
@@ -805,7 +809,7 @@ export class CallingPage implements OnInit {
             let update = firebase.database().ref('call/' + this.opposite_user_id + '/' + data.key).update({ other_call: doc_id });
             if (update) {
 
-              console.log("updated");
+              // // console.log("updated");
             }
           }
 
@@ -820,12 +824,12 @@ export class CallingPage implements OnInit {
   CheckAutRecording(){
     this.getRequest()
     .then((data) => {
-      console.log(data);
+      // console.log(data);
       if(data.recording==true){
          this.startArc();
       }
     }, err => {
-      console.log(err);
+      // console.log(err);
     });
   }
 
@@ -843,10 +847,10 @@ export class CallingPage implements OnInit {
   getRequest(): Promise<any> {
     return new Promise<any>((resolve) => {
      this.truecount=0;
-     console.log(this.JoinUsers);
-     console.log(this.AcceptedUsers);
+     // console.log(this.JoinUsers);
+     // console.log(this.AcceptedUsers);
       this.JoinUsers.forEach(element => {
-        console.log(this.AcceptedUsers[element]);
+        // console.log(this.AcceptedUsers[element]);
           if(this.AcceptedUsers[element]==true){
             this.truecount++;
              
@@ -870,16 +874,16 @@ export class CallingPage implements OnInit {
 
 
   RequeststartArc(){
-    console.log(this.JoinUsers);
+    // console.log(this.JoinUsers);
     this.JoinUsers.forEach(element => {
-         console.log(element);
+         // console.log(element);
          firebase.database().ref('call/' + element).limitToLast(1).once('value', data1 => {
           data1.forEach(data => {
             if (data.val()) {
               let update = firebase.database().ref('call/' + element + '/' + data.key).update({ recording: 0 });
               if (update) {
   
-                console.log("updated");
+                // console.log("updated");
               }
             }
           });
