@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" text="" ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class='instructions'>
+    <ion-row class='imageSlider'> 
+        <ion-slides pager="true" [options]="slideOpts" #mySlider>   
+          <ion-slide>
+            <ion-row class='sliderRow'>  
+                <ion-col class='sliderItem'>
+                  <img src="assets/xfs_image/7/image-4.png"/>  
+                  <h2>{{10 | currency}}</h2>  
+                  <p class="session">Per Sessions</p>
+                  <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              </ion-col>  
+              <ion-button fill="clear" class="insButton" (click)="buy()">Buy</ion-button> 
+            </ion-row>
+          </ion-slide>  
+        
+                   
+        </ion-slides>
+    </ion-row> 
+</ion-content>
+

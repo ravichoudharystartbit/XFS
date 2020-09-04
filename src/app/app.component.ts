@@ -21,7 +21,7 @@ import { CallingPage } from './calling/calling.page';
   providers: [ OpentokService ]
 })
 export class AppComponent implements OnInit {
-
+public global_obj: any[] = [];
 session: OT.Session;
   streams: Array<OT.Stream> = [];
   changeDetectorRef: ChangeDetectorRef;
@@ -78,7 +78,7 @@ session: OT.Session;
         this.changeDetectorRef = ref;
        // console.log('beforeinstallprompt start');
         window.addEventListener('beforeinstallprompt', (e) => {
-          console.log('beforeinstallprompt Event fired');
+          // console.log('beforeinstallprompt Event fired');
           // Prevent Chrome 67 and earlier from automatically showing the prompt
           e.preventDefault();
           // Stash the event so it can be triggered later.
@@ -101,28 +101,35 @@ session: OT.Session;
               if(!filterArr.length){
                 this.appPages.push(value);
               }
-          // this.appPages.push(value);
+          
         });
 
 
-        let config = {
-          apiKey: "AIzaSyB2OPW8IAcSl8xDEPPF7gDcLrXFL9atKSs",
-          authDomain: "xefs-fitness.firebaseapp.com",
-          databaseURL: "https://xefs-fitness.firebaseio.com",
-          projectId: "xefs-fitness",
-          storageBucket: "xefs-fitness.appspot.com",
-          messagingSenderId: "113816097680",
-          appId: "1:113816097680:web:f7be6dfa84cc0755099915",
-          measurementId: "G-4398GF8YCW"
-        };
-        firebase.initializeApp(config);
+        var firebaseConfig = {
+            apiKey: "AIzaSyB2OPW8IAcSl8xDEPPF7gDcLrXFL9atKSs",
+            authDomain: "xefs-fitness.firebaseapp.com",
+            databaseURL: "https://xefs-fitness.firebaseio.com",
+            projectId: "xefs-fitness",
+            storageBucket: "xefs-fitness.appspot.com",
+            messagingSenderId: "113816097680",
+            appId: "1:113816097680:web:f7be6dfa84cc0755099915",
+            measurementId: "G-4398GF8YCW"
+          }
+        console.log(firebase.initializeApp(firebaseConfig));
 
         this.initializeApp();
 
+         setTimeout(() => {
+
+        this.initiateFBOnline();
+
+        },500);
       this.storage.get("user").then((val) => {
         // console.log(val)
         if (val && val != "") {
+        this.global_obj = val;
           this.events.publish('userCheck:login', val);
+          
         }
       });
 
@@ -131,7 +138,8 @@ session: OT.Session;
       if(check.token){
         setTimeout(() => {
           this.initiateFB();
-        }, 2000);  
+          this.initiateFBOnline();
+        },500);  
       }     
     });
   }
@@ -174,6 +182,7 @@ session: OT.Session;
       this.storage.get("user").then((val) => {
         // console.log(val)
         if (val && val != "") {
+        this.appPages = [];
           this.statusBar.backgroundColorByHexString('#2973fb');
           this.statusBar.styleBlackOpaque();
           let values = {
@@ -191,11 +200,17 @@ session: OT.Session;
             url: '/tabs/clients',
             icon: 'person'
           };
+          let values3 = {
+            title: 'Payment',
+            url: '/payment_slide',
+            icon: 'person'
+          };
           let filterArr  = this.appPages.filter( (x)=> x.title == 'Profile');
           if(!filterArr.length){
             this.appPages.push(values);
             this.appPages.push(values1);
             this.appPages.push(values2);
+            this.appPages.push(values3);
           }
           this.navCtrl.setDirection('root');
           this.router.navigate(['/tabs/home']);
@@ -212,11 +227,11 @@ session: OT.Session;
           };
           let values = {
             title: 'coach',
-            url: '/tabs/coach',
+            url: '/tabs/coaches',
             icon: 'person'
           };
           this.appPages = [];
-          this.appPages.push(values);
+          //this.appPages.push(values);
           this.appPages.push(values1);
           this.appPages.push(values2);
           this.navCtrl.setDirection('root');
@@ -370,6 +385,46 @@ session: OT.Session;
       }
     });
     return await modal.present();
+  }
+
+  initiateFBOnline(){
+
+    console.log("M HERE");
+
+     this.platform.ready().then(() => { 
+      this.storage.get('user').then(val=>{
+        if(val){
+          this.onlineRef = firebase.database().ref('online_usersssss/'+val.user_id);
+          if(this.onlineRef){
+            this.onlineRef.push({
+              online: 1
+            });
+
+            // window.addEventListener('beforeunload', () => {
+            //   this.onlineRef.remove();
+            // });
+
+            // Observable.fromEvent(window, 'beforeunload').subscribe(event: Event => this.unsubscribeFromSignals());
+
+              this.platform.pause.subscribe(async () => {
+                console.log('Pause event detected');
+                this.onlineRef.remove();
+              });
+
+              this.platform.resume.subscribe(async () => {
+                console.log('Resume event detected');
+                this.onlineRef.push({
+                  online: 1
+                });
+              });
+  
+          }
+          else{
+            console.log("I AM IN ERROR!!");
+          }
+        }
+      }); 
+    });
   }
 
 

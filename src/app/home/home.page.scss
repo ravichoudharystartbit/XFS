@@ -47,7 +47,7 @@ ion-content{
     --padding-top: 0;
 
     h2{
-        color: #4c8cd8;
+        color: #59acfc;
         width: 100%;
         text-align: center;
         font-weight: 700;
@@ -61,7 +61,7 @@ ion-content{
 
     .insButton{
         width: 100%;
-        background: #4c8cd8;
+        background: #59acfc;
         color: white;
         border-radius: 50px;
     }
@@ -126,7 +126,7 @@ ion-content{
             top: 0px;
             left: 25px;
             letter-spacing: 1px;
-            color: #4c8cd8;
+            color: #59acfc;
             font-weight: 600;
 
             span{
@@ -245,6 +245,26 @@ ion-content{
         justify-content: unset;
         margin-left: 3%;
         margin-top: -5%;
+    }
+
+    .OnlineUserSecion{
+        ion-row{
+            color: white;text-transform: capitalize;padding:3%;            
+            
+        }
+
+        .name{
+            padding-top: 25px;
+            padding-left: 25px;
+            text-transform: capitalize;
+        }
+
+
+        img{
+            width:100% !important;
+            height: 70px !important;
+            border-radius: 20px;
+        }
     }
 
 }

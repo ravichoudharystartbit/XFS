@@ -89,7 +89,10 @@
         <ion-row class="field">
             
             <ion-col size="12" class="ion-no-padding">
-                <ion-input type="text" placeholder="Area of Emphasis" formControlName="choice" clearInput autocapitalize="off" inputmode="text"></ion-input>
+                <ion-select  placeholder="Area of Emphasis" formControlName="choice" clearInput>
+                  <ion-select-option value="Speed Quickness">Speed Quickness</ion-select-option>
+                  <ion-select-option value="Strength">Strength</ion-select-option>
+                </ion-select>
                 <div class="error-container">
                   <ng-container *ngFor="let validation of validation_messages.choice">
                     <div class="error-message" *ngIf="PersonalForm.get('choice').hasError(validation.type) && (PersonalForm.get('choice').dirty || PersonalForm.get('choice').touched)">

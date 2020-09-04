@@ -5,7 +5,7 @@ ion-content{
     // background-repeat: no-repeat;
     // background-size: 133%;
     z-index : 100000;
-    background: linear-gradient(to bottom, #4c8cd8 0%, #9fb842 40%, #9fb842 100%);
+    background: linear-gradient(to bottom, #59acfc 0%, #9fb842 40%, #9fb842 100%);
     ion-button {
         --background: #012069;
         --background-focused: #012069;
@@ -29,7 +29,7 @@ ion-content{
     position: relative;
     margin-top: 0;
     font-size: 13px;
-    top: 30px;
+    top: 28px;
 }
 .form_fields{
     padding: 4px;
@@ -55,6 +55,14 @@ ion-content{
         top: 50%;
         transform: translate(0%, -50%);
         left: 0;
+        width: 92%;
+        color: #86888f;
+    }
+    ion-select{
+        position: absolute;
+        top: 50%;
+        transform: translate(0%, -50%);
+        left: 5px;
         width: 92%;
         color: #86888f;
     }
@@ -128,7 +136,7 @@ form{
             padding: 12px;
             font-size: 16px;
             height: 46px;
-            background: #4c8cd8;
+            background: #59acfc;
             width: 100%;
             border-radius: 50px;
             color: #fff;

@@ -626,33 +626,64 @@ export class CallingPage implements OnInit {
 
   //End Call
   endCall(st) {
-    this.showLoader("");
+    //this.showLoader("");
     this.status = st;
-    this.session.disconnect();
-    this.storage.get('user').then(val => {
-      if (val != null) {
-        firebase.database().ref('call/' + this.opposite_user_id).limitToLast(1).once('value', data1 => {
-          data1.forEach(data => {
-            if (data.val()) {
-              // console.log('data rej 2222: ', data.val());
-              firebase.database().ref('call/' + this.opposite_user_id + '/' + data.key).update({ status: st });
-              firebase.database().ref('call/' + data.val().other_call).remove();
-            }
+    if(this.session){
+      this.session.disconnect();
+      this.storage.get('user').then(val => {
+        if (val != null) {
+          firebase.database().ref('call/' + this.opposite_user_id).limitToLast(1).once('value', data1 => {
+            data1.forEach(data => {
+              if (data.val()) {
+                // console.log('data rej 2222: ', data.val());
+                firebase.database().ref('call/' + this.opposite_user_id + '/' + data.key).update({ status: st });
+                firebase.database().ref('call/' + data.val().other_call).remove();
+              }
 
+            });
           });
-        });
-        firebase.database().ref('call/' + val.opposite_user_id).remove();
+          firebase.database().ref('call/' + this.opposite_user_id).remove();
 
-        this.dismiss();
-        this.stopTune();
-      }
-    });
+          this.dismiss();
+          this.stopTune();
+        }
+      });
+    }
+    else{
+      this.storage.get('user').then(val => {
+        if (val != null) {
+          firebase.database().ref('call/' + this.opposite_user_id).limitToLast(1).once('value', data1 => {
+            data1.forEach(data => {
+              if (data.val()) {
+                // console.log('data rej 2222: ', data.val());
+                firebase.database().ref('call/' + this.opposite_user_id + '/' + data.key).update({ status: st });
+                firebase.database().ref('call/' + data.val().other_call).remove();
+              }
+              if(this.session){
+                this.session.disconnect();
+              }
+            });
+          });
+          firebase.database().ref('call/' + val.opposite_user_id).remove();
+
+          this.dismiss();
+          this.stopTune();
+
+        }
+      });
+    }
+    
 
     setTimeout(() => {
      // this.dismissLoading();
+     if(this.session){
+        this.session.disconnect();
+      }
       this.ref.remove();
       this.dismiss();
-    }, 3000);
+    },3000);
+
+   
   }
 
   endCallCallie() {
@@ -743,7 +774,7 @@ export class CallingPage implements OnInit {
       // cssClass: "my-toast-red",
       duration: 2000
     });
-    toast.present();
+    await toast.present();
   }
 
 

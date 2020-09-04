@@ -1,5 +1,5 @@
 ion-toolbar {
-    --border-width: 0px!important;
+    /*--border-width: 0px!important; */
     --background: #000;
     color: #fff;
    /* border-bottom-left-radius: 18px;
@@ -12,10 +12,10 @@ ion-toolbar {
     }    
     .sc-ion-back-button-ios-h{
         color: #fff;
-        background: url(/assets/back-arrow.png);
+        /* background: url(/assets/back-arrow.png); */
         width: 28px;
         background-size: 100% 100%;
-        padding: 0 5px;
+        /* padding: 0 5px; */
         height: 21px;
         margin-left: 8px;
     }
@@ -117,6 +117,19 @@ ion-content{
         }
         .sliderItem{
             padding: 0 12px;
+        }
+
+        .swiper-slide img {
+            margin: 6vh auto 6vh;
+        }
+
+        h2{
+            margin-top: 10px;
+            font-size: 45px;
+            margin-bottom: 0px;
+        }
+        p.session{
+            margin:0;
         }
     }
 

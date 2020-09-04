@@ -68,7 +68,19 @@ const routes: Routes = [
     path: 'contact',
     loadChildren: './contact/contact.module#ContactPageModule'
   },
+  {
+    path: 'payment_slide',
+    loadChildren: './payment_slide/payment_slide.module#PaymentSlidePageModule'
+  },
+  {
+    path: 'payment',
+    loadChildren: './paymentTest/paymentTest.module#PaymentTestPageModule'
+  },
 /*  {
+    path: 'paymentDemo',
+    loadChildren: './paymentDemo/paymentDemo.module#PaymentDemoPageModule'
+  },
+  {
     path: 'call',
     loadChildren: './call/call.module#CallPageModule'
   },

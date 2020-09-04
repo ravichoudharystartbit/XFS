@@ -41,7 +41,7 @@ export class ServiceForAllService {
 
   getVideos() {
     return this.http.get(
-      'http://101.betaplanets.com/wp-json/mobileapi/v1/getVimeoVideo')
+      'https://101.betaplanets.com/wp-json/mobileapi/v1/getVimeoVideo')
         .pipe(
           retry(2), 
           map(content => {
@@ -99,6 +99,11 @@ export class ServiceForAllService {
       user_data:user_data,
       jw_auth_sec: "wivxCNm$<(+WFwivxCNm$<(+WF#7}1]TWMUl7OaU*TxS(r*$#7}1]wivxCNm$<(+WF#7}1]TWMUl7OaU*TxS(r*$TWMUl7OaU*TxS(r*$"
     })
+  }
+  
+
+  varifyStripe(accountInfo, queryparams) {
+    return this.http.post(wpUrl + 'wp-json/mobileapi/v1/stripe/add_card'+ "?" + queryparams, accountInfo)
   }
 
 
@@ -368,6 +373,18 @@ export class ServiceForAllService {
     return this.http.post(wpUrl + "wp-json/mobileapi/v1/end_arc",{
       archive_id: archive_id
     })
+  }
+
+
+
+  getUserData(userID) {
+    return this.http.post(wpUrl + 'wp-json/mobileapi/v1/getUserData', {
+      userID: userID
+    }).pipe(
+      map((user) => {
+        return user;
+      })
+    )
   }
 
   

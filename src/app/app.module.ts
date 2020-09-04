@@ -31,7 +31,7 @@ import { Network } from '@ionic-native/network/ngx';
 import { TokboxService } from './services/tokbox.service';
 
 import { CallingPageModule } from './calling/calling.module';
-
+import {NgxMaskIonicModule} from 'ngx-mask-ionic'
 
 
 @NgModule({
@@ -48,6 +48,7 @@ import { CallingPageModule } from './calling/calling.module';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     IonicStorageModule.forRoot(),
+    NgxMaskIonicModule.forRoot(),
     AngularFireMessagingModule,
     ServiceWorkerModule.register('combined-sw.js', { enabled: environment.production }),
     SparklineModule,    

@@ -14,7 +14,7 @@
 
 <ion-content padding class='mainPage'>
   <ion-row class='heading'><h5>LIVE SOCCER VIDEO</h5></ion-row>
-  <ion-row class='heading'><h5 style="background: white;color: black;" (click)="search()">Call</h5></ion-row>
+  <!-- <ion-row class='heading'><h5 style="background: white;color: black;" (click)="search()">Call</h5></ion-row> -->
     <ion-row class='imageSlider'> 
         <ion-slides pager="true" [options]="slideOpts" #mySlider>   
           <ion-slide>
@@ -171,6 +171,28 @@
       </ion-row>
       <ion-row id='handstick'>
       </ion-row>
+      
+    </ion-grid>
+    <ion-grid class='OnlineUserSecion'>
+      <ion-row>
+        <ion-col size="12">
+          Online Users
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor='let usr of OnlineUsers;' (click)='callUser(usr)'>
+        <ion-col size="3" class='userImage'>
+          <img src='{{usr.userImage}}'>
+        </ion-col>
+        <ion-col size="9" class='name'>
+           {{usr.name}}  <!--  -->
+        </ion-col>
+      </ion-row>
+      <ion-row  *ngIf='OnlineUsers.length == 0'>
+        <ion-col size="12">
+             <!--  -->No user exists online.
+        </ion-col>
+      </ion-row>
+      
       
     </ion-grid>
 </ion-content>

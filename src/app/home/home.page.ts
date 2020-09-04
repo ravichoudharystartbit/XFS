@@ -7,6 +7,8 @@ import { ServiceForAllService } from '../service-for-all.service';
 import Player from '@vimeo/player';
 import { MenuController, LoadingController,AlertController, NavController, ModalController, ToastController, ActionSheetController } from '@ionic/angular';
 import { CallingPage } from '../calling/calling.page';
+import * as firebase from 'firebase';
+
 
 @Component({
   selector: 'app-home',
@@ -31,6 +33,10 @@ export class HomePage implements OnInit{
       toggle: false
     }
 };
+olUsers = [];
+OnlineUsers = [];
+  onlineUsersRef: any;
+  resData: any;
 
 public primaryYAxis: Object = {
         lineStyle: { color: 'red' },
@@ -101,15 +107,21 @@ public data: object[] = [
       });
        
      player.on('play', function() {
-          console.log('played the video!');
+       //   console.log('played the video!');
       });*/
+
+    // console.log("online");
+    //  console.log(firebase.database().ref('online_users'));
+     // console.log("offline");
+
+      this.checkOnline();
 
     }
 
   ngOnInit(){
     this.webService.getVideos().subscribe(
         (result) => {
-          console.log(result);
+         // console.log(result);
           
         },
         err => {
@@ -117,21 +129,23 @@ public data: object[] = [
         }
       );
   }
+
+  ionViewWillEnter() {
+
+  }
   search(){
-    console.log('search');
-    this.makeVCall(18, 'a');
+   // console.log('search');
   }
 
-  async makeVCall(user_id, a) {
-    console.log("a: ", a);
+  async makeVCall(user) {
     const modal = await this.modalController.create({
       component: CallingPage,
       cssClass: 'full-modal',
       componentProps: {
-        "user_id": user_id,
+        "user_id": user.user_id,
         "appointment": {
           'id' : 'a',
-          'name' : 'Support'
+          'name' : user.name
         }
       }
     });
@@ -145,6 +159,56 @@ public data: object[] = [
   
     return await modal.present();
   }
+
+  checkOnline() {
+    this.onlineUsersRef = firebase.database().ref('online_users');
+    if (this.onlineUsersRef) {
+       this.onlineUsersRef.on('value',  (res) => {
+        this.olUsers = [];
+         res.forEach((data) => {
+          if (data.val()) {
+            if (data.key && data.key != '') {
+              this.storage.get("user").then((val) => {
+                if (val && val != null){
+
+                  if(val.user_id != data.key){
+                    this.olUsers.push(data.key);
+                    
+                    this.getUserData(data.key);
+                  }
+                }
+                });
+            }
+          }
+        });       
+      })
+      
+    }
+    
+  }
+
+  getUserData(userId){
+  console.log(userId)
+     this.webService.getUserData(userId).subscribe((result) => {
+        this.resData = result;
+        let index = this.OnlineUsers.findIndex(x=> x.user_id == this.resData.user.user_id);
+        if(index == -1){
+          this.OnlineUsers.push(this.resData.user);
+        }
+        
+        
+        console.log()
+      }, (err) => {                
+             
+    }); 
+  }
+
+  callUser(user){
+    console.log(user);
+
+    this.makeVCall(user);
+  }
+
 
 
 }

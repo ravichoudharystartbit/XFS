@@ -77,7 +77,20 @@
                 <img src="assets/xfs_image/6/Asset 6.png" />     
             </ion-col>
             <ion-col size="10" class="ion-no-padding">
-                <ion-input type="text" placeholder="Area of Emphasis" formControlName="choice" clearInput autocapitalize="off" inputmode="text"></ion-input>
+                <!-- <ion-input type="text" placeholder="Area of Emphasis" formControlName="choice" clearInput autocapitalize="off" inputmode="text"></ion-input>
+                <div class="error-container">
+                  <ng-container *ngFor="let validation of validation_messages.choice">
+                    <div class="error-message" *ngIf="PersonalForm.get('choice').hasError(validation.type) && (PersonalForm.get('choice').dirty || PersonalForm.get('choice').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon>
+                      <span>{{ validation.message }}</span>
+                    </div>
+                  </ng-container>
+                </div> -->
+                 <!-- <ion-label>Area of Emphasis</ion-label> -->
+                <ion-select  placeholder="Area of Emphasis" formControlName="choice" clearInput>
+                  <ion-select-option value="speed">Speed Quickness</ion-select-option>
+                  <ion-select-option value="strength">Strength</ion-select-option>
+                </ion-select>
                 <div class="error-container">
                   <ng-container *ngFor="let validation of validation_messages.choice">
                     <div class="error-message" *ngIf="PersonalForm.get('choice').hasError(validation.type) && (PersonalForm.get('choice').dirty || PersonalForm.get('choice').touched)">

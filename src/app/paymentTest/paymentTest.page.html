@@ -1,0 +1,52 @@
+<ion-header id="app_header">
+    <!-- <ion-toolbar id="app_toolbar"> -->
+        <!-- <ion-buttons class="end_btn_header" slot="end" (click)="gotoInvite()">
+      Skip
+    </ion-buttons> -->
+      <!--   <ion-buttons slot="start" class="back_btn" (click)="goBack()" *ngIf="action=='menu'">
+            <ion-icon name="arrow-round-back" mode="md"></ion-icon>
+        </ion-buttons>
+        <ion-title>Payment</ion-title>
+    </ion-toolbar> -->
+    <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" ></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Payment
+    </ion-title>
+    <!-- <img class="search" src='assets/xfs_image/12/search.svg' (click)="search()"> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <span id="amount"> $ {{varify_amounthh}}</span>
+
+    <div class="payment_container">
+        <ion-label class="input-item-email">
+            <ion-input type="tel" #myInput placeholder="SSN" id="fourth" data-dependency="fifth" maxlength="11" returnKeyType="Next" [(ngModel)]="ssn" inputmode="tel">
+            </ion-input>
+        </ion-label>
+<!-- [brmasker]="{mask:'000-00-0000',len:11}"  -->
+        <!-- <div class="message">
+      <ion-label>You can subscibe to this service xx.xx.</ion-label>
+    </div> -->
+        <div class="cell example example3" id="example-3">
+            <form class="subscribe_form">
+                <div class="fieldset">
+                    <div id="example3-card-number" class="field empty"></div>
+                    <div id="example3-card-expiry" class="field empty third-width"></div>
+                    <div id="example3-card-cvc" class="field empty third-width"></div>
+                    <div id="example3-holder-name" class="field empty third-width"></div>
+                </div>
+                <button type="submit" data-tid="elements_examples.form.pay_button">
+          Verify
+        </button>
+
+                <div class="error" role="alert">
+                    <span class="message"></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</ion-content>
