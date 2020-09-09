@@ -93,20 +93,15 @@ slides = [
           }
        
       });
-
+        
     }
 
   ngOnInit(){
-    
+     
   }
 
   ionViewWillEnter(){
-    this.storage.get("user").then((val) => {
-      console.log(val)
-      if (val && val != "") {
-        this.getVideo();
-      }
-    });
+   this.getVideo();
   }
 
   search(){
@@ -115,28 +110,11 @@ slides = [
   }
 
 
-   openContent( contentId , tabId) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+
+    toggleShowSort(){
+      console.log(this.showSort , 'toggleShowSort')
+      this.showSort = !this.showSort;
     }
-
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tabcontent.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-
-    document.getElementById(contentId).style.display = "block";
-
-    var element = document.getElementById(tabId);
-    element.classList.add("active");
-}
-
-toggleShowSort(){
-  console.log(this.showSort , 'toggleShowSort')
-  this.showSort = !this.showSort;
-}
 
 
 hideShowSort(){
@@ -177,8 +155,7 @@ async showLoader(msg='Please wait...') {
   }
 
   getVideo(){
-    this.showLoader();   
-
+    this.showLoader();  
     this.storage.get("user").then((val) => {
       if (val && val != null){
         this.webService.getVideos().subscribe(
@@ -189,9 +166,16 @@ async showLoader(msg='Please wait...') {
              this.AllVideos = this.resultData.Videos;
              this.Categories = this.resultData.Categories;
 
-             this.filterCatData = this.AllVideos.filter(x=> (x.terms.filter(y => y.slug == this.Categories[0]['slug'])).length > 0 );
+             this.AllVideos.map(x=>{
+              x.VideoId = this.domSanitizer.bypassSecurityTrustResourceUrl( 'https://player.vimeo.com/video/'+x.VideoId);
+              return x;
+             })
+
+            this.filterCatData = this.AllVideos.filter(x=> (x.terms.filter(y => y.slug == this.Categories[0]['slug'])).length > 0 );
 
              console.log(this.filterCatData);
+
+
           },
           err => {
             let ErrorData =  err.error;
@@ -199,19 +183,6 @@ async showLoader(msg='Please wait...') {
             this.presentAlert((ErrorData.errorMsg ? ErrorData.errorMsg : 'Server Error') );
           }
         );
-
-        /*this.webService.getProducts().subscribe(
-          (result) => {            
-            
-
-             console.log(result);
-          },
-          err => {
-            let ErrorData =  err.error;
-            this.hideLoader();
-            this.presentAlert((ErrorData.errorMsg ? ErrorData.errorMsg : 'Server Error') );
-          }
-        ); */
       }
     });
   }
@@ -238,7 +209,10 @@ async showLoader(msg='Please wait...') {
 }
 
 cleanURL(id){
-  return this.domSanitizer.bypassSecurityTrustResourceUrl('https://player.vimeo.com/video/'+id);
+console.log(id)
+  let str = 'https://player.vimeo.com/video/'+id;
+  let retUrl =  this.domSanitizer.bypassSecurityTrustResourceUrl( 'https://player.vimeo.com/video/'+id);
+  return retUrl;
 }
 
 

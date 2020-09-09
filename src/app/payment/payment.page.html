@@ -42,75 +42,53 @@
         </ion-slides>
     </ion-row>
   </ion-grid>
+   
   <ion-grid class='cardDetailSection'>
- <div class="cell example example3" id="example-3">
-    <form class="subscribe_form">
+    <div class="cell example example3" id="example-3">
+
+    <form class="subscribe_form" >
         <div class="fieldset">
-          <ion-row class='cardSection '>
+          <ion-row class='cardSection'>
+            <ion-col size="12">
+                <!-- <ion-button fill="clear" class="insButton" (click)="buy()">Buy</ion-button>  -->
+                <div class="error"  role="alert" >
+                    <span class="message" id='card-errors'></span>
+                </div>
+              </ion-col>
               <ion-col size="12">
-                <!-- <ion-input [(ngModel)]='cardnumber' placeholder="0000 0000 0000 0000" clearInput inputmode="text" mask="0000 0000 0000 0000" type="text" maxlength="19"></ion-input>
-              </ion-col> -->
               <div id="example3-card-number" class="field empty"></div>
+              </ion-col>
               <ion-col size="6">
-                <!-- <ion-input [(ngModel)]='expiry' placeholder="01/21" clearInput inputmode="text" mask="00/00" type="text" maxlength="5"></ion-input> -->
                 <div id="example3-card-expiry" class="field empty third-width"></div>
               </ion-col>
               <ion-col size="6">
-                <!-- <ion-input [(ngModel)]='cvv' placeholder="***" clearInput inputmode="password" type="password" maxlength="3"></ion-input> -->
                 <div id="example3-card-cvc" class="field empty third-width"></div>
               </ion-col>
               <ion-col size="12">
-                <ion-input [(ngModel)]='name' placeholder="Account Holder Name" clearInput inputmode="text" type="text"></ion-input>
+                <ion-input [(ngModel)]='name' placeholder="Account Holder Name" clearInput inputmode="text" type="text" [ngModelOptions]="{standalone: true}"></ion-input>
               </ion-col>
               <ion-col size="12">
                 <!-- <ion-button fill="clear" class="insButton" (click)="buy()">Buy</ion-button>  -->
-                <button type="submit" data-tid="elements_examples.form.pay_button">
+                <button type="submit" data-tid="elements_examples.form.pay_button">Pay</button>
               </ion-col>
+              
+<!--  -->          
               
           </ion-row>
         </div>
       </form>
     </div>
-    <ion-row>      
-      <ion-col size="12"  class='newButton'>
-           <button type="button" style="width:100%">+ Add New Card</button>
-        </ion-col>
-    </ion-row>
-
   </ion-grid>
- <!--  <ion-card class="welcome-card">
-    <ion-img src="/assets/stripe.png"></ion-img>
-    <ion-card-header>
-      <ion-card-subtitle>Get Started</ion-card-subtitle>
-      <ion-card-title>Stripe Sample</ion-card-title>
-      <ion-row>
-        <ion-col>Total Payment</ion-col>
-        <ion-col> $ 10.00 </ion-col>
-      </ion-row>
-    </ion-card-header>
-    <ion-card-content>
-      <form action="/" method="post" id="payment-form">
-        <div class="form-row">
-          <div id="card-element"> 
-          <div id="card-errors" role="alert"></div>
-        </div>
-        <ion-button type="submit" color="success" expand="full">Make Payment</ion-button>
-      </form>
-    </ion-card-content>
-  </ion-card> -->
 
-   <form action="/" method="post" id="payment-form">
-    
-      <div class="form-row">
-        <div id="card-element">
-          <!-- a Stripe Element will be inserted here. -->
-        </div>
-  
-        <!-- Used to display Element errors -->
-        <div id="card-errors" role="alert"></div>
-      </div>
-  
-    <button ion-button block large>Add Card</button>
-      
-    </form>
+ 
+ <ion-grid>
+    <ion-row class='newCardSection'>
+      <ion-col size="12"  class='newButton'>
+        <button type="button" style="width:100%">+ Add New Card</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+<!--  sk --- sk_test_SGq10lBaOavGHzc7cbTIR5z9 -->
+<!--  pk --- pk_test_c2z9zQhHw3cCdnRBP8vJDxkx -->

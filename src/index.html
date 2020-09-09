@@ -27,16 +27,24 @@
   <noscript>Please enable JavaScript to continue using this application.</noscript>
   <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.3/custom-elements-es5-adapter.js"></script>
   <script src="https://static.opentok.com/v2/js/opentok.min.js"></script>
-
+<script src="https://player.vimeo.com/api/player.js"></script>
 
 <script>
-var n = navigator;
-    n.getUserMedia  = n.getUserMedia || n.webkitGetUserMedia || n.mozGetUserMedia || n.msGetUserMedia;
-  if (n.getUserMedia) {
-   
-  } else {
-    alert('getUserMedia() is not supported by your browser,so you can not work');
-  }   
+var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+var cameraStream;
+
+getUserMedia.call(navigator, {
+    video: true,
+    audio: true //optional
+}, function (stream) {
+    /*
+    Here's where you handle the stream differently. Chrome needs to convert the stream
+    to an object URL, but Firefox's stream already is one.
+    */
+    
+},(err)=>{
+    console.log('errrrrrrrr',err)
+}); 
 </script>
 </body>
 </html>

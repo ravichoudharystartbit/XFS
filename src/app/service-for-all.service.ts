@@ -41,7 +41,7 @@ export class ServiceForAllService {
 
   getVideos() {
     return this.http.get(
-      'https://101.betaplanets.com/wp-json/mobileapi/v1/getVimeoVideo')
+      'https://xfs.betaplanets.com/wp-json/mobileapi/v1/getVimeoVideo')
         .pipe(
           retry(2), 
           map(content => {

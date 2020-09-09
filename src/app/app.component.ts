@@ -226,14 +226,20 @@ session: OT.Session;
             icon: 'person'
           };
           let values = {
-            title: 'coach',
-            url: '/tabs/coaches',
+            title: 'Home',
+            url: '/tabs/home',
+            icon: 'home'
+          };
+          let values3 = {
+            title: 'Payment',
+            url: '/payment_slide',
             icon: 'person'
           };
           this.appPages = [];
-          //this.appPages.push(values);
+          this.appPages.push(values);
           this.appPages.push(values1);
           this.appPages.push(values2);
+          this.appPages.push(values3);
           this.navCtrl.setDirection('root');
           this.router.navigate(['/login']);
         }

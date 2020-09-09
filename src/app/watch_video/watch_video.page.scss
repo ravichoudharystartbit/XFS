@@ -263,7 +263,7 @@ ion-content{
         }
         span{
             position : absolute;
-            bottom : 35px;
+            bottom : 65px;
             font-weight: 700;
             left: 15px;
             color: white;
@@ -293,7 +293,7 @@ ion-content{
     color:#fff;
 
     ion-slide{
-        width: 100px;        
+        width: 100px !important;        
         font-size: 11px;
     }
 

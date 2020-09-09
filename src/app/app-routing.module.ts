@@ -74,9 +74,13 @@ const routes: Routes = [
   },
   {
     path: 'payment',
-    loadChildren: './paymentTest/paymentTest.module#PaymentTestPageModule'
+    loadChildren: './payment/payment.module#PaymentPageModule'
   },
 /*  {
+    path: 'payment',
+    loadChildren: './paymentTest/paymentTest.module#PaymentTestPageModule'
+  },
+  {
     path: 'paymentDemo',
     loadChildren: './paymentDemo/paymentDemo.module#PaymentDemoPageModule'
   },
