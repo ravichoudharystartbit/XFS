@@ -442,3 +442,72 @@ ion-toolbar.in-toolbar ion-title {
   display:block;
   padding : 4%;
 }
+ion-radio {
+    width: 22px;
+    height: 22px;
+    border-radius: 100%;
+    --color-checked: #59acfc;
+    border: 1px solid #fff;
+}
+ion-item{
+  --background: inherit;
+}
+ion-label{
+  --color: white !important;
+}
+.saveCards{
+  padding: 1% 4%;
+
+  ion-row{
+    color: white;
+    padding: 1px 4% 20px;
+    background: #222224;
+    border-radius: 24px;
+  }  
+
+  button{
+    width: 100%;
+    background: #59abfb;
+    color: #fff;
+    height: 58px;
+    font-size: 22px;
+    border-radius: 20px;
+  }
+}
+
+.sliderItem{
+  position: relative;
+
+  .sliderCardDetails{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    text-align: left;
+    font-size: 14px;
+
+
+    .cardnumber{
+      font-size: 12px;
+      padding-top: 20px;
+    }
+
+    .showcardnumber{
+      font-size: 14px;
+      padding-top: 12px;
+      letter-spacing: 5px;
+    }
+
+    .expiryDate{
+      padding-top: 12px;
+    }
+    .cvv{
+      padding-top: 12px;
+    }
+
+    .showexpiryDate , .showcvv{
+      font-size: 14px;
+      letter-spacing: 5px;
+    }
+  }
+}

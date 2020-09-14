@@ -107,6 +107,29 @@ export class ServiceForAllService {
   }
 
 
+  varifyStripeAddCard(accountInfo, queryparams) {
+    return this.http.post(wpUrl + 'wp-json/mobileapi/v1/stripe/add_card_and_pay'+ "?" + queryparams, accountInfo)
+  }
+
+
+  payNow(token, cardId , user_id) {
+    console.log(cardId);
+    return this.http.post(wpUrl + 'wp-json/mobileapi/v1/stripe/add_card_and_pay', {
+      token : token,
+      card_id : cardId,
+      card : 'cardId',
+      user_id : user_id,
+      IsNew : false,
+    })
+  }
+
+  getStripeCards(token) {
+    return this.http.post(wpUrl + 'wp-json/mobileapi/v1/getStripeCards', {
+      token : token
+    })
+  }
+
+
   doLogin(email, password) {
     return this.http.post(wpUrl + 'wp-json/jwt-auth/v1/token', {
       username: email,

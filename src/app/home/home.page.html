@@ -56,7 +56,7 @@
             </ion-slide>       
         </ion-slides>
     </ion-row>
-    <ion-row class='heading'><h5>Stat</h5></ion-row>
+    <ion-row class='heading'><h5>Stats</h5></ion-row>
     <ion-row class='graphSlider'> 
         <ion-slides pager="true" [options]="slideOpts1">   
           <ion-slide>
@@ -102,7 +102,7 @@
       <ion-col size="9">
         <h6 class='remaining'>Session Remaining</h6>
 
-        <h6 class='purchase'>Purchase</h6>
+        <h6 class='purchase' (click)='purchase()'>Purchase</h6>
       </ion-col>  
       <ion-col size="3" class='purchaseDigit'>
         <h6 >10</h6>
@@ -123,7 +123,7 @@
 
             <span routerLink='/store'>
               <img src="assets/xfs_image/12/store.svg" />
-              <p>Stores</p>
+              <p>Store</p>
            </span>
 
             <span routerLink='/tabs/nutritionRecoveryJournal'>

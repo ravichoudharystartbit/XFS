@@ -9,6 +9,7 @@ import {
   NavController,
   MenuController
 } from "@ionic/angular";
+import { Location } from '@angular/common';
 
 import { ServiceForAllService } from '../service-for-all.service';
 
@@ -82,6 +83,7 @@ slides = [
     public loadingCtrl: LoadingController,
     public webService: ServiceForAllService,
     public domSanitizer: DomSanitizer,
+    private location: Location,
   ) {
 
      this.storage.get("user").then((val) => {
@@ -208,12 +210,16 @@ async showLoader(msg='Please wait...') {
      console.log(this.filterCatData)
 }
 
-cleanURL(id){
-console.log(id)
-  let str = 'https://player.vimeo.com/video/'+id;
-  let retUrl =  this.domSanitizer.bypassSecurityTrustResourceUrl( 'https://player.vimeo.com/video/'+id);
-  return retUrl;
-}
+  cleanURL(id){
+    console.log(id)
+    let str = 'https://player.vimeo.com/video/'+id;
+    let retUrl =  this.domSanitizer.bypassSecurityTrustResourceUrl( 'https://player.vimeo.com/video/'+id);
+    return retUrl;
+  }
 
+  back(){
+    this.location.back();
+    console.log('backkk')
+  }
 
 }

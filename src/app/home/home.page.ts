@@ -209,6 +209,9 @@ public data: object[] = [
     this.makeVCall(user);
   }
 
+  purchase(){
+    this.router.navigate(['/payment_slide']);
+  }
 
 
 }

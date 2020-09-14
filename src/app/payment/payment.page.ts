@@ -23,9 +23,10 @@ export class PaymentPage implements OnInit{
   isLoading = false;
   stripe = Stripe('pk_test_c2z9zQhHw3cCdnRBP8vJDxkx');
   card: any;
+  selectcard: any;
   public user_id: any;
   deferredPrompt: any;
-  showInstallBtn: boolean = true;
+  showCreateNewCard: boolean = false;
   pwa_features: any;
   cardnumber = '';
   expiry = '';
@@ -35,6 +36,8 @@ export class PaymentPage implements OnInit{
     initialSlide: .5,
     speed: 400
   };
+
+  cards : any = [];
 
   showSort  =  false;
   slideOpts1 = {   
@@ -81,6 +84,7 @@ menuItems = [
      this.storage.get("user").then((val) => {
           if (val && val != null){
              this.user_id = val.user_id;
+             this.getStripeCards(val.token)
           }
           else{
           this.router.navigate(['/login']);
@@ -91,83 +95,7 @@ menuItems = [
     }
 
   ngOnInit(){
-    var elements = this.stripe.elements({
-      fonts: [
-        {
-          cssSrc: "https://fonts.googleapis.com/css?family=Quicksand",
-        },
-      ],
-      locale: "auto",
-    });
-
-    var elementStyles = {
-      base: {
-        color: "#fff",
-        fontWeight: 600,
-        fontFamily: "Quicksand, Open Sans, Segoe UI, sans-serif",
-        fontSize: "16px",
-        fontSmoothing: "antialiased",
-        ":focus": {
-          color: "#fff",
-        },
-
-        "::placeholder": {
-          color: "#fff",
-        },
-
-        ":focus::placeholder": {
-          color: "#ececec",
-        },
-      },
-      invalid: {
-        color: "#fff",
-        ":focus": {
-          color: "#fff",
-        },
-        "::placeholder": {
-          color: "#ececec",
-        },
-      },
-      empty: {
-        color: "#fff",
-        ":focus": {
-          color: "#fff",
-        },
-        "::placeholder": {
-          color: "#ececec",
-        },
-      },
-    };
-
-    var elementClasses = {
-      focus: "focus",
-      empty: "empty",
-      invalid: "invalid",
-    };
-
-    var cardNumber = elements.create("cardNumber", {
-      style: elementStyles,
-      classes: elementClasses,
-      placeholder : '0000 0000 0000 0000'
-    });
-    cardNumber.mount("#example3-card-number");
-
-    var cardExpiry = elements.create("cardExpiry", {
-      style: elementStyles,
-      classes: elementClasses,
-    });
-    cardExpiry.mount("#example3-card-expiry");
-
-    var cardCvc = elements.create("cardCvc", {
-      style: elementStyles,
-      classes: elementClasses,
-      val : 'password',
-      placeholder: '***'
-    });
-    cardCvc.mount("#example3-card-cvc");
-
-
-    this.registerElements([cardNumber, cardExpiry], "example3");
+    
   }
 
    registerElements(elements, exampleName) {
@@ -325,6 +253,7 @@ menuItems = [
           card_type: token.card.brand,
           stripe_token: token.id,
           ssn: 'demo1234',
+          IsNew: true
         };
         this.showLoader();
         let urlSearchParams = new URLSearchParams();
@@ -332,11 +261,11 @@ menuItems = [
         urlSearchParams.append("role", "USER");
         urlSearchParams.append("platform", "browser");
         urlSearchParams.toString();
-        this.serviceAll.varifyStripe(body, urlSearchParams).subscribe(
+        this.serviceAll.varifyStripeAddCard(body, urlSearchParams).subscribe(
           (resp: any) => {
            this.hideLoader();
             if (resp.code == 0) {
-              if (
+             /* if (
                 this.app.global_obj != undefined ||
                 this.app.global_obj != null
               ) {
@@ -344,19 +273,9 @@ menuItems = [
               } else {
                 this.app.global_obj = resp;
               }
-              this.storage.set("user", this.app.global_obj);
-              /*if (this.action == "menu") {
-                this.presentAlertConfirminvalid(
-                  this.config.added_success,
-                  "/tabs/tabs/tab1"
-                );
-              } else {
-                this.presentAlertConfirminvalid(
-                  this.config.added_success,
-                  "thankyou"
-                ); 
-              }*/
-              this.presentAlert(resp.message);
+              this.storage.set("user", this.app.global_obj); */
+  
+              this.presentAlert(resp.message , true);
             } else {
               return this.presentAlert(resp.message);
               return true;
@@ -365,7 +284,7 @@ menuItems = [
           (err) => {
            this.hideLoader();
            console.log(err)
-            return this.presentAlert(err);
+            return this.presentAlert(err.message);
           }
         );
       }
@@ -379,18 +298,34 @@ menuItems = [
   }
 
 
-  async presentAlert(msg) {
-    let alert = await this.alertCtrl.create({
-      header: "Payment Alert",
-      message: msg,
-      buttons: [{
-          text: 'OK',
-          handler: () => {
-            this.navCtrl.navigateBack('/tabs/home');
-          }
-        }]
-    });
-    await alert.present();
+  async presentAlert(msg , redirect = false) {
+    if(redirect){
+      let alert = await this.alertCtrl.create({
+        header: "Payment Alert",
+        message: msg,
+        buttons: [{
+            text: 'OK',
+            handler: () => {
+              this.navCtrl.navigateBack('/tabs/home');
+            }
+          }]
+      });
+      await alert.present();
+    }
+    else{
+      let alert = await this.alertCtrl.create({
+        header: "Payment Alert",
+        message: msg,
+        buttons: [{
+            text: 'OK',
+            handler: () => {
+              
+            }
+          }]
+      });
+      await alert.present();
+    }
+    
   }
 
 async showLoader() {
@@ -420,6 +355,149 @@ async showLoader() {
       });
   }
 
+  getStripeCards(token){
+    this.showLoader();
+    this.serviceAll.getStripeCards(token).subscribe(
+      (resp: any) => {
+        console.log(resp);
+
+        if(resp.cards.data.length > 0){
+          console.log(resp.cards.data.length);
+          this.cards = resp.cards.data;
+          //this.Customer = resp.Customer;
+          this.showCreateNewCard = false;
+        }
+        else{
+          this.showCreateNewCard = true;
+        }
+        this.hideLoader();
+      },
+      (err) => {
+       this.hideLoader();
+       console.log(err);
+       this.addNew();
+        //return this.presentAlert('Server Error');
+      }
+    );
+  }
+  addNew(){
+    this.showCreateNewCard = true;
+    setTimeout(()=>{
+      this.stripeSetup();
+    },500)
+  }
+
+  stripeSetup(){
+    var elements = this.stripe.elements({
+      fonts: [
+        {
+          cssSrc: "https://fonts.googleapis.com/css?family=Quicksand",
+        },
+      ],
+      locale: "auto",
+    });
+
+    var elementStyles = {
+      base: {
+        color: "#fff",
+        fontWeight: 600,
+        fontFamily: "Quicksand, Open Sans, Segoe UI, sans-serif",
+        fontSize: "16px",
+        fontSmoothing: "antialiased",
+        ":focus": {
+          color: "#fff",
+        },
+
+        "::placeholder": {
+          color: "#fff",
+        },
+
+        ":focus::placeholder": {
+          color: "#ececec",
+        },
+      },
+      invalid: {
+        color: "#fff",
+        ":focus": {
+          color: "#fff",
+        },
+        "::placeholder": {
+          color: "#ececec",
+        },
+      },
+      empty: {
+        color: "#fff",
+        ":focus": {
+          color: "#fff",
+        },
+        "::placeholder": {
+          color: "#ececec",
+        },
+      },
+    };
+
+    var elementClasses = {
+      focus: "focus",
+      empty: "empty",
+      invalid: "invalid",
+    };
+
+    var cardNumber = elements.create("cardNumber", {
+      style: elementStyles,
+      classes: elementClasses,
+      placeholder : '0000 0000 0000 0000'
+    });
+    cardNumber.mount("#example3-card-number");
+
+    var cardExpiry = elements.create("cardExpiry", {
+      style: elementStyles,
+      classes: elementClasses,
+    });
+    cardExpiry.mount("#example3-card-expiry");
+
+    var cardCvc = elements.create("cardCvc", {
+      style: elementStyles,
+      classes: elementClasses,
+      val : 'password',
+      placeholder: '***'
+    });
+    cardCvc.mount("#example3-card-cvc");
 
 
+    this.registerElements([cardNumber, cardExpiry], "example3");
+  }
+
+  CardradioChecked(card) {
+    this.selectcard = card;    
+  }
+
+  payNow(){
+    if(this.selectcard){
+    console.log(this.selectcard);
+      this.storage.get("user").then((val) => {
+        if (val && val != null){
+        console.log(val)
+          this.showLoader();
+          this.serviceAll.payNow(val.token , this.selectcard , val.user_id).subscribe(
+            (resp: any) => {
+              console.log(resp);
+              this.presentAlert(resp.message , true);
+              this.hideLoader();
+            },
+            (err) => {
+             this.hideLoader();
+             console.log(err)
+              return this.presentAlert('Server Error');
+            }
+          );
+        }
+           
+      });
+    }
+    else{
+      this.presentAlert('Please select card');
+    }
+    
+
+    }
 }

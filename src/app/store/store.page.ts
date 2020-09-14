@@ -1,4 +1,5 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router , NavigationExtras } from '@angular/router';
 import { Storage } from "@ionic/storage";
@@ -54,6 +55,7 @@ menuItems = [
 
   constructor(
     private http: HttpClient,
+    private location: Location,
     private router: Router,
     public storage: Storage,
     public loadingCtrl: LoadingController,
@@ -182,5 +184,9 @@ openSlideContent( contentId , tabId) {
      console.log(this.filterCatData)
 }
 
+  back(){
+    this.location.back();
+    console.log('backkk')
+  }
 
 }

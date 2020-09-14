@@ -268,3 +268,11 @@ ion-content{
     }
 
 }
+
+@media screen and (min-width: 420px){
+   ion-content .lastMenu {
+        justify-content: unset;
+        margin-left: 3%;
+        margin-top: -3%;
+    }
+  }

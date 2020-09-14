@@ -27,14 +27,25 @@
           <ion-slide>
             <ion-row class='sliderRow'>  
               <ion-col size="12" class='sliderItem'>                 
-                <img src="assets/xfs_image/11/card_2.png" width="100%">                
+                <img src="assets/xfs_image/11/card_2.png" width="100%">
+                <ion-row class='sliderCardDetails'>
+                  <ion-col size='12'>Card Detail</ion-col>
+                  <ion-col size='12' class='cardnumber'>CARD NUMBER</ion-col>
+                  <ion-col size='12' class='showcardnumber'>&#8226;&#8226;&#8226;&#8226; &nbsp;&nbsp;&#8226;&#8226;&#8226;&#8226;&nbsp;&nbsp; &#8226;&#8226;&#8226;&#8226; 4444</ion-col>
+
+                  <ion-col size='8' class='expiryDate'>EXPIRATION DATE</ion-col>
+                  <ion-col size='4'class='cvv'>CVV</ion-col>
+                  <ion-col size='8' class='showexpiryDate'>MM/YY</ion-col>
+                  <ion-col size='4' class='showexpiryDate'>&#8226;&#8226;&#8226;</ion-col>
+
+                </ion-row>             
               </ion-col>                            
             </ion-row>            
           </ion-slide>    
           <ion-slide>
             <ion-row class='sliderRow'>  
               <ion-col size="12" class='sliderItem'>                 
-                <img src="assets/xfs_image/11/card_1.png" width="100%">               
+                <img src="assets/xfs_image/11/card_1.png" width="100%">         
                 
               </ion-col>                            
             </ion-row>            
@@ -42,8 +53,26 @@
         </ion-slides>
     </ion-row>
   </ion-grid>
+
+   <ion-grid class='saveCards' *ngIf="cards.length>0">
+    <ion-row>
+      <ion-col size="12">
+        <h5>Saved Cards</h5>
+        <ion-radio-group *ngIf="cards.length>0" class="cardgroup" [(ngModel)]="selectcard">
+        <ion-item lines="none" *ngFor="let c of cards">
+          <ion-label>{{c.brand}} - {{c.last4}}</ion-label>
+          <ion-radio slot="start" value="{{c.id}}" (ionSelect)="CardradioChecked(c.id)"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+      </ion-col>
+      <ion-col size="12">
+          <button (click)='payNow()'>Pay</button>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
    
-  <ion-grid class='cardDetailSection'>
+  <ion-grid class='cardDetailSection' *ngIf='showCreateNewCard'>
     <div class="cell example example3" id="example-3">
 
     <form class="subscribe_form" >
@@ -81,10 +110,10 @@
   </ion-grid>
 
  
- <ion-grid>
+ <ion-grid *ngIf='!showCreateNewCard'>
     <ion-row class='newCardSection'>
       <ion-col size="12"  class='newButton'>
-        <button type="button" style="width:100%">+ Add New Card</button>
+        <button type="button" style="width:100%" (click)='addNew()'>+ Add New Card</button>
       </ion-col>
     </ion-row>
   </ion-grid>
