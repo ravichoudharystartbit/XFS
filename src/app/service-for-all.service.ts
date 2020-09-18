@@ -41,7 +41,7 @@ export class ServiceForAllService {
 
   getVideos() {
     return this.http.get(
-      'https://xfs.betaplanets.com/wp-json/mobileapi/v1/getVimeoVideo')
+      wpUrl + 'wp-json/mobileapi/v1/getVimeoVideo')
         .pipe(
           retry(2), 
           map(content => {
@@ -51,7 +51,7 @@ export class ServiceForAllService {
   }
 
   getProducts(){
-    return this.http.get('https://xfs.betaplanets.com/wc-api/v3/products?consumer_key="ck_025c7377b0a7a9cff3723bfda95f6c8004d25301"&consumer_secret="cs_455cf6a85f9dcccdf2f31c0fdbcd822f65c5bac4"').pipe(
+    return this.http.get(wpUrl + 'wc-api/v3/products?consumer_key="ck_025c7377b0a7a9cff3723bfda95f6c8004d25301"&consumer_secret="cs_455cf6a85f9dcccdf2f31c0fdbcd822f65c5bac4"').pipe(
           retry(2),
           map(content => {
             return content;
@@ -59,7 +59,7 @@ export class ServiceForAllService {
         )
   }
   getUser(){
-    return this.http.get('https://xfs.betaplanets.com/wc-api/v3/products?consumer_key="ck_025c7377b0a7a9cff3723bfda95f6c8004d25301"&consumer_secret="cs_455cf6a85f9dcccdf2f31c0fdbcd822f65c5bac4"').pipe(
+    return this.http.get(wpUrl + 'wc-api/v3/products?consumer_key="ck_025c7377b0a7a9cff3723bfda95f6c8004d25301"&consumer_secret="cs_455cf6a85f9dcccdf2f31c0fdbcd822f65c5bac4"').pipe(
           retry(2),
           map(content => {
             return content;
@@ -67,7 +67,7 @@ export class ServiceForAllService {
         )
   }
   getCallerProfile(userI){
-    return this.http.get('https://xfs.betaplanets.com/wc-api/v3/products?consumer_key="ck_025c7377b0a7a9cff3723bfda95f6c8004d25301"&consumer_secret="cs_455cf6a85f9dcccdf2f31c0fdbcd822f65c5bac4"').pipe(
+    return this.http.get(wpUrl + 'wc-api/v3/products?consumer_key="ck_025c7377b0a7a9cff3723bfda95f6c8004d25301"&consumer_secret="cs_455cf6a85f9dcccdf2f31c0fdbcd822f65c5bac4"').pipe(
           retry(2),
           map(content => {
             return content;
@@ -408,6 +408,16 @@ export class ServiceForAllService {
         return user;
       })
     )
+  }
+
+
+  getAllCoaches(){
+    return this.http.get(wpUrl + 'wp-json/mobileapi/v1/getCoaches').pipe(
+        retry(2),
+        map(content => {
+          return content;
+        })
+      )
   }
 
   

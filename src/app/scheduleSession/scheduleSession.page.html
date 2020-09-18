@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- <ion-menu-button><img src="assets/xfs_image/12/side_bar.svg"></ion-menu-button> -->
+      <ion-button (click)='back()'><img src="assets/back-arrow.png" width="20px"></ion-button>
+    </ion-buttons>
+    <ion-title>
+      Schedule A Sessions
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class='mainPage'>
+  
+
+  <ion-grid>
+    <ion-row class='newsSection'>
+      <ion-col size="12" class='news' *ngFor='let pd of Coaches'>
+        <ion-row>
+           <ion-col  size="4" class='productImage'>
+          <!-- <img src="assets/xfs_image/19/Asset 5.png" width="100%">  (click)='detail()'-->
+            <img src="{{pd.profilePic}}" width="100%">
+          </ion-col>
+          <ion-col  size="8">
+            <h6>{{pd.name}}</h6>
+            <p><b>{{pd.email}}</b></p>
+             <p class="buyButton" (click)='book()'>Book Session</p>
+          </ion-col>
+        </ion-row>   
+      </ion-col>
+
+      <ion-col size="12" class='news' *ngIf='Coaches.length == 0'>
+        <ion-row>
+          <h5 class="noRecordFound">No Item found.</h5>
+         </ion-row>
+      </ion-col>      
+    </ion-row>
+  </ion-grid> 
+</ion-content>

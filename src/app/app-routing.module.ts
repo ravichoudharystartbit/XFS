@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-//import { VideocallPage } from './Videocallpages/videocall/videocall';
-//import { IncomingcallPage } from './Videocallpages/incomingcall/incomingcall';
 
 const routes: Routes = [
 {
@@ -76,28 +74,19 @@ const routes: Routes = [
     path: 'payment',
     loadChildren: './payment/payment.module#PaymentPageModule'
   },
-/*  {
-    path: 'payment',
-    loadChildren: './paymentTest/paymentTest.module#PaymentTestPageModule'
+  {
+    path: 'wishlist',
+    loadChildren: './wishlist/wishlist.module#WishlistPageModule'
   },
   {
-    path: 'paymentDemo',
-    loadChildren: './paymentDemo/paymentDemo.module#PaymentDemoPageModule'
+    path: 'scheduleSession',
+    loadChildren: './scheduleSession/scheduleSession.module#ScheduleSessionPageModule'
   },
   {
-    path: 'call',
-    loadChildren: './call/call.module#CallPageModule'
+    path: 'schedule',
+    loadChildren: './schedule/schedule.module#SchedulePageModule'
   },
-  {
-    path: 'video-call',
-    // loadChildren: './videocall/videocall.module#VideocallPageModule'
-    component: VideocallPage,
-  },
-  {
-    path: 'incomming-call',
-    // loadChildren: './incommingcall/incommingcall.module#IncomingcallPageModule'
-    component: IncomingcallPage,
-  } */
+
 ];
 
 @NgModule({

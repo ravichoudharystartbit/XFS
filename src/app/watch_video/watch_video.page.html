@@ -23,9 +23,9 @@
           <img src="assets/xfs_image/13/sort.svg">
           <ion-row *ngIf='showSort'>
             <ul>
-              <li>Newest</li>
-              <li>Most Reviewed</li>
-              <li>Alphabetical</li>
+              <li (click)='sort("new")'>Newest</li>
+              <li (click)='sort("view")'>Most Reviewed</li>
+              <li (click)='sort("alpha")'>Alphabetical</li>
             </ul>
           </ion-row>
       </ion-col>
@@ -34,13 +34,6 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12">
-          <div>
-            <!-- <ul class="tab">
-              <li id='tab1' class="width40 tablinks active" (click)="openContent('first' , 'tab1')">Sport Performance</li>
-              <li id='tab2' class="width20 tablinks" (click)="openContent( 'second', 'tab2')">Fitness</li>
-              <li id='tab3' class="width40 tablinks" (click)="openContent( 'third', 'tab3')">Sport Performance</li>
-             
-            </ul> -->
 
             <ion-row class='imageSlider123'> 
               <ion-slides pager="true" [options]="slideOpts123" #mySlider>   
@@ -50,9 +43,7 @@
                        
                        {{slide.name}}
                     </ion-col> 
-                    <!-- <ion-col  size="12">
-                      <h4></h4>
-                    </ion-col>    -->            
+            
                   </ion-row>
                   
                 </ion-slide>  
@@ -67,12 +58,16 @@
                 <iframe controls="true" name="iframe1" id="iframe1"  [src]="video.VideoId" frameborder="0" allowfullscreen='1' title='Watch Video' allow=" encrypted-media" class="videoFrame"></iframe>
                 <span>{{video.Title}}</span>
               </ion-col>
+              <ion-col size="12" class='news' *ngIf='filterCatData.length == 0'>
+                <ion-row>
+                  <h5 class="noRecordFound">No record found.</h5>
+                 </ion-row>
+              </ion-col>
              <!--  <ion-col size="12">
                  <video src="http://player.vimeo.com/external/85569724.sd.mp4?s=43df5df0d733011263687d20a47557e4"></video>
                  <span>Video Title</span>
               </ion-col> -->
             </ion-row>
-          </div>
       </ion-col>
     </ion-row>
   </ion-grid>

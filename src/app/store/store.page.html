@@ -15,17 +15,17 @@
   <ion-grid class='searchSection'>
     <ion-row class='searchInput'>
       <ion-col size="9" class='searchbox'>
-        <ion-input type="email" placeholder="Search" clearInput autocapitalize="off" inputmode="email"></ion-input>
-        <img src="assets/xfs_image/13/search.svg">
+         <ion-input type="text" [(ngModel)]='searchInput' placeholder="Search" clearInput autocapitalize="off" inputmode="text"></ion-input>
+        <img src="assets/xfs_image/13/search.svg" (click)='search()'>
       </ion-col>
       <ion-col size="3" class='sortbox' (click)='toggleShowSort()'>
       
           <img src="assets/xfs_image/13/sort.svg">
           <ion-row *ngIf='showSort'>
             <ul>
-              <li>Newest</li>
-              <li>Most Reviewed</li>
-              <li>Alphabetical</li>
+               <li (click)='sort("new")'>Newest</li>
+              <!-- <li (click)='sort("view")'>Most Reviewed</li> -->
+              <li (click)='sort("alpha")'>Alphabetical</li>
             </ul>
           </ion-row>
       </ion-col>
@@ -69,9 +69,15 @@
                      <p class="buyButton">Buy</p>
                   </ion-col>
                    </ion-row>     
-                            <div class='nextButton' (click)='goTo()'>
+                            <div class='nextButton' (click)='addToWishlist(pd)'>
                       <img src="assets/xfs_image/19/heart-1.svg">
                   </div>
+                </ion-col>
+
+                <ion-col size="12" class='news' *ngIf='filterCatData.length == 0'>
+                  <ion-row>
+                    <h5 class="noRecordFound">No record found.</h5>
+                   </ion-row>
                 </ion-col>
                 
               </ion-row>

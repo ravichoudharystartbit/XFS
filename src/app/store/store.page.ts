@@ -19,9 +19,10 @@ export class StorePage implements OnInit{
   Products  = [];
   Categories  = [];
   filterCatData  = [];
-  deferredPrompt: any;
-  showInstallBtn: boolean = true;
-  pwa_features: any;
+
+  SelectedCategory: any;
+  SearchCategory: any;
+  SortValue: any;
 
   slideOpts = {
     initialSlide: .5,
@@ -44,6 +45,8 @@ slideOpts123 = {
       toggle: false
     }
 };
+
+searchInput = '';
 
 str = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
 
@@ -114,28 +117,7 @@ ionViewWillEnter(){
     } 
   }
 
-  search(){
-    console.log('search');
-  }
 
-
-   openContent( contentId , tabId) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tabcontent.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-
-    document.getElementById(contentId).style.display = "block";
-
-    var element = document.getElementById(tabId);
-    element.classList.add("active");
-}
 
 toggleShowSort(){
   console.log(this.showSort , 'toggleShowSort')
@@ -174,13 +156,13 @@ openSlideContent( contentId , tabId) {
     }
 
 
-  //  document.getElementById(contentId).style.display = "block";
+  // document.getElementById(contentId).style.display = "block";
 
     var element = document.getElementById('tab'+tabId);
     element.classList.add("active");
 
      this.filterCatData = this.Products.filter(x=> (x.catgories.filter(y => y.slug == contentId)).length > 0 );
-
+     this.SelectedCategory = contentId;
      console.log(this.filterCatData)
 }
 
@@ -189,4 +171,69 @@ openSlideContent( contentId , tabId) {
     console.log('backkk')
   }
 
+  search(){
+    console.log('search..................')
+    if(this.searchInput){
+      console.log(this.searchInput);
+      this.searchInput = this.searchInput.toLowerCase();
+
+      let arr = this.filterCatData.filter(
+        (x)=>{
+          if((x.name.toLowerCase().indexOf(this.searchInput)) >= 0){
+            return x;
+          }
+        }
+        );
+      this.filterCatData = arr;
+    } 
+    else{
+      this.filterCatData = this.Products.filter(x=> (x.catgories.filter(y => y.slug == this.SelectedCategory )).length > 0 );
+    }  
+    this.searchInput = '';
+  }
+
+  sort(value){
+    if(value == 'new'){
+      this.filterCatData.sort(function(a, b) {
+        var keyA = new Date(a.date),
+          keyB = new Date(b.date);
+        // Compare the 2 dates
+        if (keyA > keyB) return -1;
+        if (keyA < keyB) return 1;
+        return 0;
+      });
+
+      console.log(this.filterCatData)
+    }
+    else if(value == 'alpha'){
+      var key = 'name';
+      this.filterCatData.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+      });
+    }
+    else{
+
+      
+    }
+    console.log(value)
+
+    
+  }
+
+  addToWishlist(product){ 
+    //console.log('add to wishlist') 
+    this.storage.get("wishlists").then((val) => {
+      if (val && val != null){
+         let previousWish = val;
+         previousWish.push(product);
+         this.storage.set("wishlists", previousWish);
+      }
+      else{
+        let wish = [];
+        wish.push(product);
+        this.storage.set("wishlists", wish);
+      }
+    });
+  }
 }

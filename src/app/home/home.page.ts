@@ -8,7 +8,7 @@ import Player from '@vimeo/player';
 import { MenuController, LoadingController,AlertController, NavController, ModalController, ToastController, ActionSheetController } from '@ionic/angular';
 import { CallingPage } from '../calling/calling.page';
 import * as firebase from 'firebase';
-
+import { IonSlides} from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +24,7 @@ export class HomePage implements OnInit{
     initialSlide: .5,
     speed: 400
   };
-
+  @ViewChild('mySlider')  slides: IonSlides;
   slideOpts1 = {   
     initialSlide: 0.5, 
     spaceBetween:5,
@@ -213,5 +213,11 @@ public data: object[] = [
     this.router.navigate(['/payment_slide']);
   }
 
+  slidePrev() {
+    this.slides.slidePrev();
+  }
+  slideNext() {
+    this.slides.slideNext();
+  }
 
 }

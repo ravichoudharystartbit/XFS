@@ -23,8 +23,6 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { ServiceForAllService } from './service-for-all.service';
 //import { UserProvider } from './calluser/calluser/calluser';
 
-import { PublisherComponent } from './publisher/publisher.component';
-import { SubscriberComponent } from './subscriber/subscriber.component';
 import { OpentokService } from './opentok.service';
 
 import { Network } from '@ionic-native/network/ngx';
@@ -37,8 +35,6 @@ import {NgxMaskIonicModule} from 'ngx-mask-ionic'
 @NgModule({
   declarations: [
     AppComponent,
-    PublisherComponent,
-    SubscriberComponent
   ],
   entryComponents: [],
   imports: [
@@ -53,8 +49,6 @@ import {NgxMaskIonicModule} from 'ngx-mask-ionic'
     ServiceWorkerModule.register('combined-sw.js', { enabled: environment.production }),
     SparklineModule,    
     CallingPageModule,
-   // VideocallPageModule,
-   // IncomingcallPageModule
     // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
@@ -81,15 +75,8 @@ Token:-
 T1==cGFydG5lcl9pZD00Njg4Mzc5NCZzaWc9ZDIzMDQxNWQ5NzIzY2Q3ODAyZjczMWE3MDcxMGY1YmI3MDA5NTc4YjpzZXNzaW9uX2lkPTFfTVg0ME5qZzRNemM1Tkg1LU1UVTVOelkyT0RVME5UZzVNSDVNZEVnclRERXJkbXRxY0RsT1pXVjNLek5TTlVKQk5rcC1mZyZjcmVhdGVfdGltZT0xNTk3NjY4NzM1Jm5vbmNlPTAuNTQ1NDE1MzkzOTM3NzAxMSZyb2xlPXB1Ymxpc2hlciZleHBpcmVfdGltZT0xNjAwMjYwNzM0JmluaXRpYWxfbGF5b3V0X2NsYXNzX2xpc3Q9
 
 
-
-
 API Key:--
 46883794
-
-
-
 SessionID:-1_MX40Njg4Mzc5NH5-MTU5NzY2ODU0NTg5MH5MdEgrTDErdmtqcDlOZWV3KzNSNUJBNkp-fg
-
-
 
 */

@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router , NavigationExtras } from '@angular/router';
+import { Location } from '@angular/common';
 import { Storage } from "@ionic/storage";
 import { QueryList, ViewChildren } from '@angular/core';
 import { ActionSheetController,LoadingController,AlertController,NavController , Platform } from '@ionic/angular';
@@ -53,6 +54,7 @@ menuItems = [
     private loadingCtrl: LoadingController,
     public storage: Storage,
     public serviceForAllService: ServiceForAllService,
+    public location: Location,
   ) {
 
   this.yesterday.setDate(this.yesterday.getDate() - 1)
@@ -154,6 +156,11 @@ goTo(id){
   };
   this.router.navigate(['/tabs/single_news'] , navigationExtras);
 }
+
+  back(){
+    this.location.back();
+    console.log('backkk')
+  }
 
 
 }

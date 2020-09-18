@@ -205,16 +205,28 @@ session: OT.Session;
             url: '/payment_slide',
             icon: 'person'
           };
+          let values4 = {
+            title: 'Wishlist',
+            url: '/wishlist',
+            icon: 'heart-empty'
+          };
           let filterArr  = this.appPages.filter( (x)=> x.title == 'Profile');
           if(!filterArr.length){
             this.appPages.push(values);
             this.appPages.push(values1);
             this.appPages.push(values2);
             this.appPages.push(values3);
+            this.appPages.push(values4);
           }
           this.navCtrl.setDirection('root');
           this.router.navigate(['/tabs/home']);
         } else {
+          
+          let values = {
+            title: 'Home',
+            url: '/tabs/home',
+            icon: 'home'
+          };
           let values1 = {
             title: 'Coaches',
             url: '/tabs/coaches',
@@ -225,21 +237,22 @@ session: OT.Session;
             url: '/tabs/clients',
             icon: 'person'
           };
-          let values = {
-            title: 'Home',
-            url: '/tabs/home',
-            icon: 'home'
-          };
           let values3 = {
             title: 'Payment',
             url: '/payment_slide',
             icon: 'person'
+          };
+          let values4 = {
+            title: 'Wishlist',
+            url: '/wishlist',
+            icon: 'heart-empty'
           };
           this.appPages = [];
           this.appPages.push(values);
           this.appPages.push(values1);
           this.appPages.push(values2);
           this.appPages.push(values3);
+          this.appPages.push(values4);
           this.navCtrl.setDirection('root');
           this.router.navigate(['/login']);
         }
@@ -406,9 +419,9 @@ session: OT.Session;
               online: 1
             });
 
-            // window.addEventListener('beforeunload', () => {
-            //   this.onlineRef.remove();
-            // });
+             window.addEventListener('beforeunload', () => {
+               this.onlineRef.remove();
+             });
 
             // Observable.fromEvent(window, 'beforeunload').subscribe(event: Event => this.unsubscribeFromSignals());
 
@@ -431,6 +444,15 @@ session: OT.Session;
         }
       }); 
     });
+  }
+
+  showWishlist(){
+    this.storage.get('wishlists').then(val=>{
+      if(val){
+        console.log(val);
+      }
+    });
+    this.router.navigate(['/wishlist']);
   }
 
 

@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Router , NavigationExtras } from '@angular/router';
 import { Storage } from "@ionic/storage";
 import { QueryList, ViewChildren } from '@angular/core';
+import { Location } from '@angular/common';
+
+
 @Component({
   selector: 'app-trading_star',
   templateUrl: 'trading_star.page.html',
@@ -43,6 +46,7 @@ menuItems = [
     private http: HttpClient,
     private router: Router,
     public storage: Storage,
+    public location: Location,
   ) {
 
   this.yesterday.setDate(this.yesterday.getDate() - 1)
@@ -101,6 +105,10 @@ goTo(){
   
 }
 
+  back(){
+    this.location.back();
+    console.log('backkk')
+  }
 
 }
 

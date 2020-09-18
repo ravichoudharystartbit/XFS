@@ -9,6 +9,8 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 declare var OT: any;
 
+
+
 @Component({
   selector: 'app-calling',
   templateUrl: './calling.page.html',
@@ -390,8 +392,11 @@ export class CallingPage implements OnInit {
         // this.showLoader('Connecting...');
         this.sessionId = '';
 
-        navigator.mediaDevices.getUserMedia({ audio: true, video: true }).
-          then((stream) => {
+        if (typeof navigator.mediaDevices.getUserMedia === 'undefined') {
+            navigator.getUserMedia({
+                video: true,
+              audio: true //optional
+            }, (stream)=> {
             this.allServices.createSession()
               .subscribe(res => {
                 // this.dismissLoading();
@@ -499,10 +504,130 @@ export class CallingPage implements OnInit {
               }, err => {
                 // this.dismissLoading();
               });
-          }, err => {
+          
+          }, (errorHandler)=>{
             this.presentAlert('getUserMedia() is not supported by your browser,so you can not work');
-            this.dismiss();
+           this.dismiss();
           });
+        } else {
+            navigator.mediaDevices.getUserMedia({
+                video: true,
+            audio: true //optional
+            }).then( (stream)=> {
+            this.allServices.createSession()
+              .subscribe(res => {
+                // this.dismissLoading();
+                let res2: any = [];
+                res2 = res;
+                // console.log(res2);
+                // console.log(res2.session_id);
+
+                this.sessionId = res2.session_id;
+                this.token = res2.token;
+
+                // console.log(this.token);
+
+                // "archive_id": e88d27b3-0c1f-4dc5-96d4-bf165bebad7a
+
+                let publisherOptions = {
+                  insertMode: 'append',
+                  width: this.miniW,
+                  height: this.miniH,
+                };
+                let options = {
+                  width: this.bigW,
+                  height: this.bigH,
+                  insertMode: 'append'
+                }
+
+                this.session = OT.initSession(this.apiKey, this.sessionId);
+                this.publisher = OT.initPublisher('publisher', publisherOptions);
+
+                this.session.on({
+                  streamCreated: (event: any) => {
+                    // console.log(event.streams.length);
+                   let len = document.getElementById("stream_other_calling")
+                    if (len) {
+                        document.getElementById("stream_other_calling").remove();
+                    }
+                    //this.session.subscribe(event.stream, 'subscriber', options);
+                    for (let i = 0; i < event.streams.length; i++) {
+                      //  Make sure we don’t subscribe to ourself
+                      // console.log(event.streams[i]);
+                      if (event.streams[i].connection.connectionId == this.session.connection.connectionId) {
+                        return;
+                      }
+                      let div = document.createElement('div');
+                      div.setAttribute('id', 'stream' + event.streams[i].streamId);
+                      div.setAttribute('style', "float:left;padding: 7px;");
+                      document.getElementById("subscriber_data").append(div);
+                      this.session.subscribe(event.streams[i], 'stream' + event.streams[i].streamId, options);
+
+                    }
+
+                    if (event.streams.length == 1) {
+                      let div = document.createElement('div');
+                      div.setAttribute('id', 'stream_other_calling');
+                      div.setAttribute('style', "float:left;padding: 7px;");
+                      document.getElementById("subscriber_data").append(div);
+                    }
+                    // OT.updateViews();
+
+                    // this.startArc();
+
+                    this.recordingStatus = 1;
+                  },
+
+                  streamDestroyed: (event: any) => {
+                    // console.log("streamDestroyed");
+                    // console.log(`Stream ${event.stream.name} ended because ${event.reason}`);
+                    //OT.updateViews();
+                  },
+                  sessionConnected: (event: any) => {
+                    // console.log("sessionConnected");
+                  }
+                });
+
+                this.session.connect(this.token, (error: any) => {
+                  // console.log("session.connect");
+                  if (error) {
+                    // console.log(`There was an error connecting to the session ${error}`);
+                    this.presentAlert("Sorry, you can not make a call right now try again later.")
+                    this.dismiss();
+                  } else {
+                    this.storage.get('user').then(val => {
+                      if (val != null) {
+                        // this.ref = firebase.database().ref('call/'+this.opposite_user_id);
+                        this.isIncoming = false;
+
+                        this.calling_going = false;
+                        this.session.publish(this.publisher);
+                        this.ref.push({
+                          caller_id: val.user_id,
+                          caller_name: val.user_display_name,
+                          caller_img: val.user_avatar,
+                          caller_role: val.role,
+                          appointment_id: 'a',
+                          session_id: this.sessionId,
+                          token: this.token,
+                          status: 0
+                        });
+
+                      }
+                    });
+                  }
+                });
+
+              }, err => {
+                // this.dismissLoading();
+              });
+          
+          }).catch((errorHandler)=>{
+           this.presentAlert('getUserMedia() is not supported by your browser,so you can not work');
+           this.dismiss();
+          });
+        }
+
 
 
 
@@ -534,8 +659,13 @@ export class CallingPage implements OnInit {
 
       this.session = OT.initSession(this.apiKey, this.sessionId);
       this.publisher = OT.initPublisher('publisher', publisherOptions);
-      navigator.mediaDevices.getUserMedia({ audio: true, video: true }).
-        then((stream) => {
+      //var getUserMedia = window.navigator.getUserMedia || window.navigator.webkitGetUserMedia || window.navigator.mozGetUserMedia;
+
+      if (typeof navigator.mediaDevices.getUserMedia === 'undefined') {
+        navigator.getUserMedia({
+            video: true,
+          audio: true //optional
+        }, (stream)=> {
           this.session.on({
             streamCreated: (event: any) => {
               // console.log("streamCreated");
@@ -587,6 +717,65 @@ export class CallingPage implements OnInit {
           this.presentAlert('getUserMedia() is not supported by your browser,so you can not work');
           this.dismiss();
         });
+      
+        } else {
+          navigator.mediaDevices.getUserMedia({
+                video: true,
+            audio: true //optional
+            }).then( (stream)=> {
+               this.session.on({
+                  streamCreated: (event: any) => {
+                    // console.log("streamCreated");
+                    // console.log(event.streams);
+                    //this.session.subscribe(event.stream, 'subscriber', options);
+                    //OT.updateViews();
+
+                    for (let i = 0; i < event.streams.length; i++) {
+                      //  Make sure we don’t subscribe to ourself
+                      // console.log(event.streams[i]);
+                      if (event.streams[i].connection.connectionId == this.session.connection.connectionId) {
+                        return;
+                      }
+                      let div = document.createElement('div');
+                      div.setAttribute('id', 'stream' + event.streams[i].streamId);
+                      div.setAttribute('style', "float:left;padding:5px");
+                      document.getElementById("subscriber_data").append(div);
+                      this.session.subscribe(event.streams[i], 'stream' + event.streams[i].streamId, options);
+                      //document.getElementById("subscriber_data").append(div);
+                    }
+
+                  },
+                  streamDestroyed: (event: any) => {
+                    // console.log("streamDestroyed");
+                    // console.log(`Stream ${event.stream.name} ended because ${event.reason}`);
+                    //OT.updateViews();
+                  },
+                  sessionConnected: (event: any) => {
+                    // console.log("sessionConnected");
+                    this.session.publish(this.publisher);
+                    // console.log(event.streams);
+                  }
+                });
+
+                this.session.connect(this.token, (error: any) => {
+                  // console.log("session.connect");
+                  if (error) {
+                    // console.log(`There was an error connecting to the session ${error}`);
+                  } else {
+                    this.stopTune();
+
+                  }
+                });
+
+                firebase.database().ref('call/' + this.user_data.user_id + '/' + this.recive_key).update({ status: 2 });
+
+
+            }).catch((errorHandler)=>{
+           this.presentAlert('getUserMedia() is not supported by your browser,so you can not work');
+           this.dismiss();
+          });
+        }
+
     } else {
       this.presentToast("Unable to join the call.");
     }

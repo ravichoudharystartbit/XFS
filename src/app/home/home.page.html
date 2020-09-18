@@ -16,7 +16,8 @@
   <ion-row class='heading'><h5>LIVE SOCCER VIDEO</h5></ion-row>
   <!-- <ion-row class='heading'><h5 style="background: white;color: black;" (click)="search()">Call</h5></ion-row> -->
     <ion-row class='imageSlider'> 
-        <ion-slides pager="true" [options]="slideOpts" #mySlider>   
+       
+        <ion-slides pager="true" [options]="slideOpts">   
           <ion-slide>
             <ion-row class='sliderRow'>  
               <ion-col size="12" class='sliderItem'>
@@ -58,7 +59,13 @@
     </ion-row>
     <ion-row class='heading'><h5>Stats</h5></ion-row>
     <ion-row class='graphSlider'> 
-        <ion-slides pager="true" [options]="slideOpts1">   
+       <div class='prev' (click)="slidePrev()" [class.disabled]="mySlider.isBeginningSlide">
+          <ion-icon name="arrow-back"></ion-icon>
+        </div>
+        <div class="next" (click)="slideNext()" [class.disabled]="mySlider.isEndSlide">
+          <ion-icon name="arrow-forward"></ion-icon>
+        </div>
+        <ion-slides pager="true" [options]="slideOpts1" #mySlider>   
           <ion-slide>
             <ion-row class='sliderRow'>  
               <ion-col size="12" class='sliderItem'>   
@@ -124,7 +131,7 @@
             <span routerLink='/store'>
               <img src="assets/xfs_image/12/store.svg" />
               <p>Store</p>
-           </span>
+            </span>
 
             <span routerLink='/tabs/nutritionRecoveryJournal'>
                <img src="assets/xfs_image/12/nutrition.svg" />
@@ -140,20 +147,20 @@
                <p>Library</p>
             </span>
             
-            <span>
+            <span routerLink='/scheduleSession'>
               <img src="assets/xfs_image/12/schedule.svg" />
               <p>Schedule A <br>Sessions</p>
-           </span>
+            </span>
             
             <span routerLink='/tabs/news'>
               <img src="assets/xfs_image/12/news.svg" />
               <p>News</p>
-           </span>
+            </span>
             
             <span routerLink='/contact'>
               <img src="assets/xfs_image/12/contact.svg" />
               <p>Contact</p>
-           </span>          
+            </span>          
           </div>
       </ion-col>
     </ion-row>

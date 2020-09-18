@@ -1,0 +1,142 @@
+ion-toolbar {
+    --border-width: 0px!important;
+    --background: #000 !important;
+    background: #000;
+    color: #fff;
+
+
+    ion-menu-button {
+        color: #fff;
+    }    
+    .sc-ion-back-button-ios-h{
+        color : #fff;
+    }
+    .toolbar-container{
+     --background: #000 !important;
+      background: #000 !important;
+    }
+    .ion-color-primary{
+    	background: #000
+    }
+
+    ion-toolbar ion-menu-button {
+        color: #fff;
+        content: url(assets/xfs_image/12/side_bar.svg);
+        width: 18px;
+        margin-left: 10px;
+    }
+    .search{
+        cursor: pointer;
+        position: absolute;
+        top: 12px;
+        right: 20px;
+        width: 18px;
+    } 
+
+    ion-back-button {
+        margin-top: 5px;
+        content: url('assets/back-arrow.png') !important;
+        width: 20px;
+        margin-left: 5px;
+    }
+    ion-buttons{
+        padding-left: 2%;
+    }
+}
+
+ion-content{
+   
+    z-index : 1;
+    --background: #000;
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+
+    h2{
+        color: #59acfc;
+        width: 100%;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    p{
+        text-align: center;
+        color: #9e9e9e;
+        font-size: 14px;
+    }
+
+    .insButton{
+        width: 100%;
+        background: #59acfc;
+        color: white;
+        border-radius: 50px;
+    }
+
+    .newsSection{
+        padding: 0 4%;
+        .news{
+            position: relative;
+            margin: 10px auto;
+            padding: 5px 0 0;
+            background: #2d2d2d;
+            border-radius: 24px;
+
+            .productImage{
+                padding-left: 10px;
+            }
+            
+            ion-row{
+
+                h6{
+                    margin-top: 10px;
+                    color: white;
+                }
+                p{
+                    text-align : left;
+                    margin: 2px 0;
+                    padding-right: 15px;
+
+                    b{
+                        color: #59abfc;
+                    }   
+                }
+
+                p.buyButton{
+                    width: 25%;
+                    margin-top: 6px;
+                    background: #59abfc;
+                    text-align: center;
+                    padding: 3px 10px;
+                    border-radius: 22px;
+                    color: white;
+                    font-size: 12px;
+                }
+            }
+
+            img{
+                border-radius: 22px;
+                margin: 0 !important;
+                height: 90px;
+            }
+
+            .nextButton{
+                background : url('assets/xfs_image/17/shape.svg');
+                background-size: 100% 100%;
+                position: absolute;
+                top: -3px;
+                width: 35px;
+                height: 35px;
+                right: 0px;
+                padding: 8px;
+                text-align: center;
+
+                img{
+                    width: 70%;
+                    height: 18px;
+                }
+
+            }
+            
+        }
+    } 
+}

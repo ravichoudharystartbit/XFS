@@ -30,6 +30,11 @@ export class WatchVideosPage implements OnInit{
   Categories = []; 
   filterCatData = []; 
 
+  SelectedCategory: any;
+  SearchCategory: any;
+  SortValue: any;
+
+
   slideOpts = {
     initialSlide: .5,
     speed: 400
@@ -106,17 +111,9 @@ slides = [
    this.getVideo();
   }
 
-  search(){
-    console.log(this.searchInput);
-
+  toggleShowSort(){  
+    this.showSort = !this.showSort;
   }
-
-
-
-    toggleShowSort(){
-      console.log(this.showSort , 'toggleShowSort')
-      this.showSort = !this.showSort;
-    }
 
 
 hideShowSort(){
@@ -174,8 +171,9 @@ async showLoader(msg='Please wait...') {
              })
 
             this.filterCatData = this.AllVideos.filter(x=> (x.terms.filter(y => y.slug == this.Categories[0]['slug'])).length > 0 );
-
-             console.log(this.filterCatData);
+            if(this.Categories.length > 0){
+              this.SelectedCategory = this.Categories[0]['slug']; 
+            }
 
 
           },
@@ -206,7 +204,7 @@ async showLoader(msg='Please wait...') {
     element.classList.add("active");
 
      this.filterCatData = this.AllVideos.filter(x=> (x.terms.filter(y => y.slug == contentId)).length > 0 );
-
+    this.SelectedCategory = contentId;
      console.log(this.filterCatData)
 }
 
@@ -222,4 +220,56 @@ async showLoader(msg='Please wait...') {
     console.log('backkk')
   }
 
+  search(){
+    if(this.searchInput){
+      console.log(this.searchInput);
+      this.searchInput = this.searchInput.toLowerCase();
+
+      let arr = this.filterCatData.filter(
+            (x)=>{
+              if((x.Title.toLowerCase().indexOf(this.searchInput)) >= 0){
+              return x;
+              }
+            }
+        );
+
+      console.log(arr)
+      this.filterCatData = arr;
+    } 
+    else{
+      this.filterCatData = this.AllVideos.filter(x=> (x.terms.filter(y => y.slug == this.SelectedCategory )).length > 0 );
+    }  
+    this.searchInput = '';
+  }
+
+  sort(value){
+    console.log(value)
+
+    if(value == 'new'){
+      this.filterCatData.sort(function(a, b) {
+        var keyA = new Date(a.Date),
+          keyB = new Date(b.Date);
+        // Compare the 2 dates
+        if (keyA > keyB) return -1;
+        if (keyA < keyB) return 1;
+        return 0;
+      });
+
+      console.log(this.filterCatData)
+    }
+    else if(value == 'alpha'){
+      var key = 'Title';
+      this.filterCatData.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+      });
+    }
+    else{
+
+      
+    }
+    console.log(value)
+
+    
+  }
 }
