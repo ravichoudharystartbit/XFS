@@ -165,8 +165,8 @@ session: OT.Session;
     })
     .then(() => this.opentokService.connect())
     .catch((err) => {
-      console.error(err);
-      alert('Unable to connect. Make sure you have updated the config.ts file with your OpenTok details.');
+     // console.error(err);
+     // alert('Unable to connect. Make sure you have updated the config.ts file with your OpenTok details.');
     });
   }
 

@@ -1,0 +1,98 @@
+ion-header {
+    ion-toolbar{
+        // background-image: url(/assets/profile-bg.jpg);
+        // background-repeat: no-repeat;
+        // background-position: 0px -124px;
+        // background-size: cover;
+        // --background: transparent;
+        min-height: 100px;
+        // padding-top: 8px;
+    }
+    ion-icon.more{
+        transform: rotate(90deg);
+    }
+    ion-toolbar{
+        min-height: 54px;
+    
+        ion-title{
+            text-align: left;
+            padding: 0px 72px;
+            min-height: 54px;
+            img{
+                width: 168px;
+            }
+        }
+        ion-back-button{
+            margin-top: 7px;
+            color: #0f477c;
+        }
+    }
+}
+
+.message_list_sec {
+    width: 100%;
+    max-width: 93%;
+    margin: auto;
+    padding-bottom: 0;
+    margin-bottom: 12px;
+    box-shadow: 0px 0px 6px #c3c3c3;
+    margin-top: 20px;
+    border-radius: 10px;
+    padding-top: 0px;
+    padding-left: 0;
+    ion-col[size="7"] p {
+        margin-bottom: 0px;
+    }
+     
+    ion-col[size="8"] {
+        // padding-left: 0px;
+        h3 {
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 0;
+            font-family: SF-UI-Display-Semibold !important;
+        }
+        p {
+            font-size: 13px;
+            color: #797979;
+            margin-top: 4px;
+            line-height: 18px;
+            font-family: SF-UI-Display !important;
+        }        
+    }
+    ion-col[size="4"] {
+        margin: auto;
+        padding-bottom: 0px;
+        color: var(--ion-color-medium);
+        text-align: left;
+        padding-left: 0;
+        img {
+            width: 100%;
+            max-width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 14px;
+            margin-left: 5px;
+        }
+    }
+  }
+ 
+    .date_sec {
+        position: absolute;
+        right: 22px;
+        font-size: 12px;
+        top: 10px;
+        font-family: SF-UI-Display !important;
+        color: #808080;
+    }
+
+    .offline {
+        position: absolute;
+        bottom: 12px;
+        // right: 2px;
+        right: 12px;
+        img {
+            width: 10px !important;
+            height: 10px !important;
+        }
+    }

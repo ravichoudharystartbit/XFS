@@ -88,4 +88,46 @@ export class ScheduleSessionPage implements OnInit{
     this.router.navigate(['/schedule']);
   }
 
+
+  sendToMessage() {
+    this.storage.get('user').then((val) => {
+      console.log(val);
+      if (val != null) {
+       console.log('Current User' , val);
+       return 0;
+
+       /* this.allServices.getCurrentUserInfo(val.token).subscribe((result) => {
+          this.res = result;
+         
+          this.openChatPage(this.res.result);
+         
+        }, (err) => {
+        
+          console.log("error...", err);
+          let msg = err.error.errormsg;
+         // this.allServices.presentAlert(msg);
+        });
+        */
+        this.openChatPage(val);
+      }
+    });
+  }
+
+  openChatPage(Currentuser) {
+    let userPro = {
+    //  first_name: this.doctor_name,
+    //  id: parseInt(this.doctor_id),
+    //  user_img:  this.image
+    };
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        //  special: JSON.stringify(workout),
+        secondUser: JSON.stringify(userPro),
+        currentUser: JSON.stringify(Currentuser),
+        fromMy: true
+      }
+    };
+    this.navCtrl.navigateForward(['/chat'], navigationExtras);
+  }
+
 }
