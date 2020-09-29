@@ -14,7 +14,7 @@
   
 
   <ion-grid>
-    <ion-row class='newsSection'>
+    <ion-row class='newsSection' *ngIf='role == "Athlete"'>
       <ion-col size="12" class='news' *ngFor='let pd of Coaches'>
         <ion-row>
            <ion-col  size="4" class='productImage'>
@@ -23,8 +23,31 @@
           </ion-col>
           <ion-col  size="8">
             <h6>{{pd.name}}</h6>
-            <p><b>{{pd.email}}</b></p>
-             <p class="buyButton" (click)='book()'>Book Session</p>
+            <p class="email"><b>{{pd.email}}</b></p>
+             <p class="buyButton" (click)='view(pd)'>View</p>
+             <!-- <p class="messageButton" (click)='sendToMessage(pd)'>Message</p> -->
+          </ion-col>
+        </ion-row>   
+      </ion-col>
+
+      <ion-col size="12" class='news' *ngIf='Coaches.length == 0'>
+        <ion-row>
+          <h5 class="noRecordFound">No Item found.</h5>
+         </ion-row>
+      </ion-col>      
+    </ion-row>
+    <ion-row class='newsSection' *ngIf='role == "Trainer"'>
+      <ion-col size="12" class='news' *ngFor='let pd of Coaches'>
+        <ion-row>
+           <ion-col  size="4" class='productImage'>
+          <!-- <img src="assets/xfs_image/19/Asset 5.png" width="100%">  (click)='detail()'-->
+            <img src="{{pd.profilePic}}" width="100%">
+          </ion-col>
+          <ion-col  size="8">
+            <h6>{{pd.name}}</h6>
+            <p class="email"><b>{{pd.email}}</b></p>
+             <p class="buyButton" (click)='view(pd)'>View</p>
+             <!-- <p class="messageButton" (click)='sendToMessage(pd)'>Message</p> -->
           </ion-col>
         </ion-row>   
       </ion-col>

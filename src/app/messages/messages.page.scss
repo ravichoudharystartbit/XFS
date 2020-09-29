@@ -1,31 +1,23 @@
-ion-header {
-    ion-toolbar{
-        // background-image: url(/assets/profile-bg.jpg);
-        // background-repeat: no-repeat;
-        // background-position: 0px -124px;
-        // background-size: cover;
-        // --background: transparent;
-        min-height: 100px;
-        // padding-top: 8px;
-    }
-    ion-icon.more{
-        transform: rotate(90deg);
-    }
-    ion-toolbar{
-        min-height: 54px;
+ion-toolbar {
+    --background: #000;
+    --border-width:0px !important;
     
-        ion-title{
-            text-align: left;
-            padding: 0px 72px;
-            min-height: 54px;
-            img{
-                width: 168px;
-            }
-        }
-        ion-back-button{
-            margin-top: 7px;
-            color: #0f477c;
-        }
+    color: white;
+    ion-title {
+        padding: 0px 75px;
+        text-align: center;
+        color: var(--btn-white-color);
+        font-size: 15px;    
+    }
+}
+ion-header.header-md {
+    img.top-profile {
+        left: 46px;
+    }
+}
+ion-toolbar.md{
+    ion-title{
+        padding: 0px 46px;
     }
 }
 

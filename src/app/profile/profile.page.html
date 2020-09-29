@@ -168,7 +168,7 @@
       <ion-grid *ngIf='user.type == "Trainer"'>
          <ion-row>
             <ion-col size="12"  class='buttonMsg'>
-               <ion-button type="button" style="width:100%">Message</ion-button>
+               <ion-button type="button" style="width:100%" (click)='goToMessageList()'>Message</ion-button>
             </ion-col>
          </ion-row>
       </ion-grid> 

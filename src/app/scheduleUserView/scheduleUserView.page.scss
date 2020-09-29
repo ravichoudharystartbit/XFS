@@ -83,78 +83,54 @@ ion-content{
 
             .productImage{
                 padding-left: 10px;
+                padding-top: 15px;
             }
             
             ion-row{
 
                 h6{
-                    margin-top: 5px;
-                    margin-bottom: 5px;
+                    margin-top: 10px;
                     color: white;
                     text-transform: capitalize;
+                    text-align : center;
                 }
                 p{
-                    text-align : left;
-                    margin: 2px 0;
+                    text-align : center;
+                    margin: 2px auto;
                     padding-right: 15px;
 
                     b{
                         color: #59abfc;
                     }   
                 }
-                p.email{
-                    min-height: 32px !important;
-                }
 
                 p.buyButton{
-                    width: 55%;
-                    margin-top: 6px;
+                    width: 96%;
                     background: #59abfc;
                     text-align: center;
-                    padding: 3px 10px;
+                    padding: 15px 10px;
                     border-radius: 22px;
                     color: white;
-                    font-size: 12px;
-                    display: inline-block;
+                    font-size: 18px;
+                    margin: 20px auto 10px;
                 }
                 p.messageButton{
-                    width: 35%;
+                    width: 96%;
                     margin-top: 6px;
                     background: #59abfc;
                     text-align: center;
-                    padding: 3px 10px;
+                    padding: 15px 10px;
                     border-radius: 22px;
                     color: white;
-                    font-size: 12px;
-                    display: inline-block;
-                    margin-left: 10px;
+                    font-size: 18px;
+                    margin: 20px auto 10px;
                 }
             }
 
             img{
-                border-radius: 22px;
+                border-radius: 50%;
                 margin: 0 !important;
-                height: 90px;
-            }
-
-            .nextButton{
-                background : url('assets/xfs_image/17/shape.svg');
-                background-size: 100% 100%;
-                position: absolute;
-                top: -3px;
-                width: 35px;
-                height: 35px;
-                right: 0px;
-                padding: 8px;
-                text-align: center;
-
-                img{
-                    width: 70%;
-                    height: 18px;
-                }
-
-            }
-            
+            }            
         }
     } 
 }

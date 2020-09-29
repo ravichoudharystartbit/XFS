@@ -1,6 +1,6 @@
 ion-toolbar {
-    --background: var(--btn-dark-color);
-        --border-width:0px !important;
+    --background: #000;
+    --border-width:0px !important;
     color: var(--btn-white-color);
     ion-title {
         padding: 0px 75px;
@@ -123,7 +123,7 @@ ion-content {
 .chat_bottom {
     position: absolute;
     bottom: 0px;
-    background-color: var(--btn-white-color);
+    background-color: #fff;
     width: 100%;
     min-height: 75px;
     box-shadow: 1px 1px 10px #ababab;
@@ -157,5 +157,10 @@ ion-content {
         color: #fff;
         border-radius: 100%;
         margin-top: 7px;
+    }
+
+    .my-toast-red{
+        --background: red;
+        --color:white;
     }
 }

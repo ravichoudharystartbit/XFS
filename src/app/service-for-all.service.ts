@@ -38,7 +38,6 @@ export class ServiceForAllService {
     })
   }
 
-
   getVideos() {
     return this.http.get(
       wpUrl + 'wp-json/mobileapi/v1/getVimeoVideo')
@@ -180,9 +179,7 @@ export class ServiceForAllService {
         return user;
       })
     )
-  }
-  
- 
+  }  
 
   updateProfile(token,user_data,role:any='user') {
     return this.http.post(wpUrl + 'wp-json/mobileapi/v1/updateUserProfile', {
@@ -191,7 +188,6 @@ export class ServiceForAllService {
       jw_auth_sec: "wivxCNm$<(+WFwivxCNm$<(+WF#7}1]TWMUl7OaU*TxS(r*$#7}1]wivxCNm$<(+WF#7}1]TWMUl7OaU*TxS(r*$TWMUl7OaU*TxS(r*$"
     })
   }
-
 
   changePassword(changePassword,token){
     return this.http.post(wpUrl + 'wp-json/mobileapi/changePassword', {
@@ -202,9 +198,6 @@ export class ServiceForAllService {
     })
   }
 
-
-
-
   changeUserPassword(token , changePassword){
     return this.http.post(wpUrl + 'wp-json/mobileapi/v1/changeUserPassword', {
       token:token,
@@ -212,7 +205,6 @@ export class ServiceForAllService {
       jw_auth_sec: "wivxCNm$<(+WFwivxCNm$<(+WF#7}1]TWMUl7OaU*TxS(r*$#7}1]wivxCNm$<(+WF#7}1]TWMUl7OaU*TxS(r*$TWMUl7OaU*TxS(r*$"
     })
   }
-  
 
   getPageContent(page: number = 1) {
     //if we want to query posts by category
@@ -227,9 +219,6 @@ export class ServiceForAllService {
         )
   }
 
-
-
- 
   //get_fav
 
   get_fav(token,paged){
@@ -256,7 +245,6 @@ export class ServiceForAllService {
           })
         )
   } 
-
   
   updateToken(userToken, deviceID, deviceData, status) {
     let timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -278,9 +266,8 @@ export class ServiceForAllService {
       msg:msg,
       name:name,
       senderID:senderID
-    })
-  
-   }
+    })  
+  }
 
    sendPushNotificationWeb(callid ,id,msg,name,senderID ,active ){
      return this.http.post(wpUrl+ 'wp-json/mobileapi/v1/sendPushNotification', {
@@ -294,8 +281,7 @@ export class ServiceForAllService {
     }
   checkNetworkConnection() {
     return this.network.type;
-   }
-  
+  }  
 
   getpagebyslug(token,slug){
     return this.http.post(wpUrl + 'wp-json/mobileapi/v1/getpagebyslug',{
@@ -307,8 +293,7 @@ export class ServiceForAllService {
             return content;
           })
         )
-  }
- 
+  } 
 
   createPDF(token){
     return this.http.post(wpUrl + 'wp-json/mobileapi/v1/createPDF',{
@@ -319,9 +304,7 @@ export class ServiceForAllService {
             return content;
           })
         )
-  }
-
-  
+  }  
 
   sendMail(token){
     return this.http.post(wpUrl + 'wp-json/mobileapi/v1/sendMail',{
@@ -398,8 +381,6 @@ export class ServiceForAllService {
     })
   }
 
-
-
   getUserData(userID) {
     return this.http.post(wpUrl + 'wp-json/mobileapi/v1/getUserData', {
       userID: userID
@@ -410,7 +391,6 @@ export class ServiceForAllService {
     )
   }
 
-
   getAllCoaches(){
     return this.http.get(wpUrl + 'wp-json/mobileapi/v1/getCoaches').pipe(
         retry(2),
@@ -419,6 +399,26 @@ export class ServiceForAllService {
         })
       )
   }
+  getAllAthletes(){
+    return this.http.get(wpUrl + 'wp-json/mobileapi/v1/getAthletes').pipe(
+        retry(2),
+        map(content => {
+          return content;
+        })
+      )
+  }
 
-  
+  getCurrentUserInfo(token) {
+    return this.http.post(wpUrl + 'wp-json/mobileapi/v1/getCurrentUserInfo', {
+      token: token
+    })
+  }
+
+  getSecoondUserInfo1(token, id) {
+    return this.http.post(wpUrl + 'wp-json/mobileapi/v1/getSecoondUserInfo1', {
+      token: token,
+      id: id,
+
+    })
+  }  
 }

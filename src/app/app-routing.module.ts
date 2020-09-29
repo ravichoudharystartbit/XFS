@@ -83,10 +83,21 @@ const routes: Routes = [
     loadChildren: './scheduleSession/scheduleSession.module#ScheduleSessionPageModule'
   },
   {
+    path: 'scheduleUserView',
+    loadChildren: './scheduleUserView/scheduleUserView.module#ScheduleUserViewPageModule'
+  },
+  {
     path: 'schedule',
     loadChildren: './schedule/schedule.module#SchedulePageModule'
   },
-
+  { 
+    path: 'chat', 
+    loadChildren: './chat/chat.module#ChatPageModule' 
+  },
+  { 
+    path: 'messages', 
+    loadChildren: './messages/messages.module#MessagesPageModule' 
+  },
 ];
 
 @NgModule({

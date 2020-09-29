@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
-import { AllServicesService } from '../all-services.service';
+import { ServiceForAllService } from '../service-for-all.service';
 import { Storage } from '@ionic/storage';
 import * as moment from 'moment';
 import { NavigationExtras } from '@angular/router';
@@ -24,7 +24,7 @@ export class MessagesPage implements OnInit {
   chatlistData: any = [];
   constructor(
     public navCtrl: NavController,
-    public serviceForAllService: AllServicesService,
+    public serviceForAllService: ServiceForAllService,
     public storage: Storage,
     public loadingCtrl: LoadingController,
     public router: Router,
@@ -40,9 +40,9 @@ export class MessagesPage implements OnInit {
     this.storage.get('user').then((val) => {
       console.log(val);
       if (val != null) {
-        this.serviceForAllService.getCurrentUserInfo(val.token).subscribe((result) => {
-          this.res = result;
-          this.userID = this.res.result.id;
+        /* this.serviceForAllService.getCurrentUserInfo(val.token).subscribe((result) => {
+          this.res = result; */
+          this.userID = val.user_id;
           let msgdata, msgdata2 = '';
           console.log('current_user=' + this.userID);
           this.ref = firebase.database().ref('chatbox/' + this.userID);
@@ -81,10 +81,10 @@ export class MessagesPage implements OnInit {
           })
 
 
-        },
+      /*  },
           err => {
             console.log(err);
-          })
+          }) */
       }else{
         this.router.navigate(['/login']);
       }
@@ -116,7 +116,7 @@ export class MessagesPage implements OnInit {
         this.serviceForAllService.getSecoondUserInfo1(val.token, temp).subscribe((result) => {
           this.res = result;
           console.log(this.res.result);
-          /* this.chatlistData = this.res.result;
+          this.chatlistData = this.res.result;
           this.chatlistData.sort((b, a) => {
             console.log('time1' + a.msg_time);
             console.log('time2' + b.msg_time);
@@ -127,7 +127,7 @@ export class MessagesPage implements OnInit {
             if (keyA > keyB) return 1;
             return 0;
           });
-          */
+          
 
           console.log(this.chatlistData);
           this.loading_spinner = false;

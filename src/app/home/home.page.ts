@@ -88,11 +88,13 @@ public data: object[] = [
     public storage: Storage,
     public webService: ServiceForAllService,
     public modalController: ModalController,
+    public menu: MenuController,
   ) {
 
      this.storage.get("user").then((val) => {
           if (val && val != null){
-             
+             console.clear()
+             this.menu.enable(true);
           }
           else{
           this.router.navigate(['/login']);
@@ -101,64 +103,21 @@ public data: object[] = [
       });
 
  
-     /*  const player = new Player('handstick', {
-          id: 76979871,
-          width: 640
-      });
-       
-     player.on('play', function() {
-       //   console.log('played the video!');
-      });*/
-
-    // console.log("online");
-    //  console.log(firebase.database().ref('online_users'));
-     // console.log("offline");
 
       this.checkOnline();
 
     }
 
   ngOnInit(){
-    this.webService.getVideos().subscribe(
-        (result) => {
-         // console.log(result);
-          
-        },
-        err => {
-         
-        }
-      );
+
   }
 
   ionViewWillEnter() {
 
   }
   search(){
-   // console.log('search');
   }
 
-  async makeVCall(user) {
-    const modal = await this.modalController.create({
-      component: CallingPage,
-      cssClass: 'full-modal',
-      componentProps: {
-        "user_id": user.user_id,
-        "appointment": {
-          'id' : 'a',
-          'name' : user.name
-        }
-      }
-    });
-  
-    modal.onDidDismiss().then((dataReturned) => { 
-      if (dataReturned !== null) {
-        // this.dataReturned = dataReturned.data;
-        // //alert('Modal Sent Data :'+ dataReturned);
-      }
-    });
-  
-    return await modal.present();
-  }
 
   checkOnline() {
     this.onlineUsersRef = firebase.database().ref('online_users');
@@ -188,25 +147,18 @@ public data: object[] = [
   }
 
   getUserData(userId){
-  console.log(userId)
      this.webService.getUserData(userId).subscribe((result) => {
         this.resData = result;
         let index = this.OnlineUsers.findIndex(x=> x.user_id == this.resData.user.user_id);
         if(index == -1){
           this.OnlineUsers.push(this.resData.user);
         }
-        
-        
-        console.log()
       }, (err) => {                
              
     }); 
   }
 
   callUser(user){
-    console.log(user);
-
-    this.makeVCall(user);
   }
 
   purchase(){

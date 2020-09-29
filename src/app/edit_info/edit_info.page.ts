@@ -218,7 +218,7 @@ export class EditInfoPage implements OnInit {
       this.storage.get("user").then((val) => {
         if (val && val != null){
         this.showLoader('Uploading...');
-          this.http.post("http://xfs.betaplanets.com/wp-json/mobileapi/v1/mediaUpload?token=" + val.token,formData)
+          this.http.post("https://xfs.betaplanets.com/wp-json/mobileapi/v1/mediaUpload?token=" + val.token,formData)
           .subscribe((data:any)=>{
             this.hideLoader();
             this.ResData = data;

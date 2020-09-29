@@ -66,7 +66,7 @@ export class SignupOptionStep2Page implements OnInit {
       });
 
     
-    this.menu.swipeEnable(false);
+    //this.menu.swipeEnable(false);
     this.loginForm = new FormGroup({
       email: new FormControl(
         "",

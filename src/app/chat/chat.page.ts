@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import * as firebase from 'firebase';
 import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController, LoadingController, NavController, MenuController, Platform, Events } from '@ionic/angular';
+import { AlertController, LoadingController, NavController, MenuController,ToastController, Platform, Events } from '@ionic/angular';
 declare var google: any;
 import { NavigationExtras } from '@angular/router';
 import { Storage } from '@ionic/storage';
@@ -24,7 +24,7 @@ export class ChatPage implements OnInit {
   nameFrom: any;
   idFrom: any;
   messagesList: any;
-  newmessage: any;
+  newmessage: any = '';
   current_page = 9;
   per_page = 9;
   morePagesAvailable: boolean = true;
@@ -60,7 +60,9 @@ export class ChatPage implements OnInit {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     public platform: Platform,
-    public route: ActivatedRoute, public router: Router,
+    public route: ActivatedRoute, 
+    public router: Router,    
+    public toastController: ToastController,
 
   ) {
     //  this.classCond=true;
@@ -74,27 +76,19 @@ export class ChatPage implements OnInit {
         this.reciverData = JSON.parse(params.secondUser);
         this.currentUser = JSON.parse(params.currentUser);
         this.newmessage=params.message;
-        console.log('reciverData',this.reciverData);
-        console.log('currentUser',this.currentUser);
+        // console.log('reciverData',this.reciverData);
+        // console.log('currentUser',this.currentUser);
         this.CuserID = this.currentUser.id;
         this.CuserName = this.currentUser.display_name;
         this.fromNotfification = params.fromNotfification;
-        this.events.publish('secondUser', this.reciverData, this.currentUser);
-      }
-    });
-    //console.clear();
-    this.events.subscribe('toName', (val) => {
-      // user and time are the same arguments passed in `events.publish(user, time)`
-      this.toName = val;
-    });
-    this.events.subscribe('secondUser', (val, val2) => {
-      this.reciverData = val;
-      this.currentUser = val2;
+       
+      this.reciverData = this.reciverData;
+      this.currentUser = this.currentUser;
       this.CuserID = this.currentUser.id;
-      console.table(this.currentUser);
-      console.log(this.CuserID);
+      //console.table(this.currentUser);
+      // console.log(this.CuserID);
       this.CuserName = this.currentUser.display_name;
-      this.events.publish('toName', this.reciverData.first_name);
+      this.toName = this.reciverData.first_name;
       this.chatbox = {
         id: this.reciverData.id,
         topDetails: this.reciverData.first_name,
@@ -103,7 +97,7 @@ export class ChatPage implements OnInit {
         idFrom: this.CuserID,
 
       };
-      console.log('chatbox', this.chatbox);
+      // console.log('chatbox', this.chatbox);
       if (this.chatbox.id > this.chatbox.idFrom) {
         let chatBoxID = this.chatbox.id + '_chat_' + this.chatbox.idFrom;
         this.ref = firebase.database().ref('chatbox/' + this.CuserID + '/' + chatBoxID);
@@ -117,6 +111,7 @@ export class ChatPage implements OnInit {
         this.fetchChatDetails();
         //console.log(chatBoxID);
       }
+    }
     });
   }
   ngOnInit() {
@@ -124,13 +119,13 @@ export class ChatPage implements OnInit {
   }
 
   ionViewDidLoad() {
-    console.log('see updated');
+    // console.log('see updated');
 
 
   }
 
   fetchChatDetails() {
-    console.log(this.ref);
+    // console.log(this.ref);
     this.ref.orderByKey().limitToLast(this.current_page).on('value', data => {
       let tmp = [];
       var i = 1;
@@ -155,8 +150,8 @@ export class ChatPage implements OnInit {
       });
 
       this.messagesList = tmp;
-      console.table(tmp);
-      console.log('current user' + this.CuserID + 'name:' + this.CuserName);
+      console.table('tmp' , tmp);
+      // console.log('current user' + this.CuserID + 'name:' + this.CuserName);
       this.current_page = this.current_page + this.per_page;
       this.scrollToBottomFunction();
     });
@@ -170,7 +165,7 @@ export class ChatPage implements OnInit {
   sendMessage() {
     // console.log('console.data',this.chatbox);
     if (this.imageURI != '') {
-      console.log('sending');
+      // console.log('sending');
       //this.upload();
     }
 
@@ -205,7 +200,7 @@ export class ChatPage implements OnInit {
       time: time
     });
     this.sendNotification(this.chatbox.id, this.newmessage, this.chatbox.nameFrom, this.chatbox.idFrom);
-    // // console.log(this.ref);
+    // // // console.log(this.ref);
     this.scrollToBottomFunction();
     this.newmessage = '';
 
@@ -217,13 +212,13 @@ export class ChatPage implements OnInit {
   scrollToBottomFunction() {
     setTimeout(() => {
       if (this.content._scroll) this.content.scrollToBottom();
-      console.log('scroll');
+       console.log('scroll');
     }, 400)
   }
 
 
-
   loadMoreLeads(infiniteScroll) {
+    if (infiniteScroll.originalEvent !== undefined && infiniteScroll.touchObject.swipeLength > 4 &&  infiniteScroll.cancelable) { infiniteScroll.preventDefault(); }
 
     this.ref.orderByKey().limitToLast(this.current_page).on('value', data => {
       let tmp = [];
@@ -247,20 +242,32 @@ export class ChatPage implements OnInit {
       this.messagesList = tmp;
       // console.log(tmp);
       this.current_page = this.current_page + this.per_page;
+       infiniteScroll.preventDefault();
+       infiniteScroll.stopPropagation();
       infiniteScroll.target.complete();
     });
-
   }
   sendNotification(secondUserID, msg, name, senderID) {
-    console.log('sendPush');
+    // console.log('sendPush');
     this.storage.get('user').then((val) => {
-      console.log(val);
+      // console.log(val);
       if (val != null) {
         // this.serviceForAllService.sendPushNotification(secondUserID, msg, name, senderID).subscribe((result) => {
         //   console.log(result);
         // });
       }
     });
+  }
+
+   async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      animated: true,
+      position: 'top',
+      cssClass: "my-toast-red",
+      duration: 100000
+    });
+    await toast.present();
   }
 
 }

@@ -9,9 +9,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content #content>
-  <ion-refresher slot="fixed" (ionRefresh)="loadMoreLeads($event)">
-    <ion-refresher-content></ion-refresher-content>
+<ion-content #content style='overflow-scroll:true' cancelable="false">
+  <ion-refresher slot="fixed" disabled="false"  cancelable="false" (ionRefresh)="loadMoreLeads($event)" style='overflow-scroll:true'>
+    <ion-refresher-content
+    pullingIcon="arrow-dropdown"  
+    pullingText="Pull to refresh"  
+    refreshingSpinner="circles"  
+    refreshingText="loading..."
+    ></ion-refresher-content>
   </ion-refresher>
   <ion-grid class="chat_block">
 
@@ -22,13 +27,13 @@
               <p class="time">{{message.time}}</p>
             </ion-col>
             <ion-col size="2" class="ion-text-right">
-              <img [hidden]="currentUser.user_img" src="assets/profile.png" class="profile" />
+              <img [hidden]="currentUser.user_img" src="assets/profile.svg" class="profile" />
               <img *ngIf="currentUser.user_img" [src]="currentUser.user_img" class="profile" />
             </ion-col>
       </ion-row>
       <ion-row class="left" *ngIf="message.reciverID == chatbox.idFrom">
           <ion-col size="2">
-            <img [hidden]="reciverData.user_img" src="assets/profile.png" class="profile" />
+            <img [hidden]="reciverData.user_img" src="assets/profile.svg" class="profile" />
             <img *ngIf="reciverData.user_img" [src]="reciverData.user_img" class="profile" />
           </ion-col>
           <ion-col size="10">

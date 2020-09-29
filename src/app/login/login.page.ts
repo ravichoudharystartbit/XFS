@@ -66,7 +66,8 @@ export class LoginPage implements OnInit {
       });
 
     
-    this.menu.swipeEnable(false);
+    //this.menu.swipeEnable(false);
+    this.menu.enable(false);
     this.loginForm = new FormGroup({
       email: new FormControl(
         "",
@@ -105,7 +106,7 @@ export class LoginPage implements OnInit {
             url: '/profile',
             icon:'person'
           };
-          this.events.publish('menu', values);
+          //this.events.publish('menu', values);
           this.storage.set("user_profile", this.response);
           this.hideLoader();
           this.navCtrl.setDirection('root');

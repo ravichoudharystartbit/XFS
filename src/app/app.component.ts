@@ -215,7 +215,7 @@ session: OT.Session;
             this.appPages.push(values);
             this.appPages.push(values1);
             this.appPages.push(values2);
-            this.appPages.push(values3);
+            //this.appPages.push(values3);
             this.appPages.push(values4);
           }
           this.navCtrl.setDirection('root');
@@ -251,7 +251,7 @@ session: OT.Session;
           this.appPages.push(values);
           this.appPages.push(values1);
           this.appPages.push(values2);
-          this.appPages.push(values3);
+          //this.appPages.push(values3);
           this.appPages.push(values4);
           this.navCtrl.setDirection('root');
           this.router.navigate(['/login']);

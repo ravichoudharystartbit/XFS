@@ -139,5 +139,7 @@ export class ProfilePage implements OnInit {
     console.log('abouts');
   }
 
-
+  goToMessageList(){
+    this.navctrl.navigateForward(['/messages']);  
+  }
 }

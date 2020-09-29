@@ -51,8 +51,7 @@ export class SchedulePage implements OnInit{
   
   
   back(){
-    this.location.back();
-    console.log('backkk')
+    this.router.navigate(['/tabs/home']);
   }
   
   async showLoader(){
