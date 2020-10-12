@@ -8,16 +8,21 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content class='instructions'>
+<ion-content class='instructions' *ngIf='renderForm'>
    <form [formGroup]="PersonalForm" (ngSubmit)="submit()">
     <ion-grid class="login form_fields ion-padding">
         
         <ion-row class="field">            
             <ion-col size="12" class="ion-no-padding">
-                <ion-input type="text" placeholder="Admin" formControlName="old_password" clearInput autocapitalize="off" inputmode="text"></ion-input>
+                <!-- <ion-input type="text" placeholder="Admin" formControlName="user" clearInput autocapitalize="off" inputmode="text"></ion-input> -->
+                <ion-select  placeholder="-- Please Select --" formControlName="user" clearInput>
+                  <ion-select-option value="admin">Admin</ion-select-option>
+                  <!-- <ion-select-option class='coach' disabled value="admin" *ngIf='Coaches.length'>&nbsp;&nbsp;&nbsp;Coaches</ion-select-option>
+                  <ion-select-option *ngFor='let coach of Coaches' value="{{coach.ID}}">{{coach.name}}</ion-select-option> -->
+                </ion-select>
                 <div class="error-container">
-                  <ng-container *ngFor="let validation of validation_messages.old_password">
-                    <div class="error-message" *ngIf="PersonalForm.get('old_password').hasError(validation.type) && (PersonalForm.get('old_password').dirty || PersonalForm.get('old_password').touched)">
+                  <ng-container *ngFor="let validation of validation_messages.user">
+                    <div class="error-message" *ngIf="PersonalForm.get('user').hasError(validation.type) && (PersonalForm.get('user').dirty || PersonalForm.get('user').touched)">
                       <ion-icon name="information-circle-outline"></ion-icon>
                       <span>{{ validation.message }}</span>
                     </div>
@@ -27,17 +32,17 @@
         </ion-row>
         <ion-row  class="fieldContent">
           <p>
-            Have an issue or want to tell something us how great we're doing? Contact us via email below!
+            Have an issue or let us know how great we are doing? Contact us via email below!
           </p>
         </ion-row>
 
 
         <ion-row class="field">            
             <ion-col size="12" class="ion-no-padding">
-                <ion-input type="text" placeholder="Name" formControlName="password" clearInput autocapitalize="off" inputmode="text"></ion-input>
+                <ion-input disabled type="text" placeholder="Name" formControlName="name" clearInput autocapitalize="off" inputmode="text"></ion-input>
                 <div class="error-container">
-                  <ng-container *ngFor="let validation of validation_messages.password">
-                    <div class="error-message" *ngIf="PersonalForm.get('password').hasError(validation.type) && (PersonalForm.get('password').dirty || PersonalForm.get('password').touched)">
+                  <ng-container *ngFor="let validation of validation_messages.name">
+                    <div class="error-message" *ngIf="PersonalForm.get('name').hasError(validation.type) && (PersonalForm.get('name').dirty || PersonalForm.get('name').touched)">
                       <ion-icon name="information-circle-outline"></ion-icon>
                       <span>{{ validation.message }}</span>
                     </div>
@@ -48,10 +53,10 @@
         <ion-row class="field">
             
             <ion-col size="12" class="ion-no-padding">
-                <ion-input type="text" placeholder="Email" formControlName="confirm_password" clearInput autocapitalize="off" inputmode="text"></ion-input>
+                <ion-input disabled type="text" placeholder="Email" formControlName="email" clearInput autocapitalize="off" inputmode="text"></ion-input>
                 <div class="error-container">
-                  <ng-container *ngFor="let validation of validation_messages.confirm_password">
-                    <div class="error-message" *ngIf="PersonalForm.get('confirm_password').hasError(validation.type) && (PersonalForm.get('confirm_password').dirty || PersonalForm.get('confirm_password').touched)">
+                  <ng-container *ngFor="let validation of validation_messages.email">
+                    <div class="error-message" *ngIf="PersonalForm.get('email').hasError(validation.type) && (PersonalForm.get('email').dirty || PersonalForm.get('email').touched)">
                       <ion-icon name="information-circle-outline"></ion-icon>
                       <span>{{ validation.message }}</span>
                     </div>
@@ -62,7 +67,15 @@
         <ion-row class="field">
             
             <ion-col size="12" class="ion-no-padding">
-                <textarea rows="5" placeholder="Message"></textarea>
+                <textarea rows="5" placeholder="Message" formControlName="message" clearInput autocapitalize="off" inputmode="text"></textarea>
+                <div class="error-container">
+                  <ng-container *ngFor="let validation of validation_messages.message">
+                    <div class="message-error" *ngIf="PersonalForm.get('message').hasError(validation.type) && (PersonalForm.get('message').dirty || PersonalForm.get('message').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon>
+                      <span>{{ validation.message }}</span>
+                    </div>
+                  </ng-container>
+                </div>
             </ion-col>
         </ion-row>
         <ion-row>

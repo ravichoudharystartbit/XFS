@@ -15,8 +15,7 @@ import {
   ReactiveFormsModule
 } from "@angular/forms";
 import { Router,ActivatedRoute ,NavigationExtras } from "@angular/router";
-
-
+import { ServiceForAllService } from '../../service-for-all.service';
 import { HttpClient, HttpHeaders, HttpErrorResponse, } from '@angular/common/http';
   
 @Component({
@@ -29,7 +28,8 @@ export class ClientPage implements OnInit {
   isLoading = false;
   showInput = false;
   isShow = true; 
-
+  Clients = [];
+  resData: any;
   response: any;
   Coaches = [
     {name: 'Client 1' , star:5.0, address: 'ABC US' , image : 'assets/xfs_image/34/p_1.png'},
@@ -48,6 +48,7 @@ export class ClientPage implements OnInit {
     public menu: MenuController,
     private route : ActivatedRoute,
     private http : HttpClient,
+    private serviceForAllService : ServiceForAllService,
   ) {  
     
          
@@ -57,7 +58,12 @@ export class ClientPage implements OnInit {
     
    }
 
-  async showLoader(msg='Password Updating , Please wait...') {
+  ionViewWillEnter(){
+    this.Clients = [];
+    this.getAllClients();
+  }
+
+  async showLoader(msg='Please wait...') {
     this.isLoading = true;
     return await this.loadingCtrl
       .create({
@@ -87,6 +93,21 @@ export class ClientPage implements OnInit {
     return await this.loadingCtrl
       .dismiss()
       .then(() => {});
+  }
+
+  getAllClients(){
+    this.showLoader();
+    this.Clients = [];
+    this.serviceForAllService.getAllAthletes().subscribe((result) => {      
+        this.resData = result;
+        this.Clients = this.resData.Coaches;
+        this.hideLoader();
+      }, (err) => {
+        this.hideLoader();
+        let ErrorData =  err.error;
+         // this.presentAlert((ErrorData.errorMsg ? ErrorData.errorMsg : 'Server Error') );       
+    }); 
+    
   }
 
 

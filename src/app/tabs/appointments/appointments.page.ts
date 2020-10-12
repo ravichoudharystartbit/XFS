@@ -6,20 +6,19 @@ import { Storage } from '@ionic/storage';
 
 
 import { ModalController } from '@ionic/angular';
-import { ServiceForAllService } from '../service-for-all.service';
+import { ServiceForAllService } from '../../service-for-all.service';
 
 @Component({
-  selector: 'app-schedule',
-  templateUrl: './schedule.page.html',
-  styleUrls: ['./schedule.page.scss'], 
+  selector: 'app-appointments',
+  templateUrl: './appointments.page.html',
+  styleUrls: ['./appointments.page.scss'], 
 })
-export class SchedulePage implements OnInit {
+export class AppointmentsPage implements OnInit {
   mediaFiles = [];
   @ViewChild('myvideo') myVideo: any;
   selectedSlot:any = -1;
   isday:any;
   user_token: any;
-  user_type: any;
   user_id:any = '';
 
   date: any;
@@ -42,7 +41,7 @@ export class SchedulePage implements OnInit {
   isSelected: any;
 
   availability:any = [];
-
+  SessionLists = [];
   doctor_id:any = '';
   hospital_id:any = '';
 
@@ -62,7 +61,7 @@ export class SchedulePage implements OnInit {
   loading:any;
 
   desc:any = '';
-
+  Role = '';
   isHoliday:any = '';
 
   page_title:any = '';
@@ -95,16 +94,9 @@ export class SchedulePage implements OnInit {
       }
     });
 
-    this.selectedDate = new Date();
-    // console.log('sd NEW: ', this.selectedDate)
+    this.selectedDate = new Date(); 
     
     
-    //this.date = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0);
-    this.getDaysOfMonth();
-    // this.getWeekOfDays();
-
-    this.loadEventThisMonth();
-    // this.loadEventToday();
   }
 
   ngOnInit() { 
@@ -116,7 +108,14 @@ export class SchedulePage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.SessionLists = [];
     this.menu.enable(false);
+    //this.date = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0);
+    this.getDaysOfMonth();
+    // this.getWeekOfDays();
+
+    this.loadEventThisMonth();
+    // this.loadEventToday();
 
    /* this.allServices.checkingProcess();
     this.allServices.CheckMembership();
@@ -133,7 +132,8 @@ export class SchedulePage implements OnInit {
       if(val!=null){
         this.user_token = val.token;
         this.user_id = val.user_id;
-        this.user_type = val.type;
+
+        this.Role = val.type;
       }
     });
 
@@ -190,11 +190,9 @@ export class SchedulePage implements OnInit {
         this.currentDate = new Date().getDate();
         let currentCustom = new Date().getDate();
         this.selectDate(currentCustom);
-        // console.log('if condition');
     } else {
         this.currentDate = 999;
         this.selectDate(999);
-        // console.log('not condition');
     }
   
     var firstDayThisMonth = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay();
@@ -255,46 +253,7 @@ export class SchedulePage implements OnInit {
         this.doctor_id = data.doctor_id;  
         this.hospital_id = data.hospital_id;
 
-        // console.log('doctorData11: ', this.doctor_id);
-        // console.log('hospitalID11: ', this.hospital_id);
-
-        let todayD = (new Date());
-
-       /* this.allServices.getAllDates(this.hospital_id,this.doctor_id,selectedDate, '', todayD)
-        .subscribe(data => {
-          let sl:any = [];
-          sl = data; */
-          this.slots = [
-            {
-              start_time : '07:00 AM',
-              slot_timing : '07:00 AM',
-              end_slot_timing : '08:00 AM',
-            },
-            {
-              start_time : '08:00 AM',
-              slot_timing : '08:00 AM',
-              end_slot_timing : '09:00 AM',
-            },
-            {
-              start_time : '09:00 AM',
-              slot_timing : '09:00 AM',
-              end_slot_timing : '10:00 AM',
-            },
-            {
-              start_time : '10:00 AM',
-              slot_timing : '10:00 AM',
-              end_slot_timing : '1100 AM',
-            },
-            {
-              start_time : '11:00 AM',
-              slot_timing : '11:00 AM',
-              end_slot_timing : '12:00 PM',
-            },
-          ];
-       /*   this.isHoliday = sl.holiday;
-          console.log('sl:' ,this.slots);
-        });
-        */
+        
       }
     });
 }
@@ -318,7 +277,8 @@ selectDate(day) {
   this.selectedEvent = new Array();
   this.selectedDate = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+day;
 
-  this.GetRecentTopic(this.selectedDate);
+  // console.log('sd: ', this.selectedDate);
+  // this.GetRecentTopic(this.selectedDate);
 }
 
 loadEventToday() {
@@ -351,25 +311,42 @@ loadEventThisMonth() {
 
   
 
-  this.route.params.subscribe(data => {
-    if (data) {
-      this.doctor_id = data.doctor_id;  
-      this.hospital_id = data.hospital_id;
+  // this.route.params.subscribe(data => {
+  //   if (data) {
+  //     this.doctor_id = data.doctor_id;  
+  //     this.hospital_id = data.hospital_id;
+
+      // console.log('doctorData11: ', this.doctor_id);
+      // console.log('hospitalID11: ', this.hospital_id);
 
       let todayD = (new Date());
-
-     /* this.allServices.getAllDates(this.hospital_id,this.doctor_id,startDate1, endDate1, todayD)
+    this.storage.get('user').then((val) => {
+      if(val!=null){
+        console.log(val)
+        let dataToken = {
+          token : val.token,
+          type : val.type,
+          month : startDate.getMonth()+1,
+          year : endDate.getFullYear(),
+        }
+      this.showLoader('Please wait...');
+      this.allServices.sendData('get_schedule_sessions', dataToken)
         .subscribe(data => {
+          this.dismissLoading();
+
           let sl:any = [];
           sl = data;
-
-          this.eventList = sl.slots;
-          this.eventList = Array.from(new Set(this.eventList.map((item: any) => item.slot_day)))
-          console.log('lll: ',this.eventList);
+          this.SessionLists = sl.Sessions;
+          this.eventList = sl.Sessions;
+          this.eventList = Array.from(new Set(this.eventList.map((item: any) => item.day)))
+         
+        },err=>{
+          this.dismissLoading();
         });
-      */
-    }
-  });
+      }
+    });  
+  //   }
+  // });
 
 }
 
@@ -410,7 +387,7 @@ loadEventThisMonth() {
         {
           text: 'OK',
           handler: () => {
-            this.router.navigate(['/tabs/home']);
+            
           }
         }
       ]
@@ -424,7 +401,7 @@ loadEventThisMonth() {
     this.loading.present();
   }
   async dismissLoading() {
-    // console.log(this.loading);
+    console.log(this.loading);
     await this.loading.dismiss();
   }
 
@@ -439,84 +416,86 @@ loadEventThisMonth() {
     }
   }
 
-  schApp(){
-    this.route.params.subscribe(data => {
-      if (data.appointment_id && data.appointment_id!='' ) {
-
-        this.showLoader('Rescheduling, Please wait...');
-
-        let sdata = {
-          user_id: this.user_id,
-          trainer_id: this.route.snapshot.queryParamMap.get('trainer_id'),
-          desc: this.desc,
-          selectedTime: this.selectedTime,
-          selectedTimeEnd: this.selectedTimeEnd,
-          selectedDate: this.selectedDate,
-          appointment_id: data.appointment_id,
-        }
-    
-        this.allServices.sendData('schedule_sessions', sdata).subscribe(data => {
-          this.loading.dismiss();
-          this.selectedSlot = -1;
-          this.selectedTime = '';
-          this.selectedTimeEnd = '';
-          this.desc = '';      
-          let resdata:any = [];
-          resdata = data;
-          // this.router.navigate(['/patientdashboard']);
-          this.presentAlert(resdata.message);
-        }, err => {
-          // console.log("error ====", err);
-          this.loading.dismiss();
-          let msg= err.error.errormsg;
-          this.presentAlert(msg);
-        })
-        
-      }
-      else{
-
-        this.showLoader('Scheduling, Please wait...');
-        let trainerID = this.route.snapshot.queryParamMap.get('trainer_id');
-        let sdata = {
-          user_id: (this.user_type == 'Trainer' ? trainerID : this.user_id),
-          trainer_id: (this.user_type == 'Trainer' ? this.user_id : trainerID),
-          status : (this.user_type == 'Trainer' ? 1 : 0),
-          desc: this.desc,
-          selectedTime: this.selectedTime,
-          selectedTimeEnd: this.selectedTimeEnd,
-          selectedDate: this.selectedDate,
-          appointment_id: '',
-        }
-    
-        this.allServices.sendData('schedule_sessions', sdata).subscribe(data => {
-          this.loading.dismiss();
-          this.selectedSlot = -1;
-          this.selectedTime = '';
-          this.selectedTimeEnd = '';
-          this.desc = '';
-          let resdata:any = [];
-          resdata = data;
-          // this.router.navigate(['/patientdashboard']);
-          this.presentAlertWithNav(resdata.message);
-        }, err => {
-          // console.log("error ====", err);
-          this.loading.dismiss();
-          let msg= err.error.errormsg;
-          this.presentAlert(msg);
-        })
-      }
-    });
-
-    } 
-    
-    
   customday(day){
     if(this.currentDate === day){
+      if(document.getElementById('cuDate'))
       document.getElementById('cuDate').classList.add('currentDate');
     }
     else{
+      if(document.getElementById('cuDate'))
       document.getElementById('cuDate').classList.remove('currentDate');
-    }    
+    }
+    setTimeout(() => {
+      this.getCurrentDateBooking(this.selectedDate);
+    },500);
+    
   }
+  getCurrentDateBooking(date){
+    this.storage.get('user').then((val) => {
+      if(val!=null){
+        let dataToken = {
+          token : val.token,
+          date : date,
+        }
+        this.showLoader('Please wait...');
+      this.allServices.sendData('get_schedule_sessions_by_date', dataToken)
+        .subscribe(data => {
+          this.dismissLoading();
+          console.log('data', data)
+          let sl:any = [];
+          sl = data;
+          this.SessionLists = sl.Sessions;
+        }, err=>{
+          this.dismissLoading();
+        });
+      }
+    });
+  }
+
+  acceptSession(session){
+    console.log('accept');
+    this.storage.get('user').then((val) => {
+      if(val!=null){
+        let dataToken = {
+          token : val.token,
+          'session_id' : session.session_id,
+          'type': 'accept'
+        }
+        this.showLoader('Please wait...');
+      this.allServices.sendData('accept_decline_schedule_sessions', dataToken)
+        .subscribe(data => {
+          this.dismissLoading();
+          let dataIndex = this.SessionLists.findIndex(x=> x.session_id == session.session_id);
+          this.SessionLists[dataIndex].status = '2';
+          this.presentAlert('Session accepted successfully.');
+        }, err=>{
+          this.dismissLoading();
+        });
+      }
+    });
+  }
+  declineSession(session){
+    console.log('decline');
+    this.storage.get('user').then((val) => {
+      if(val!=null){
+        let dataToken = {
+          token : val.token,
+          'session_id' : session.session_id,
+          'type': 'decline'
+        }
+        this.showLoader('Please wait...');
+        this.allServices.sendData('accept_decline_schedule_sessions', dataToken)
+          .subscribe(data => {
+          this.dismissLoading();
+          let dataIndex = this.SessionLists.findIndex(x=> x.session_id == session.session_id);
+          this.SessionLists[dataIndex].status = '3';
+          this.presentAlert('Session declined successfully.');
+        }, err=>{
+          this.dismissLoading();
+        });
+      }
+    });
+  }
+ 
 }
 

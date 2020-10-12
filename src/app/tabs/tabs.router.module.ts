@@ -7,6 +7,8 @@ import { TradingStarPage } from './trading_star/trading_star.page';
 import { NutritionRecoveryJournalPage } from './nutritionRecoveryJournal/nutritionRecoveryJournal.page';
 import { CoachPage } from './coach/coach.page';
 import { ClientPage } from './client/client.page';
+import { NewJournalEntryPage } from './new_journal_entry/new_journal_entry.page';
+import { AppointmentsPage } from './appointments/appointments.page';
 
 
 const routes: Routes = [
@@ -33,11 +35,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'Appointment',
+        path: 'appointments',
         children: [
           {
             path: '',
-            loadChildren: '../home/home.module#HomePageModule'
+            component : AppointmentsPage
           }
         ]
       },
@@ -115,6 +117,16 @@ const routes: Routes = [
           {
             path: '',
             component: ClientPage,
+            
+          }
+        ]
+      },
+      {
+        path: 'new_entry',
+        children: [
+          {
+            path: '',
+            component: NewJournalEntryPage,
             
           }
         ]

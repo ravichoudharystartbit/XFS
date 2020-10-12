@@ -12,7 +12,7 @@
 </ion-header>
 <ion-content>
 	<ion-row>
-		<ion-col size='12' class='coachSection' *ngFor='let client of Clients'>
+		<!-- <ion-col size='12' class='coachSection' *ngFor='let client of Clients'>
 			<ion-row>
 				<ion-col size='4'>
 					<img src="{{client.image}}">
@@ -21,6 +21,18 @@
 					<h5>{{client.name}}</h5>
 					<p><img src="assets/xfs_image/23/star.svg" width="15px"> {{client.star}}</p>
 					<p><img src="assets/xfs_image/23/location.svg" width="12px"> {{client.address}}</p>
+				</ion-col>
+			</ion-row>
+		</ion-col> -->
+		<ion-col size='12' class='coachSection' *ngFor='let client of Coaches'>
+			<ion-row (click)='userProfile(client)'>
+				<ion-col size='4'>
+					<img src="{{client.profilePic}}" class='profileImage'>
+				</ion-col>
+				<ion-col size='8'>
+					<h5>{{client.name}}</h5>
+					<p><img src="assets/xfs_image/23/star.svg" width="15px"> 5.0</p>
+					<p><img src="assets/xfs_image/23/location.svg" width="12px"> XFS US</p>
 				</ion-col>
 			</ion-row>
 		</ion-col>

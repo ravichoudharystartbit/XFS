@@ -1,0 +1,183 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)='back()'><img src="assets/back-arrow.png" width="20px"></ion-button>
+    </ion-buttons>
+    <ion-title>
+      New Entry
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class='newEntry'>
+  <form [formGroup]="NewJournalForm" (ngSubmit)="submit()">
+    <ion-grid class="login form_fields ion-padding">
+      <ion-row class="field">
+        <ion-col size="8" class='formLabel'>
+            Hours of Sleep  
+        </ion-col>
+        <ion-col size="4" class="">
+            <ion-input type="number" placeholder="Hours of Sleep" formControlName="hours_of_sleep" clearInput autocapitalize="off" inputmode="number"></ion-input>
+            <!-- <div class="error-container">
+              <ng-container *ngFor="let validation of validation_messages.sleep">
+                <div class="error-message" *ngIf="NewJournalForm.get('sleep').hasError(validation.type) && (NewJournalForm.get('sleep').dirty || NewJournalForm.get('sleep').touched)">
+                  <ion-icon name="information-circle-outline"></ion-icon>
+                  <span>{{ validation.message }}</span>
+                </div>
+              </ng-container>
+            </div> -->
+          </ion-col>
+        <ion-col size="12" class="">
+            <div class="error-container">
+              <ng-container *ngFor="let validation of validation_messages.hours_of_sleep">
+                <div class="error-message errMsg" *ngIf="NewJournalForm.get('hours_of_sleep').hasError(validation.type) && (NewJournalForm.get('hours_of_sleep').dirty || NewJournalForm.get('hours_of_sleep').touched)">
+                  <ion-icon name="information-circle-outline"></ion-icon>
+                  <span>{{ validation.message }}</span>
+                </div>
+              </ng-container>
+            </div>
+          </ion-col>
+      </ion-row>
+
+      <ion-row class="field">
+          <ion-col size="8" class='formLabel'>
+              Naps
+          </ion-col>
+          <ion-col size="4" class="">
+              <ion-input type="number" placeholder="Naps" formControlName="naps" clearInput autocapitalize="off" inputmode="number"></ion-input>
+          </ion-col>
+          <ion-col size="12" class="">
+              <div class="error-container">
+                <ng-container *ngFor="let validation of validation_messages.naps">
+                  <div class="error-message errMsg" *ngIf="NewJournalForm.get('naps').hasError(validation.type) && (NewJournalForm.get('naps').dirty || NewJournalForm.get('naps').touched)">
+                    <ion-icon name="information-circle-outline"></ion-icon>
+                    <span>{{ validation.message }}</span>
+                  </div>
+                </ng-container>
+              </div>
+          </ion-col>
+      </ion-row>
+
+      <ion-row class="field">
+          <ion-col size="8" class='formLabel'>
+              Calories
+          </ion-col>
+          <ion-col size="4" class="">
+              <ion-input type="number" placeholder="Calories" formControlName="calories" clearInput autocapitalize="off" inputmode="number"></ion-input>
+          </ion-col>
+          <ion-col size="12" class="">
+              <div class="error-container">
+                <ng-container *ngFor="let validation of validation_messages.calories">
+                  <div class="error-message errMsg" *ngIf="NewJournalForm.get('calories').hasError(validation.type) && (NewJournalForm.get('calories').dirty || NewJournalForm.get('calories').touched)">
+                    <ion-icon name="information-circle-outline"></ion-icon>
+                    <span>{{ validation.message }}</span>
+                  </div>
+                </ng-container>
+              </div>
+          </ion-col>
+      </ion-row>
+
+      <ion-row class="field">
+          <ion-col size="4">
+            <ion-label>Carbs</ion-label>
+             <ion-input type="number" placeholder="Carbs" formControlName="carbs" clearInput autocapitalize="off" inputmode="number"></ion-input>
+              <div class="error-container">
+                <ng-container *ngFor="let validation of validation_messages.carbs">
+                  <div class="error-message" *ngIf="NewJournalForm.get('carbs').hasError(validation.type) && (NewJournalForm.get('carbs').dirty || NewJournalForm.get('carbs').touched)">
+                    <ion-icon name="information-circle-outline"></ion-icon>
+                    <span>{{ validation.message }}</span>
+                  </div>
+                </ng-container>
+              </div>
+          </ion-col>
+          <ion-col size="4">
+            <ion-label>Protiens</ion-label>
+             <ion-input type="number" placeholder="Protiens" formControlName="protiens" clearInput autocapitalize="off" inputmode="number"></ion-input>
+              <div class="error-container">
+                <ng-container *ngFor="let validation of validation_messages.protiens">
+                  <div class="error-message" *ngIf="NewJournalForm.get('protiens').hasError(validation.type) && (NewJournalForm.get('protiens').dirty || NewJournalForm.get('protiens').touched)">
+                    <ion-icon name="information-circle-outline"></ion-icon>
+                    <span>{{ validation.message }}</span>
+                  </div>
+                </ng-container>
+              </div>
+          </ion-col>
+
+          <ion-col size="4">
+              <ion-label>Fat</ion-label>
+             <ion-input type="number" placeholder="Fat" formControlName="fat" clearInput autocapitalize="off" inputmode="number"></ion-input>
+              <div class="error-container">
+                <ng-container *ngFor="let validation of validation_messages.fat">
+                  <div class="error-message" *ngIf="NewJournalForm.get('fat').hasError(validation.type) && (NewJournalForm.get('fat').dirty || NewJournalForm.get('fat').touched)">
+                    <ion-icon name="information-circle-outline"></ion-icon>
+                    <span>{{ validation.message }}</span>
+                  </div>
+                </ng-container>
+              </div>
+          </ion-col>
+          
+      </ion-row>
+
+      <ion-row class="field">
+          <ion-col size="12">
+              <!-- <ion-input type="number" placeholder=""  clearInput autocapitalize="off" inputmode="number"></ion-input> -->
+              <ion-label>Injury Status</ion-label>
+              <ion-textarea formControlName="injury_status" clearInput placeholder="Injury Status description..." rows='7'></ion-textarea>
+              <div class="error-container">
+                <ng-container *ngFor="let validation of validation_messages.injury_status">
+                  <div class="error-message" *ngIf="NewJournalForm.get('injury_status').hasError(validation.type) && (NewJournalForm.get('injury_status').dirty || NewJournalForm.get('injury_status').touched)">
+                    <ion-icon name="information-circle-outline"></ion-icon>
+                    <span>{{ validation.message }}</span>
+                  </div>
+                </ng-container>
+              </div>
+          </ion-col>
+      </ion-row>
+      <ion-row class="field">
+          <ion-col size="12">
+              <!-- <ion-input type="number" placeholder=""  clearInput autocapitalize="off" inputmode="number"></ion-input> -->
+              <ion-label>Are you sick today?</ion-label>
+              <ion-textarea formControlName="are_you_sick_today" clearInput placeholder="Are you sick today?" rows='1'></ion-textarea>
+              <div class="error-container">
+                <ng-container *ngFor="let validation of validation_messages.are_you_sick_today">
+                  <div class="error-message" *ngIf="NewJournalForm.get('are_you_sick_today').hasError(validation.type) && (NewJournalForm.get('are_you_sick_today').dirty || NewJournalForm.get('are_you_sick_today').touched)">
+                    <ion-icon name="information-circle-outline"></ion-icon>
+                    <span>{{ validation.message }}</span>
+                  </div>
+                </ng-container>
+              </div>
+          </ion-col>
+      </ion-row>
+      <ion-row class="field">
+          <ion-col size="12">             
+              <ion-select  placeholder="Rating" formControlName="rating" clearInput>
+                  <ion-select-option value="1">1</ion-select-option>
+                  <ion-select-option value="2">2</ion-select-option>
+                  <ion-select-option value="3">3</ion-select-option>
+                  <ion-select-option value="4">4</ion-select-option>
+                  <ion-select-option value="5">5</ion-select-option>
+                  <ion-select-option value="6">6</ion-select-option>
+                  <ion-select-option value="7">7</ion-select-option>
+                  <ion-select-option value="8">8</ion-select-option>
+                  <ion-select-option value="9">9</ion-select-option>
+                  <ion-select-option value="10">10</ion-select-option>
+                </ion-select>
+              <div class="error-container">
+                <ng-container *ngFor="let validation of validation_messages.rating">
+                  <div class="error-message" *ngIf="NewJournalForm.get('rating').hasError(validation.type) && (NewJournalForm.get('rating').dirty || NewJournalForm.get('rating').touched)">
+                    <ion-icon name="information-circle-outline"></ion-icon>
+                    <span>{{ validation.message }}</span>
+                  </div>
+                </ng-container>
+              </div>
+          </ion-col>
+      </ion-row>
+      <ion-row class="field">
+          <ion-col size="12">             
+              <ion-button type='submit'>Submit</ion-button>
+          </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </form>
+</ion-content>

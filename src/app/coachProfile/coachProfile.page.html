@@ -1,0 +1,179 @@
+
+<ion-header >
+  <ion-grid [style.background-image]="'url('+ profilePic +')'" class='blurImage'></ion-grid>
+  <ion-toolbar>
+   <ion-buttons slot="start">
+      <ion-back-button text=''></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+     Coach Profile
+    </ion-title>
+    <img class="editProfile" src='assets/xfs_image/20/edit.svg' (click)="editProfile()">
+    <img class="abouts" src='assets/xfs_image/20/i.svg' (click)="abouts()">
+  </ion-toolbar>
+  <ion-grid class="profile_data usr">
+    <ion-row class="cr">
+        <ion-col size="12" class="ion-text-center">
+            <img  [src]="profilePic" *ngIf='profilePic'/>            
+            <!-- <h6 class='userName'>{{user.name}}</h6>
+            <h6 ><img  src="assets/xfs_image/20/call.svg" class='callIcon'*ngIf='user.phone'/> {{user.phone}}</h6> -->
+        </ion-col>
+    </ion-row>
+  </ion-grid>  
+</ion-header>
+
+ 
+<ion-content>
+
+  <ion-grid class="details">
+    <ion-row>
+        <ion-col size="12">
+           <h4 class='myInformation'><span>Information</span></h4>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+    <ion-grid class="profile_data ion-no-padding">
+
+        <ion-row class="info_sec info">
+            <ion-col size="12" class="pi ion-no-padding">  
+
+               <ion-row>
+                 <ion-col size="1" class="ion-no-padding">
+                   <img  src="assets/xfs_image/2/user.png" /> 
+                 </ion-col>
+                 
+                 <ion-col size="10" class="ion-no-padding paddingTop">
+                  {{user.name}}
+                 </ion-col>
+              </ion-row> 
+
+               <ion-row>
+                 <ion-col size="1" class="ion-no-padding">
+                   <img  src="assets/xfs_image/6/Asset 4.png" /> 
+                 </ion-col>
+                 
+                 <ion-col size="10" class="ion-no-padding paddingTop">
+                  {{user.phone}}
+                 </ion-col>
+                 
+              </ion-row>              
+            </ion-col>
+          </ion-row>
+      </ion-grid> 
+      <ion-grid>
+         <ion-row>
+            <ion-col size="12"  class='buttonMsg'>
+               <ion-button type="button" style="width:100%" (click)='goToChat()'>Message</ion-button>
+            </ion-col>
+         </ion-row>
+      </ion-grid> 
+   <!--    <ion-grid>
+        <ion-row>
+            <ion-col size="12">
+               <h4 class='myInformation'><span>other Info</span></h4>
+            </ion-col>
+        </ion-row>
+    </ion-grid> -->
+
+
+<!--     <ion-grid class="profile_data ion-no-padding">
+
+        <ion-row class="info_sec otherInfo">
+            <ion-col size="12" class="pi ion-no-padding">  
+
+              <ion-row  *ngIf='user.type == "Athlete"'>
+                 <ion-col size="1" class="ion-no-padding">
+                   <img  src="assets/xfs_image/20/membership.svg" /> 
+                 </ion-col>
+                 
+                 <ion-col size="10" class="ion-no-padding paddingTop">
+                  My Orders
+                 </ion-col>
+                 <ion-col size="1" class="ion-no-padding ion-text-right">
+                   <img  src="assets/xfs_image/20/arrow.svg" /> 
+                 </ion-col>
+              </ion-row> 
+              <ion-row>
+                 <ion-col size="1" class="ion-no-padding">
+                   <img  src="assets/xfs_image/20/membership.svg" /> 
+                 </ion-col>
+                 
+                 <ion-col size="10" class="ion-no-padding paddingTop">
+                  My Membership
+                 </ion-col>
+                 <ion-col size="1" class="ion-no-padding ion-text-right">
+                   <img  src="assets/xfs_image/20/arrow.svg" /> 
+                 </ion-col>
+              </ion-row> 
+
+               <ion-row>
+                 <ion-col size="1" class="ion-no-padding">
+                   <img  src="assets/xfs_image/20/nutrition.svg" /> 
+                 </ion-col>
+                 
+                 <ion-col size="10" class="ion-no-padding paddingTop">
+                  My Nutrition and Recovery Journal 
+                 </ion-col>
+                 <ion-col size="1" class="ion-no-padding ion-text-right">
+                   <img  src="assets/xfs_image/20/arrow.svg" /> 
+                 </ion-col>
+              </ion-row> 
+ 
+              <ion-row  *ngIf='user.type == "Athlete"'>
+                 <ion-col size="1" class="ion-no-padding">
+                   <img  src="assets/xfs_image/20/appointments.svg" /> 
+                 </ion-col>
+                 
+                 <ion-col size="10" class="ion-no-padding paddingTop">
+                  My Appointments 
+                 </ion-col>
+                 <ion-col size="1" class="ion-no-padding ion-text-right">
+                   <img  src="assets/xfs_image/20/arrow.svg" /> 
+                 </ion-col>
+              </ion-row>
+ 
+              <ion-row>
+                 <ion-col size="1" class="ion-no-padding">
+                   <img  src="assets/xfs_image/20/progress.svg" /> 
+                 </ion-col>
+                 
+                 <ion-col size="10" class="ion-no-padding paddingTop">
+                  My Progress & Scores 
+                 </ion-col>
+                 <ion-col size="1" class="ion-no-padding ion-text-right">
+                   <img  src="assets/xfs_image/20/arrow.svg" /> 
+                 </ion-col>
+              </ion-row>
+              <ion-row  *ngIf='user.type == "Trainer"'>
+                 <ion-col size="1" class="ion-no-padding">
+                   <img  src="assets/xfs_image/20/start_official_testing.svg" /> 
+                 </ion-col>
+                 
+                 <ion-col size="10" class="ion-no-padding paddingTop">
+                  Start Official Testing
+                 </ion-col>
+                 <ion-col size="1" class="ion-no-padding ion-text-right">
+                   <img  src="assets/xfs_image/20/arrow.svg" /> 
+                 </ion-col>
+              </ion-row>               
+            </ion-col>
+          </ion-row>
+      </ion-grid> 
+      <ion-grid *ngIf='user.type == "Trainer"'>
+         <ion-row>
+            <ion-col size="12"  class='buttonMsg'>
+               <ion-button type="button" style="width:100%" (click)='goToMessageList()'>Message</ion-button>
+            </ion-col>
+         </ion-row>
+      </ion-grid> 
+      <ion-grid *ngIf='user.type == "Athlete"'>
+         <ion-row>
+            <ion-col size="12"  class='changePassword'>
+               <ion-button type="button" style="width:100%" (click)='gotoChangePassword()'>Change Password</ion-button>
+            </ion-col>
+         </ion-row>
+      </ion-grid>  -->
+
+</ion-content>

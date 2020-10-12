@@ -25,8 +25,9 @@
   <ion-grid class="main-grid custom">
     <ion-row class="view_data" *ngIf="status==-1 || status==0">
       <ion-col size="12">
-        <!-- <img class="user-img" src="assets/proPic.jpg" *ngIf="calling_going" /> -->
-        <img class="moving" *ngIf="status==0 && calling_going"  src="assets/colorloader.gif" />
+        <!-- <img class="user-img" src="assets/proPic.jpg" /> -->
+        <img class="user-img" src="{{opposite_pic}}" />
+        <!-- <img class="moving" *ngIf="status==0 && calling_going"  src="assets/colorloader.gif" /> -->
         <!-- <img class="moving" src="assets/imgs/colorloader.gif" /> -->
       </ion-col>
       <ion-col size="12">

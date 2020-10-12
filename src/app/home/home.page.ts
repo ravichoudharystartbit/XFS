@@ -1,6 +1,6 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router , ActivatedRoute } from '@angular/router';
 import { Storage } from "@ionic/storage";
 import { ServiceForAllService } from '../service-for-all.service';
 
@@ -85,16 +85,23 @@ public data: object[] = [
   constructor(
     private http: HttpClient,
     private router: Router,
+    private route: ActivatedRoute,
     public storage: Storage,
     public webService: ServiceForAllService,
     public modalController: ModalController,
     public menu: MenuController,
   ) {
 
+
+
      this.storage.get("user").then((val) => {
           if (val && val != null){
-             console.clear()
+             //console.clear()
              this.menu.enable(true);
+             if(!val.type){
+              this.storage.clear();
+              this.router.navigate(['/login']);
+             }
           }
           else{
           this.router.navigate(['/login']);
@@ -102,7 +109,9 @@ public data: object[] = [
        
       });
 
- 
+   this.route.data.subscribe(routeData => {
+      console.log('router' , routeData)
+    })
 
       this.checkOnline();
 
@@ -158,8 +167,27 @@ public data: object[] = [
     }); 
   }
 
-  callUser(user){
+ callUser(user){
+    console.log('video call')
+    this.makeVCall(user);
   }
+
+  async makeVCall(user) {
+    const modal = await this.modalController.create({
+      component: CallingPage,     
+      cssClass: 'full-modal',      
+      componentProps: {      
+        "user_id": user.user_id,         
+        "appointment": {         
+          'id' : 'a',        
+          'name' : user.name,
+          'opposite_pic': user.userImage
+        }        
+      }      
+    });    
+
+    return await modal.present();   
+  } 
 
   purchase(){
     this.router.navigate(['/payment_slide']);

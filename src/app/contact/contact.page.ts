@@ -32,10 +32,12 @@ export class ContactPage implements OnInit {
     speed: 400,
     slidesPerView : 'auto', 
     zoom: {
-    toggle: false
-  }
+      toggle: false
+    }
   };
-
+  renderForm = false;
+  Coaches = [];
+  resData : any;
 
 
   isLoading = false;
@@ -47,24 +49,18 @@ export class ContactPage implements OnInit {
   ResData: any;
     PersonalForm: FormGroup;
     validation_messages = {
-    password: [
+    user: [
       { type: "required", message: "This Field is required." },
-      {
-        type: "minlength",
-        message: "New Password must be at least 5 characters long."
-      } 
     ],
-    confirm_password: [
-      { type: "required", message: "This Field is required." },
-      {
-        type: "minlength",
-        message: "Confirm New Password must be at least 5 characters long."
-      }     
+    name: [
+      { type: "required", message: "This Field is required." },    
     ],
-    old_password: [
-      { type: "required", message: "This Field is required." },
-         
-    ]
+    email: [
+      { type: "required", message: "This Field is required." },         
+    ],
+    message: [
+      { type: "required", message: "This Field is required." },         
+    ],
   };
   
   constructor(
@@ -81,29 +77,46 @@ export class ContactPage implements OnInit {
     private http : HttpClient,
   ) {  
     
-      this.PersonalForm = new FormGroup({
-        password: new FormControl(
-          "",
-          Validators.compose([Validators.minLength(5), Validators.required])          
-        ),
-        confirm_password: new FormControl(
-          "",
-         Validators.compose([Validators.minLength(5), Validators.required])
-        ),
-        old_password: new FormControl(
-          "",
-          Validators.compose([
-            Validators.required,
-          ])
-        ),
-      });    
+      this.storage.get('user').then((val) => {
+        console.log('val' , val);
+        if (val != null) {
+          /*if(val.type == 'Athlete'){
+            this.getAllCoaches();
+          }
+          if(val.type == 'Trainer'){
+            this.getAllAthletes();
+          }*/
+          this.renderForm = true;
+          this.PersonalForm = new FormGroup({
+            user: new FormControl(
+              "",
+              Validators.compose([Validators.required])          
+            ),
+            name: new FormControl(
+              val.user_display_name,
+             Validators.compose([Validators.required])
+            ),
+            email: new FormControl(
+              val.user_email,
+              Validators.compose([Validators.required])
+            ),
+            message: new FormControl(
+              "",
+              Validators.compose([Validators.required])
+            ),
+          }); 
+        }
+        else{
+          this.router.navigate(['/login']);
+        }
+      });   
   }
 
   ngOnInit() {
     
    }
 
-  async showLoader(msg='Password Updating , Please wait...') {
+  async showLoader(msg='Please wait...') {
     this.isLoading = true;
     return await this.loadingCtrl
       .create({
@@ -137,29 +150,58 @@ export class ContactPage implements OnInit {
 
 
   submit(){
-  /*  console.log(this.PersonalForm.value);
+    console.log(this.PersonalForm.value);
 
     if(this.PersonalForm.valid){
-      if(this.PersonalForm.value.password == this.PersonalForm.value.confirm_password){
-          this.presentAlert('Old password and new password is same, please try diffrent.');
-          return false;
-      }
-      if(this.PersonalForm.value.password != this.PersonalForm.value.confirm_password){
-          this.presentAlert('New password and confirm new password does not match');
-          return false;
-      }
+      
       this.showLoader();
 
       let userData = this.PersonalForm.value;
 
       this.storage.get("user").then((val) => {
         if (val && val != null){
-          userData.user_email = val.user_email;
-          this.webService.changeUserPassword(val.token , userData).subscribe(
+          this.webService.contact_to_admin(val.token , userData).subscribe(
             (result) => {
                 
                this.hideLoader();
-               this.presentAlert('Password changed successfully');
+               
+               this.storage.get('user').then((val) => {
+                  if (val != null) {
+                    this.resData = result;
+
+                    if(this.resData.sendEmail == 'failed'){
+                      this.presentAlert('Email sent failed');
+                    }
+                    else{
+                      this.presentAlert('Email sent successfully');
+                    }
+
+
+                    this.renderForm = true;
+                    this.PersonalForm = new FormGroup({
+                      user: new FormControl(
+                        "",
+                        Validators.compose([Validators.required])          
+                      ),
+                      name: new FormControl(
+                        val.user_display_name,
+                       Validators.compose([Validators.required])
+                      ),
+                      email: new FormControl(
+                        val.user_email,
+                        Validators.compose([Validators.required])
+                      ),
+                      message: new FormControl(
+                        "",
+                        Validators.compose([Validators.required])
+                      ),
+                    }); 
+                  }
+                  else{
+                  
+                  }
+                });   
+
             },
             err => {
               let ErrorData =  err.error;
@@ -169,7 +211,42 @@ export class ContactPage implements OnInit {
           );
         }
       });
-    }
-    */
+    }    
   }
+
+  getAllCoaches(){
+    this.showLoader();
+    this.Coaches = [];
+    this.webService.getAllCoaches().subscribe((result) => {
+      
+        this.resData = result;
+        this.Coaches = this.resData.Coaches;
+        this.hideLoader();
+      }, (err) => {
+        this.hideLoader();
+        let ErrorData =  err.error;
+        this.presentAlert((ErrorData.errorMsg ? ErrorData.errorMsg : 'Server Error') );
+       
+    }); 
+    
+  }
+
+
+  getAllAthletes(){
+    this.showLoader();
+    this.Coaches = [];
+    this.webService.getAllAthletes().subscribe((result) => {
+      
+        this.resData = result;
+        this.Coaches = this.resData.Coaches;
+        this.hideLoader();
+      }, (err) => {
+        this.hideLoader();
+        let ErrorData =  err.error;
+        this.presentAlert((ErrorData.errorMsg ? ErrorData.errorMsg : 'Server Error') );
+       
+    }); 
+    
+  }
+
 }

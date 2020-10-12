@@ -1,0 +1,56 @@
+
+<ion-header >
+  <ion-grid [style.background-image]="'url('+ profilePic +')'" class='blurImage'></ion-grid>
+  <ion-toolbar>
+   <ion-buttons slot="start">
+      <ion-back-button text=''></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+     {{user.name}}
+    </ion-title>
+ <!--    <img class="editProfile" src='assets/xfs_image/20/edit.svg' (click)="editProfile()">
+    <img class="abouts" src='assets/xfs_image/20/i.svg' (click)="abouts()"> -->
+  </ion-toolbar>
+  <ion-grid class="profile_data usr">
+    <ion-row class="cr">
+        <ion-col size="12" class="ion-text-center">
+            <img  [src]="profilePic" *ngIf='profilePic'/>            
+            <!-- <h6 class='userName'>{{user.name}}</h6>
+            <h6 ><img  src="assets/xfs_image/20/call.svg" class='callIcon'*ngIf='user.phone'/> {{user.phone}}</h6> -->
+        </ion-col>
+    </ion-row>
+  </ion-grid>  
+</ion-header>
+
+ 
+<ion-content>
+
+  <ion-grid class="details">
+    <ion-row>
+        <ion-col size="12">
+           <h4 class='myInformation'><span>Information</span></h4>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+   <ion-grid class='saveCards' *ngIf="cards.length>0">
+    <ion-row>
+      <ion-col size="12">
+        <h5>Saved Cards</h5>
+        
+        <ion-item lines="none" *ngFor="let c of cards">
+          <ion-label>{{c.brand}} - {{c.last4}}</ion-label>
+          
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+         <ion-row>
+            <ion-col size="12"  class='changePassword'>
+               <ion-button type="button" style="width:100%" (click)='gotoChangePassword()'>Change Password</ion-button>
+            </ion-col>
+         </ion-row>
+      </ion-grid> 
+
+</ion-content>

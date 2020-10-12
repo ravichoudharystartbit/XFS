@@ -35,8 +35,9 @@ ion-toolbar {
 
     ion-back-button {
         margin-top: 5px;
-        content: url('assets/back-arrow.png') !important;
+        background: url(assets/xfs_image/12/side_bar.svg) !important;
         width: 20px;
+        height: 20px;
         margin-left: 5px;
     }
     ion-buttons{
@@ -485,6 +486,55 @@ ion-content{
     border-radius: 2px;
 }
   //end
+.heading{
+    span{
+        width: 100%;
+        margin-top: 15px;
+    }
+}
+.sessions{
+    margin: 3%;
+    background: white;
+    padding: 2%;
+    border-radius: 24px;
+
+    img{
+        border-radius: 24px;
+    }
+    p{
+        text-align: left;
+        text-transform: capitalize;
+        font-size: 16px;
+    }
+    span{
+        background-color: #fff;
+        width: 90px;
+        display: inline-block;
+        text-align: center;
+        padding: 11px 0px;
+        border-radius: 100px;
+        border: 1px solid gray;
+        margin-right: 5px;
+    }
+
+    .success , .danger{        
+        width: 40%;        
+        padding: 15px;
+        color: white;
+        border-radius: 24px;
+    }
+    .statusButton{
+        text-align: center;
+    }
+    .success {
+        margin-right: 10%;
+        background: green;
+    }
+    .danger{
+        background: red;
+    }
+
+}
 
 
 

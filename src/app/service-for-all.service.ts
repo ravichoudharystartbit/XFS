@@ -414,11 +414,46 @@ export class ServiceForAllService {
     })
   }
 
+  getUserById(id) {
+    return this.http.post(wpUrl + 'wp-json/mobileapi/v1/getUserById', {
+      id: id
+    })
+  }
+
   getSecoondUserInfo1(token, id) {
     return this.http.post(wpUrl + 'wp-json/mobileapi/v1/getSecoondUserInfo1', {
       token: token,
       id: id,
 
     })
+  }
+  contact_to_admin(token, userData) {
+    return this.http.post(wpUrl + 'wp-json/mobileapi/v1/contact_to_admin', {
+      token: token,
+      userData: userData
+
+    })
+  } 
+  create_new_journal_entry(token, newEntryData) {
+    return this.http.post(wpUrl + 'wp-json/mobileapi/v1/create_new_journal_entry', {
+      token: token,
+      newEntryData: newEntryData
+
+    })
+  } 
+  get_journal_entry(token) {
+    return this.http.post(wpUrl + 'wp-json/mobileapi/v1/get_journal_entry', {
+      token: token
+
+    })
   }  
+
+  sendData(endPoint,data){
+    return this.http.post(wpUrl + 'wp-json/mobileapi/v1/'+endPoint,data).pipe(
+      map(data => {
+        return data;
+      })
+    )
+      
+  }
 }

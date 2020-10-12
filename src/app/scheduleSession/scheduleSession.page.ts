@@ -44,6 +44,10 @@ export class ScheduleSessionPage implements OnInit{
     }
 
   ngOnInit(){
+    
+  }
+
+  ionViewWillEnter(){
     this.storage.get("user").then((val) => {
         if (val && val != null){
            if(val.type == "Athlete"){
@@ -59,15 +63,10 @@ export class ScheduleSessionPage implements OnInit{
       });
     
   }
-
-  ionViewWillEnter(){
-    
-  }
   
   
   back(){
-    this.router.navigate(['/tabs/home']);
-    
+    this.router.navigate(['/tabs/home']);    
   }
   
   async showLoader(){
@@ -135,14 +134,11 @@ export class ScheduleSessionPage implements OnInit{
     this.storage.get('user').then((val) => {
       console.log(val);
       if (val != null) {
-       console.log('Current User' , val , user);
+        console.log('Current User' , val , user);
         this.serviceForAllService.getCurrentUserInfo(val.token).subscribe((result) => {
-          this.res = result;
-         
-          this.openChatPage(this.res.result , user);
-         
-        }, (err) => {
-        
+          this.res = result;         
+          this.openChatPage(this.res.result , user);         
+        }, (err) => {        
           console.log("error...", err);
           let msg = err.error.errormsg;
          // this.allServices.presentAlert(msg);

@@ -1,7 +1,7 @@
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { TabsPageRoutingModule } from './tabs.router.module';
 
@@ -15,12 +15,15 @@ import { NutritionRecoveryJournalPage } from './nutritionRecoveryJournal/nutriti
 import { CoachPage } from './coach/coach.page';
 
 import { ClientPage } from './client/client.page';
+import { NewJournalEntryPage } from './new_journal_entry/new_journal_entry.page';
+import { AppointmentsPage } from './appointments/appointments.page';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
-    FormsModule,
+    FormsModule,    
+    ReactiveFormsModule,
     TabsPageRoutingModule
   ],
   declarations: [
@@ -31,7 +34,9 @@ import { ClientPage } from './client/client.page';
     TradingStarPage,
     NutritionRecoveryJournalPage,
     CoachPage,
-    ClientPage
+    ClientPage,
+    NewJournalEntryPage,
+    AppointmentsPage
   ]
 })
 export class TabsPageModule {}

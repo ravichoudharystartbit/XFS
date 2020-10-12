@@ -1,41 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)='back()'><img src="assets/back-arrow.png" width="20px"></ion-button>
-    </ion-buttons>
-    <ion-title>
-      Schedule A Sessions
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding class='mainPage'>
-  
-
-  <ion-grid>
-    <ion-row class='newsSection'>
-      <ion-col size="12" class='news' *ngFor='let pd of Coaches'>
-        <ion-row>
-           <ion-col  size="4" class='productImage'>
-           <img src="assets/xfs_image/19/Asset 5.png" width="100%">  (click)='detail()'
-            <img src="{{pd.profilePic}}" width="100%">
-          </ion-col>
-          <ion-col  size="8">
-            <h6>{{pd.name}}</h6>
-            <p><b>{{pd.email}}</b></p>
-             <p class="buyButton">Book</p>
-          </ion-col>
-        </ion-row>   
-      </ion-col>
-
-      <ion-col size="12" class='news' *ngIf='Coaches.length == 0'>
-        <ion-row>
-          <h5 class="noRecordFound">No Item found.</h5>
-         </ion-row>
-      </ion-col>      
-    </ion-row>
-  </ion-grid> 
-</ion-content> -->
 
 <ion-header>
     <ion-toolbar>
@@ -67,19 +29,26 @@
           </ion-row>
 
           <ion-row class="calendar">
-              <ion-col><b>S</b></ion-col>
-              <ion-col><b>M</b></ion-col>
-              <ion-col><b>T</b></ion-col>
-              <ion-col><b>W</b></ion-col>
-              <ion-col><b>T</b></ion-col>
-              <ion-col><b>F</b></ion-col>
-              <ion-col><b>S</b></ion-col>
+            <ion-col><b>SUN</b></ion-col>
+            <ion-col><b>MON</b></ion-col>
+            <ion-col><b>TUE</b></ion-col>
+            <ion-col><b>WED</b></ion-col>
+            <ion-col><b>THU</b></ion-col>
+            <ion-col><b>FRI</b></ion-col>
+            <ion-col><b>SAT</b></ion-col>
+            <!-- <ion-col><b>SUN</b></ion-col>
+            <ion-col><b>MON</b></ion-col>
+            <ion-col><b>TUE</b></ion-col>
+            <ion-col><b>WED</b></ion-col>
+            <ion-col><b>THU</b></ion-col>
+            <ion-col><b>FRI</b></ion-col>
+            <ion-col><b>SAT</b></ion-col> -->
             </ion-row>
       
             <ion-row class="calendar-date">
               <ion-col col-1 *ngFor="let lastDay of daysInLastMonth" class="last-month" (click)="goToLastMonth()">{{lastDay}}</ion-col>
-              <ion-col col-1 *ngFor="let day of daysInThisMonth" (click)="selectDate(day)" >
-                <span class="currentDate" *ngIf="currentDate === day; else otherDate" >{{day}}
+              <ion-col col-1 *ngFor="let day of daysInThisMonth" (click)="[ customday(day) , selectDate(day) ]" >
+                <span id='cuDate' class="currentDate" *ngIf="currentDate === day; else otherDate" >{{day}}
                   <div *ngFor="let eventDay of eventList" class="event-div"> 
                     <div class="event-bullet" *ngIf="eventDay == day"></div>
                   </div>
@@ -109,7 +78,7 @@
         </div>
         
     
-     <!--  <ion-grid class="time_block">
+      <ion-grid class="time_block">
         <ion-row *ngIf="slots.length>0">
           <ion-col size="4" text-center *ngFor="let s of slots; let i=index" >
              <span [ngClass]="{'active': selectedSlot==i}" (click)="selectTime(s.slot_timing,s.end_slot_timing,i);" >{{s.start_time}}</span>
@@ -122,7 +91,7 @@
              <h3 class="nores" *ngIf="isHoliday!=''">{{isHoliday}}</h3>
           </ion-col>
         </ion-row>
-      </ion-grid> -->
+      </ion-grid>
 
       <!-- <ion-grid>
         <ion-row class="video_audio_sec">
@@ -145,19 +114,19 @@
         </ion-row>
       </ion-grid> -->
 
-      <!-- <ion-row class="area_sec">
+      <ion-row class="area_sec">
         <ion-col size="12">
           <ion-textarea [(ngModel)]="desc" placeholder="Type description..."></ion-textarea>
         </ion-col>
-      </ion-row> -->
+      </ion-row>
 
-   <!--    <ion-grid>
+      <ion-grid>
         <ion-row>
           <p class="desclaimer-txt">Appointment needs to be confirmed
-            by the Attorney. 
+            by the Trainer. 
             This will send an appointment request.</p>
         </ion-row>
-      </ion-grid> -->
+      </ion-grid>
       
         <ion-grid>
             <ion-row class="remember">

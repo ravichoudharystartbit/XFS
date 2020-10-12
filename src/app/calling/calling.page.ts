@@ -158,6 +158,8 @@ export class CallingPage implements OnInit {
 
       this.opposite_pic = this.appointment.opposite_pic;
       this.opposite_name = this.appointment.name;
+      console.clear();
+                  console.log("User Image",this.opposite_pic)
 
       this.isIncoming = false;
     }
@@ -178,11 +180,13 @@ export class CallingPage implements OnInit {
               data1.forEach(data => {
                 if (data.val()) {
                   this.recive_key = data.key;
-                  // console.log('Recording 3 : ', data.val());
+                   console.clear();
+                   console.log('Recording 3 : ', data.val());
                    
                   this.opposite_pic = data.val().caller_img;
                   this.opposite_name = data.val().caller_name;
-
+                 
+                  console.log("User Image",this.opposite_pic)
                   // if (data.val().recording == 0) {
                   //   this.presentAlertConfirm();
                   //  }
@@ -599,13 +603,12 @@ export class CallingPage implements OnInit {
                       if (val != null) {
                         // this.ref = firebase.database().ref('call/'+this.opposite_user_id);
                         this.isIncoming = false;
-
                         this.calling_going = false;
                         this.session.publish(this.publisher);
                         this.ref.push({
                           caller_id: val.user_id,
                           caller_name: val.user_display_name,
-                          caller_img: val.user_avatar,
+                          caller_img: val.user_image,
                           caller_role: val.role,
                           appointment_id: 'a',
                           session_id: this.sessionId,

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 const routes: Routes = [
 {
@@ -98,12 +98,18 @@ const routes: Routes = [
     path: 'messages', 
     loadChildren: './messages/messages.module#MessagesPageModule' 
   },
+  {
+    path: 'coachProfile',
+    loadChildren: './coachProfile/coachProfile.module#CoachProfilePageModule'
+  },
+  {
+    path: 'account',
+    loadChildren: './account/account.module#AccountPageModule',
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
-
-

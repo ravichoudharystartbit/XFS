@@ -61,7 +61,8 @@ export class ScheduleUserViewPage implements OnInit{
   
   
   back(){
-    this.location.back();
+   this.router.navigate(['/scheduleSession']);
+    //this.location.back();
     console.log('backkk')
   }
   
@@ -79,7 +80,12 @@ export class ScheduleUserViewPage implements OnInit{
   
 
   book(){
-    this.router.navigate(['/schedule']);
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        trainer_id : this.User.ID
+      }
+    };
+    this.router.navigate(['/schedule'] , navigationExtras);
   }
 
 

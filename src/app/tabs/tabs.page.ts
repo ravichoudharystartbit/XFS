@@ -76,5 +76,9 @@ goToProfile(){
   this.router.navigate(['/profile']);
 }
 
+goToMessageList(){
+  this.router.navigate(['/messages']);  
+}
+
 
 }

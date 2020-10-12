@@ -15,7 +15,7 @@ import {
   FormControl,
   ReactiveFormsModule
 } from "@angular/forms";
-import { Router } from "@angular/router";
+import { Router , ActivatedRoute } from "@angular/router";
   
 @Component({
   selector: "app-login",
@@ -42,8 +42,7 @@ export class LoginPage implements OnInit {
         message: "Password must be at least 5 characters long."
       }
     ]
-  };
-  title = 'Angular7-readCSV';  
+  }; 
   passwordType:string = 'password'
   public records: any[] = [];   
   constructor(
@@ -57,15 +56,11 @@ export class LoginPage implements OnInit {
     private router: Router,
     public menu: MenuController,
   ) {
-
-
       this.storage.get("user").then((val) => {
         if (val && val != null){
            this.router.navigate(['/tabs/home']);
         }       
-      });
-
-    
+      });    
     //this.menu.swipeEnable(false);
     this.menu.enable(false);
     this.loginForm = new FormGroup({

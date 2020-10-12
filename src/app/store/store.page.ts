@@ -6,7 +6,7 @@ import { Storage } from "@ionic/storage";
 import { QueryList, ViewChildren } from '@angular/core';
 
 import { ServiceForAllService } from '../service-for-all.service';
-import { ActionSheetController,LoadingController,AlertController,NavController , Platform } from '@ionic/angular';
+import { ActionSheetController,LoadingController,AlertController,NavController ,ToastController , Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-store',
@@ -63,6 +63,7 @@ menuItems = [
     public storage: Storage,
     public loadingCtrl: LoadingController,
     public serviceForAllService: ServiceForAllService,
+    public toastController: ToastController
   ) {
 
      this.storage.get("user").then((val) => {
@@ -82,7 +83,6 @@ menuItems = [
   }
 
 ionViewWillEnter(){
-    
         this.getAllProducts();
      
   }
@@ -226,14 +226,38 @@ openSlideContent( contentId , tabId) {
     this.storage.get("wishlists").then((val) => {
       if (val && val != null){
          let previousWish = val;
-         previousWish.push(product);
-         this.storage.set("wishlists", previousWish);
+         var index = previousWish.findIndex(x=>x.ID == product.ID);
+         console.log(index)
+         if(index == -1){
+          previousWish.push(product);
+          this.storage.set("wishlists", previousWish);
+          let message = 'Product successfully added to wishlist.'
+          this.presentToastWithOptions(message , true);
+         }
+         else{
+          let message = 'Product already added to wishlist.';
+          this.presentToastWithOptions(message , false);
+         }
+         
+
       }
       else{
         let wish = [];
         wish.push(product);
         this.storage.set("wishlists", wish);
+        let message = 'Product successfully added to wishlist.'
+        this.presentToastWithOptions(message , true);
       }
     });
   }
+
+  async presentToastWithOptions(message , condition) {
+    const toast = await this.toastController.create({
+        message: message,
+        duration: 2000,
+        position: 'top',
+        color: condition ? 'success' : 'danger',
+      });
+      toast.present();
+    }
 }

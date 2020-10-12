@@ -1,0 +1,121 @@
+
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <!-- <ion-back-button></ion-back-button> -->
+            <ion-button routerLink="/tabs/home" routerDirection="back"><img src="assets/back-arrow.png" width="20px"></ion-button>
+         </ion-buttons>
+      <ion-title>Bookings</ion-title>
+      <!-- <div class="noti">
+        <ion-icon name="notifications-outline"></ion-icon>
+        <ion-icon name="more" class="more"></ion-icon>
+      </div> -->
+    </ion-toolbar>  
+  </ion-header>
+
+  <ion-content>
+  
+      <div class="listing" no-padding>
+          <ion-row >
+
+              <ion-col size="2" text-right (click)="goToLastMonth()">
+                  <ion-icon name="arrow-back"></ion-icon>
+              </ion-col>
+              <ion-col size="8" text-center>
+                  <h2>{{currentMonth}} <span class="green2018">{{currentYear}}</span></h2>
+              </ion-col>
+              <ion-col size="2" text-left (click)="goToNextMonth()">
+                  <ion-icon name="arrow-forward"></ion-icon> 
+              </ion-col> 
+          </ion-row>
+
+          <ion-row class="calendar">
+              <ion-col><b>S</b></ion-col>
+              <ion-col><b>M</b></ion-col>
+              <ion-col><b>T</b></ion-col>
+              <ion-col><b>W</b></ion-col>
+              <ion-col><b>T</b></ion-col>
+              <ion-col><b>F</b></ion-col>
+              <ion-col><b>S</b></ion-col>
+            </ion-row>
+      
+            <ion-row class="calendar-date">
+              <ion-col col-1 *ngFor="let lastDay of daysInLastMonth" class="last-month" (click)="goToLastMonth()">{{lastDay}}</ion-col>
+              <ion-col col-1 *ngFor="let day of daysInThisMonth" (click)="[customday(day) , selectDate(day)]" >
+                <span id='cuDate' class="currentDate" *ngIf="currentDate === day; else otherDate" >{{day}}
+                  <div *ngFor="let eventDay of eventList" class="event-div"> 
+                    <div class="event-bullet" *ngIf="eventDay == day"></div>
+                  </div>
+                </span>
+                <ng-template #otherDate class="otherDate" >
+      
+                    <div *ngIf="isday!=day">
+                      <span>{{day}}</span>
+                      <div *ngFor="let eventDay of eventList" class="event-div"> 
+                        <div class="event-bullet" *ngIf="eventDay== day "></div>
+                      </div>
+                    </div>
+      
+                    <div *ngIf="isday==day">
+                      <span class="currentDate" *ngIf="isday==day">{{day}}</span>
+                      <div *ngFor="let eventDay of eventList" class="event-div"> 
+                        <div class="event-bullet" *ngIf="eventDay == day "></div>
+                      </div>
+                    </div>
+      
+                  <!-- {{day}}<br> -->
+                  <!-- <div class="event-bullet" *ngIf="checkEvent(day)"></div> -->
+                </ng-template>
+              </ion-col>
+              <ion-col col-1 *ngFor="let nextDay of daysInNextMonth" class="next-month" (click)="goToNextMonth()">{{nextDay}}</ion-col>
+            </ion-row>
+        </div>
+    <ion-grid class="time_block">
+      <ion-row class='heading'>
+        <ion-col size="12" text-center  >
+            <span >Schedule Sessions</span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>        
+
+    <ion-grid class="time_block" *ngIf="SessionLists.length>0  && (Role == 'Trainer')">
+      <ion-row class='sessions' *ngFor="let session of SessionLists; let i=index">
+        <ion-col size="4" text-center  class='session_image'>
+            <img src="{{session.UserImage}}"/>
+        </ion-col>
+        <ion-col size="8" text-center class='session_content'>
+          <p>{{session.username}}</p>
+          <p>{{session.date}}</p>
+          <span >{{session.time_start}}</span>
+          <span >{{session.time_end}}</span>
+      </ion-col>
+      <ion-col size='12' class='statusButton' *ngIf="session.status == '0'">
+        <button class='success' (click)="acceptSession(session)">Accept</button>
+        <button class='danger' (click)="declineSession(session)">Decline</button>
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+    <ion-grid class="time_block" *ngIf="SessionLists.length>0 && (Role == 'Athlete')">
+      <ion-row  class='sessions' *ngFor="let session of SessionLists; let i=index">
+        <ion-col size="4" text-center class='session_image'>
+          <img src="{{session.Trainerimage}}"/>
+      </ion-col>
+      <ion-col size="8" text-center class='session_content'>
+        <p>{{session.Trainername}}</p>
+        <p>{{session.date}}</p>
+        <span >{{session.time_start}}</span>
+        <span >{{session.time_end}}</span>
+    </ion-col>
+      </ion-row>
+    </ion-grid>
+
+      <ion-grid class="time_block" *ngIf="SessionLists.length==0">
+        <ion-row class='heading'>
+          <ion-col size="12" text-center  >
+              <span >No Data Found.</span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>    
+  </ion-content>
+

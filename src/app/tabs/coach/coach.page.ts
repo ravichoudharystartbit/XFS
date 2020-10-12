@@ -16,6 +16,7 @@ import {
 } from "@angular/forms";
 import { Router,ActivatedRoute ,NavigationExtras } from "@angular/router";
 import { Location } from '@angular/common';
+import { ServiceForAllService } from '../../service-for-all.service';
   
 @Component({
   selector: "app-coach",
@@ -27,6 +28,8 @@ export class CoachPage implements OnInit {
   isLoading = false;
   showInput = false;
   isShow = true; 
+  Coaches = []; 
+  resData : any; 
 
   response: any;
   Clients = [
@@ -46,7 +49,8 @@ export class CoachPage implements OnInit {
     private router: Router,
     public menu: MenuController,
     private route : ActivatedRoute,
-    private location : Location ,
+    private location : Location,
+    private serviceForAllService : ServiceForAllService,
   ) {  
     
      
@@ -56,7 +60,12 @@ export class CoachPage implements OnInit {
     
    }
 
-  async showLoader(msg='Password Updating , Please wait...') {
+   ionViewWillEnter(){
+      this.Coaches = [];
+      this.getAllCoaches();
+  }
+
+  async showLoader(msg='Please wait...') {
     this.isLoading = true;
     return await this.loadingCtrl
       .create({
@@ -93,4 +102,29 @@ export class CoachPage implements OnInit {
     console.log('backkk')
   }
  
+  getAllCoaches(){
+    this.showLoader();
+    this.Coaches = [];
+    this.serviceForAllService.getAllCoaches().subscribe((result) => {
+      
+        this.resData = result;
+        this.Coaches = this.resData.Coaches;
+        this.hideLoader();
+      }, (err) => {
+        this.hideLoader();
+        let ErrorData =  err.error;
+         // this.presentAlert((ErrorData.errorMsg ? ErrorData.errorMsg : 'Server Error') );
+       
+    }); 
+    
+  }
+
+  userProfile(user){
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        id: user.ID,
+      }
+    };
+    this.navCtrl.navigateForward(['/coachProfile'], navigationExtras);
+  }
 }

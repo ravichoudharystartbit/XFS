@@ -97,7 +97,7 @@ export class ChatPage implements OnInit {
         idFrom: this.CuserID,
 
       };
-      // console.log('chatbox', this.chatbox);
+       console.log('chatbox', this.chatbox);
       if (this.chatbox.id > this.chatbox.idFrom) {
         let chatBoxID = this.chatbox.id + '_chat_' + this.chatbox.idFrom;
         this.ref = firebase.database().ref('chatbox/' + this.CuserID + '/' + chatBoxID);
